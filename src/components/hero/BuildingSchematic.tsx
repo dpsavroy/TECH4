@@ -3,7 +3,7 @@
 import { colors } from "@/styles/design-tokens";
 
 interface BuildingSchematicProps {
-  activeSystem: "hvac" | "security" | "energy" | "network" | null;
+  activeSystem: "bms" | "bas" | "cctv" | "sap" | "kd" | "hvac" | null;
 }
 
 const floors = [500, 450, 400, 350, 300, 250, 200];
@@ -16,10 +16,26 @@ function diamond(y: number) {
 
 export function BuildingSchematic({ activeSystem }: BuildingSchematicProps) {
   const hvacActive = activeSystem === "hvac";
-  const securityActive = activeSystem === "security";
-  const energyActive = activeSystem === "energy";
-  const networkActive = activeSystem === "network";
-  const systemStroke = hvacActive ? "#10B981" : securityActive ? "#EF4444" : networkActive ? colors.primary.signal : colors.neutral[400];
+  const cctvActive = activeSystem === "cctv";
+  const sapActive = activeSystem === "sap";
+  const kdActive = activeSystem === "kd";
+  const bmsActive = activeSystem === "bms";
+  const basActive = activeSystem === "bas";
+  const securityActive = cctvActive || kdActive;
+  const networkActive = bmsActive || basActive;
+  const systemStroke = hvacActive
+    ? "#10B981"
+    : cctvActive
+      ? "#EF4444"
+      : sapActive
+        ? "#F97316"
+        : kdActive
+          ? "#8B5CF6"
+          : basActive
+            ? "#0EA5E9"
+            : bmsActive
+              ? colors.primary.signal
+              : colors.neutral[400];
 
   return (
     <svg
@@ -71,8 +87,8 @@ export function BuildingSchematic({ activeSystem }: BuildingSchematicProps) {
       {/* Reinforced concrete floor plates: top surface, structural edge, underside and chamfer */}
       <g className="bim-transition dark:stroke-neutral-700" stroke={colors.neutral[500]} strokeWidth="0.8" strokeLinejoin="round">
         {floors.map((level, index) => {
-          const accent = (index === 3 && hvacActive) || (index === 6 && (hvacActive || energyActive));
-          const stroke = accent ? (energyActive && index === 6 ? "#F59E0B" : "#10B981") : colors.neutral[500];
+          const accent = (index === 3 && hvacActive) || (index === 6 && hvacActive);
+          const stroke = accent ? "#10B981" : colors.neutral[500];
           return (
             <g key={level} stroke={stroke} opacity={accent ? 0.94 : 0.74} fill="none">
               <polygon points={diamond(level - 7)} fill={colors.background.surface} className="dark:fill-neutral-900" opacity="0.28" />
@@ -128,8 +144,8 @@ export function BuildingSchematic({ activeSystem }: BuildingSchematicProps) {
       </g>
 
       {/* Central reinforced concrete core: walls, lift, stair and services */}
-      <g stroke={systemStroke} fill="none" className="bim-transition dark:stroke-neutral-600" opacity={securityActive || networkActive ? 0.98 : 0.7}>
-        <g strokeWidth={securityActive || networkActive ? 1.45 : 1.05}>
+      <g stroke={systemStroke} fill="none" className="bim-transition dark:stroke-neutral-600" opacity={securityActive || networkActive || sapActive ? 0.98 : 0.7}>
+        <g strokeWidth={securityActive || networkActive || sapActive ? 1.45 : 1.05}>
           <path d="M300 440V112 M352 410V82 M248 410V82 M300 380V52" strokeDasharray="0" />
           <path d="M300 432V120 M344 407V95 M256 407V95 M300 382V65" strokeWidth="0.75" />
           <polygon points="300,432 344,407 344,95 300,120" fill="url(#concreteHatch)" opacity="0.18" />
@@ -141,7 +157,7 @@ export function BuildingSchematic({ activeSystem }: BuildingSchematicProps) {
           {beamLevels.slice(1).map((level) => <path key={level} d={`M258 ${level - 18}L300 ${level - 42}L342 ${level - 18} M258 ${level - 10}L300 ${level - 34}L342 ${level - 10}`} />)}
         </g>
         {/* Elevator shaft and car */}
-        <g stroke={securityActive ? "#EF4444" : colors.neutral[600]} strokeWidth="0.95" opacity={securityActive ? 1 : 0.78}>
+        <g stroke={securityActive ? systemStroke : colors.neutral[600]} strokeWidth="0.95" opacity={securityActive ? 1 : 0.78}>
           <path d="M277 420V135 M300 433V148 M323 420V135" />
           <polygon points="300,286 326,271 300,256 274,271" fill={colors.background.surface} className="dark:fill-neutral-900" />
           <polygon points="300,262 326,247 300,232 274,247" />
@@ -155,7 +171,7 @@ export function BuildingSchematic({ activeSystem }: BuildingSchematicProps) {
           <path d="M264 403L264 188 M336 403L336 188 M264 403l5-3m-5 3 5 3 M336 403l-5-3m5 3-5 3" strokeWidth="0.48" opacity="0.7" />
         </g>
         {/* Vertical ducts, pipe pairs and network risers */}
-        <g stroke={networkActive ? colors.primary.signal : colors.neutral[500]} strokeWidth="0.8" opacity={networkActive ? 1 : 0.65}>
+        <g stroke={networkActive ? systemStroke : colors.neutral[500]} strokeWidth="0.8" opacity={networkActive ? 1 : 0.65}>
           <line x1="282" y1="422" x2="282" y2="132" strokeDasharray="2 2" />
           <line x1="318" y1="422" x2="318" y2="132" strokeDasharray="2 2" />
           <line x1="290" y1="424" x2="290" y2="130" /><line x1="310" y1="424" x2="310" y2="130" />
@@ -238,7 +254,7 @@ export function BuildingSchematic({ activeSystem }: BuildingSchematicProps) {
       </g>
 
       {/* Roof-mounted solar array remains energy-system specific */}
-      <g stroke={energyActive ? "#F59E0B" : colors.neutral[500]} fill={energyActive ? "#F59E0B10" : "transparent"} className="bim-transition dark:stroke-neutral-700" strokeWidth={energyActive ? 1.25 : 0.7} opacity={energyActive ? 1 : 0.34}>
+      <g stroke={colors.neutral[500]} fill="transparent" className="bim-transition dark:stroke-neutral-700" strokeWidth="0.7" opacity="0.34">
         <polygon points="180,154 214,171 239,157 205,140" /><polygon points="219,176 253,193 278,179 244,162" /><polygon points="258,198 292,215 317,201 283,184" />
         <path d="M191 151l13 17m-1-24 13 17m14 8 13 17m-1-24 13 17m14 8 13 17m-1-24 13 17" strokeWidth="0.55" />
       </g>
