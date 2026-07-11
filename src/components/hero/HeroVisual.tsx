@@ -2,15 +2,17 @@
 
 import { useEffect, useRef, useState } from "react";
 import { colors, radius, transitions, typography } from "@/styles/design-tokens";
-import { BuildingSchematic } from "./BuildingSchematic";
+import { BuildingSchematic, SYSTEM_COLORS } from "./BuildingSchematic";
 
-type SystemType = "hvac" | "security" | "energy" | "network";
+type SystemType = "bms" | "bas" | "cctv" | "sap" | "kd" | "hvac";
 
 const systemsList: { id: SystemType; label: string; desc: string; color: string }[] = [
-  { id: "hvac", label: "HVAC_AUTOMATION", desc: "Precyzyjna kontrola klimatu i wentylacji", color: "#10B981" },
-  { id: "security", label: "SECURITY_INTEGRATION", desc: "Zintegrowana kontrola dostępu i monitoring", color: "#EF4444" },
-  { id: "energy", label: "ENERGY_MANAGEMENT", desc: "Optymalizacja zużycia mediów w czasie rzeczywistym", color: "#F59E0B" },
-  { id: "network", label: "NETWORK_BACKBONE", desc: "Niezawodna magistrala komunikacyjna LAN/światłowód", color: colors.primary.signal },
+  { id: "bms", label: "BMS", desc: "Central management", color: SYSTEM_COLORS.bms },
+  { id: "bas", label: "BAS", desc: "Building automation", color: SYSTEM_COLORS.bas },
+  { id: "cctv", label: "CCTV", desc: "IP video surveillance", color: SYSTEM_COLORS.cctv },
+  { id: "sap", label: "SAP", desc: "Fire alarm system", color: SYSTEM_COLORS.sap },
+  { id: "kd", label: "KD", desc: "Access control", color: SYSTEM_COLORS.kd },
+  { id: "hvac", label: "HVAC", desc: "HVAC automation", color: SYSTEM_COLORS.hvac },
 ];
 
 export function HeroVisual() {

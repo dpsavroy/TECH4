@@ -2,6 +2,15 @@
 
 import { colors } from "@/styles/design-tokens";
 
+export const SYSTEM_COLORS = {
+  hvac: "#3B82F6",
+  sap: "#EF4444",
+  kd: "#22C55E",
+  cctv: "#8B5CF6",
+  bas: "#F97316",
+  bms: colors.primary.signal,
+} as const;
+
 interface BuildingSchematicProps {
   activeSystem: "bms" | "bas" | "cctv" | "sap" | "kd" | "hvac" | null;
 }
@@ -24,17 +33,17 @@ export function BuildingSchematic({ activeSystem }: BuildingSchematicProps) {
   const securityActive = cctvActive || kdActive;
   const networkActive = bmsActive || basActive;
   const systemStroke = hvacActive
-    ? "#10B981"
-    : cctvActive
-      ? "#EF4444"
-      : sapActive
-        ? "#F97316"
-        : kdActive
-          ? "#8B5CF6"
+    ? SYSTEM_COLORS.hvac
+    : sapActive
+      ? SYSTEM_COLORS.sap
+      : kdActive
+        ? SYSTEM_COLORS.kd
+        : cctvActive
+          ? SYSTEM_COLORS.cctv
           : basActive
-            ? "#0EA5E9"
+            ? SYSTEM_COLORS.bas
             : bmsActive
-              ? colors.primary.signal
+              ? SYSTEM_COLORS.bms
               : colors.neutral[400];
 
   return (
@@ -88,7 +97,7 @@ export function BuildingSchematic({ activeSystem }: BuildingSchematicProps) {
       <g className="bim-transition dark:stroke-neutral-700" stroke={colors.neutral[500]} strokeWidth="0.8" strokeLinejoin="round">
         {floors.map((level, index) => {
           const accent = (index === 3 && hvacActive) || (index === 6 && hvacActive);
-          const stroke = accent ? "#10B981" : colors.neutral[500];
+          const stroke = accent ? SYSTEM_COLORS.hvac : colors.neutral[500];
           return (
             <g key={level} stroke={stroke} opacity={accent ? 0.94 : 0.74} fill="none">
               <polygon points={diamond(level - 7)} fill={colors.background.surface} className="dark:fill-neutral-900" opacity="0.28" />
@@ -180,7 +189,7 @@ export function BuildingSchematic({ activeSystem }: BuildingSchematicProps) {
       </g>
 
       {/* Technical risers and exposed mechanical distribution, secondary until HVAC is active */}
-      <g stroke={hvacActive ? "#10B981" : colors.neutral[500]} fill="none" className="bim-transition dark:stroke-neutral-700" opacity={hvacActive ? 1 : 0.38}>
+      <g stroke={hvacActive ? SYSTEM_COLORS.hvac : colors.neutral[500]} fill="none" className="bim-transition dark:stroke-neutral-700" opacity={hvacActive ? 1 : 0.38}>
         <g strokeWidth={hvacActive ? 1.45 : 0.8}>
           <path d="M334 390V174H402V152" />
           <path d="M266 390V224H198V202" />
@@ -194,7 +203,7 @@ export function BuildingSchematic({ activeSystem }: BuildingSchematicProps) {
       </g>
 
       {/* Roof plant: dunnage, ducts, two AHUs, fans and pipework */}
-      <g stroke={hvacActive ? "#10B981" : colors.neutral[500]} fill="none" className="bim-transition dark:stroke-neutral-600" opacity={hvacActive ? 1 : 0.44}>
+      <g stroke={hvacActive ? SYSTEM_COLORS.hvac : colors.neutral[500]} fill="none" className="bim-transition dark:stroke-neutral-600" opacity={hvacActive ? 1 : 0.44}>
         <g strokeWidth="0.8">
           <path d="M326 176L414 125L384 108L296 159Z M326 183L414 132 M296 166L384 115" />
           <path d="M316 172L408 119 M326 166L418 113" strokeWidth="1.2" />
