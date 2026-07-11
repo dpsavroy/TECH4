@@ -1,8 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { colors, radius, transitions, typography } from "@/styles/design-tokens";
-import { BuildingSchematic, SYSTEM_COLORS } from "./BuildingSchematic";
+import { SYSTEM_COLORS } from "./BuildingSchematic";
 
 type SystemType = "bms" | "bas" | "cctv" | "sap" | "kd" | "hvac";
 
@@ -14,6 +15,45 @@ const systemsList: { id: SystemType; label: string; desc: string; color: string 
   { id: "kd", label: "KD", desc: "Access control", color: SYSTEM_COLORS.kd },
   { id: "hvac", label: "HVAC", desc: "HVAC automation", color: SYSTEM_COLORS.hvac },
 ];
+
+const systemHotspots: Record<SystemType, { x: number; y: number }[]> = {
+  bms: [{ x: 55, y: 42 }, { x: 56, y: 57 }, { x: 55, y: 72 }],
+  bas: [{ x: 43, y: 29 }, { x: 47, y: 50 }, { x: 48, y: 68 }],
+  cctv: [{ x: 18, y: 30 }, { x: 81, y: 31 }, { x: 78, y: 68 }],
+  sap: [{ x: 67, y: 25 }, { x: 68, y: 47 }, { x: 68, y: 67 }],
+  kd: [{ x: 33, y: 77 }, { x: 51, y: 77 }, { x: 62, y: 87 }],
+  hvac: [{ x: 42, y: 14 }, { x: 54, y: 17 }, { x: 53, y: 88 }],
+};
+
+function SystemHotspots({ activeSystem }: { activeSystem: SystemType | null }) {
+  if (!activeSystem) return null;
+
+  const color = SYSTEM_COLORS[activeSystem];
+
+  return (
+    <svg
+      viewBox="0 0 100 100"
+      className="pointer-events-none absolute inset-0 z-10 h-full w-full"
+      aria-hidden="true"
+    >
+      {systemHotspots[activeSystem].map((hotspot, index) => (
+        <g key={`${activeSystem}-${index}`} style={{ transformOrigin: `${hotspot.x}px ${hotspot.y}px` }}>
+          <circle
+            cx={hotspot.x}
+            cy={hotspot.y}
+            r="2.8"
+            fill={color}
+            opacity="0.18"
+            className="animate-ping motion-reduce:animate-none"
+            style={{ animationDelay: `${index * 180}ms`, animationDuration: "2.4s" }}
+          />
+          <circle cx={hotspot.x} cy={hotspot.y} r="1.35" fill="white" opacity="0.94" />
+          <circle cx={hotspot.x} cy={hotspot.y} r="0.72" fill={color} />
+        </g>
+      ))}
+    </svg>
+  );
+}
 
 export function HeroVisual() {
   const [activeSystem, setActiveSystem] = useState<SystemType | null>(null);
@@ -57,12 +97,22 @@ export function HeroVisual() {
 
   return (
     <div className="relative flex flex-col items-center justify-center w-full max-w-2xl mx-auto" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-      <div className="w-full relative aspect-square transition-all duration-500 ease-out transform hover:scale-[1.01] drop-shadow-[0_12px_36px_rgba(10,18,32,0.04)] dark:drop-shadow-[0_12px_36px_rgba(0,0,0,0.4)]">
+      <div className="w-full relative aspect-square transition-transform duration-500 ease-out hover:scale-[1.01] drop-shadow-[0_12px_36px_rgba(10,18,32,0.04)] dark:drop-shadow-[0_12px_36px_rgba(0,0,0,0.4)]">
         <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-neutral-300 dark:border-neutral-800" />
         <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-neutral-300 dark:border-neutral-800" />
         <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-neutral-300 dark:border-neutral-800" />
         <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-neutral-300 dark:border-neutral-800" />
-        <BuildingSchematic activeSystem={activeSystem} />
+        <Image
+          src="/tech4-building-transparent.png"
+          alt="Engineering cutaway of a commercial building with visible technical systems"
+          fill
+          priority
+          quality={100}
+          unoptimized
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 70vw, 672px"
+          className={`object-contain transition-[filter,opacity] duration-500 ease-out ${activeSystem ? "opacity-75 blur-[1px]" : "opacity-100 blur-0"}`}
+        />
+        <SystemHotspots activeSystem={activeSystem} />
       </div>
 
       <div className="w-full mt-10 grid grid-cols-1 sm:grid-cols-2 gap-3">
