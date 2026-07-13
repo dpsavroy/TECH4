@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { colors, radius, transitions, typography } from "@/styles/design-tokens";
 import { SYSTEM_COLORS } from "./BuildingSchematic";
 
@@ -25,6 +25,22 @@ const systemHotspots: Record<SystemType, { x: number; y: number }[]> = {
   hvac: [{ x: 42, y: 14 }, { x: 54, y: 17 }, { x: 53, y: 88 }],
 };
 
+const BuildingCutaway = memo(function BuildingCutaway() {
+  return (
+    <Image
+      src="/tech4-building-transparent.png"
+      alt="Engineering cutaway of a commercial building with visible technical systems"
+      fill
+      priority
+      quality={100}
+      unoptimized
+      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 70vw, 672px"
+      className="pointer-events-none z-0 object-contain"
+      style={{ transform: "translateZ(0)" }}
+    />
+  );
+});
+
 function SystemHotspots({ activeSystem }: { activeSystem: SystemType | null }) {
   if (!activeSystem) return null;
 
@@ -33,7 +49,7 @@ function SystemHotspots({ activeSystem }: { activeSystem: SystemType | null }) {
   return (
     <svg
       viewBox="0 0 100 100"
-      className="pointer-events-none absolute inset-0 z-10 h-full w-full"
+      className="pointer-events-none absolute inset-0 z-20 h-full w-full"
       aria-hidden="true"
     >
       {systemHotspots[activeSystem].map((hotspot, index) => (
@@ -97,21 +113,16 @@ export function HeroVisual() {
 
   return (
     <div className="relative flex flex-col items-center justify-center w-full max-w-2xl mx-auto" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-      <div className="w-full relative aspect-square transition-transform duration-500 ease-out hover:scale-[1.01] drop-shadow-[0_12px_36px_rgba(10,18,32,0.04)] dark:drop-shadow-[0_12px_36px_rgba(0,0,0,0.4)]">
-        <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-neutral-300 dark:border-neutral-800" />
-        <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-neutral-300 dark:border-neutral-800" />
-        <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-neutral-300 dark:border-neutral-800" />
-        <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-neutral-300 dark:border-neutral-800" />
-        <Image
-          src="/tech4-building-transparent.png"
-          alt="Engineering cutaway of a commercial building with visible technical systems"
-          fill
-          priority
-          quality={100}
-          unoptimized
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 70vw, 672px"
-          className={`object-contain transition-[filter,opacity] duration-500 ease-out ${activeSystem ? "opacity-75 blur-[1px]" : "opacity-100 blur-0"}`}
+      <div className="w-full relative aspect-square transform-gpu will-change-transform [backface-visibility:hidden] transition-transform duration-500 ease-out hover:scale-[1.01] drop-shadow-[0_12px_36px_rgba(10,18,32,0.04)] dark:drop-shadow-[0_12px_36px_rgba(0,0,0,0.4)]">
+        <BuildingCutaway />
+        <div
+          className={`pointer-events-none absolute inset-0 z-10 bg-slate-950 transition-opacity duration-500 ease-out ${activeSystem ? "opacity-15" : "opacity-0"}`}
+          aria-hidden="true"
         />
+        <div className="pointer-events-none absolute top-0 left-0 z-20 w-4 h-4 border-t border-l border-neutral-300 dark:border-neutral-800" />
+        <div className="pointer-events-none absolute top-0 right-0 z-20 w-4 h-4 border-t border-r border-neutral-300 dark:border-neutral-800" />
+        <div className="pointer-events-none absolute bottom-0 left-0 z-20 w-4 h-4 border-b border-l border-neutral-300 dark:border-neutral-800" />
+        <div className="pointer-events-none absolute bottom-0 right-0 z-20 w-4 h-4 border-b border-r border-neutral-300 dark:border-neutral-800" />
         <SystemHotspots activeSystem={activeSystem} />
       </div>
 
