@@ -30,12 +30,13 @@ const BuildingCutaway = memo(function BuildingCutaway() {
     <Image
       src="/tech4-building-transparent.png"
       alt="Engineering cutaway of a commercial building with visible technical systems"
-      fill
+      width={1024}
+      height={1024}
       priority
       quality={100}
       unoptimized
       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 70vw, 672px"
-      className="pointer-events-none z-0 object-contain"
+      className="pointer-events-none z-0 h-auto w-full object-contain"
       style={{ transform: "translateZ(0)" }}
     />
   );
@@ -113,12 +114,8 @@ export function HeroVisual() {
 
   return (
     <div className="relative flex flex-col items-center justify-center w-full max-w-2xl mx-auto" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-      <div className="w-full relative aspect-square transform-gpu will-change-transform [backface-visibility:hidden] transition-transform duration-500 ease-out hover:scale-[1.01] drop-shadow-[0_12px_36px_rgba(10,18,32,0.04)] dark:drop-shadow-[0_12px_36px_rgba(0,0,0,0.4)]">
+      <div className="w-full relative transform-gpu will-change-transform [backface-visibility:hidden] transition-transform duration-500 ease-out hover:scale-[1.01] drop-shadow-[0_12px_36px_rgba(10,18,32,0.04)] dark:drop-shadow-[0_12px_36px_rgba(0,0,0,0.4)]">
         <BuildingCutaway />
-        <div
-          className={`pointer-events-none absolute inset-0 z-10 bg-slate-950 transition-opacity duration-500 ease-out ${activeSystem ? "opacity-15" : "opacity-0"}`}
-          aria-hidden="true"
-        />
         <div className="pointer-events-none absolute top-0 left-0 z-20 w-4 h-4 border-t border-l border-neutral-300 dark:border-neutral-800" />
         <div className="pointer-events-none absolute top-0 right-0 z-20 w-4 h-4 border-t border-r border-neutral-300 dark:border-neutral-800" />
         <div className="pointer-events-none absolute bottom-0 left-0 z-20 w-4 h-4 border-b border-l border-neutral-300 dark:border-neutral-800" />
