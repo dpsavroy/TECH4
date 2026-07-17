@@ -16,6 +16,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "TECH4 | Where Buildings Become Intelligent",
   description: "TECH4 integrates building engineering systems into one reliable and manageable solution. We design, integrate, and support intelligent building automation, security, and HVAC systems throughout Europe.",
+  other: {
+    "theme-color": "#23870b",
+  },
 };
 
 export default function RootLayout({

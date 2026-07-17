@@ -8,6 +8,7 @@ import {
   colors,
   layout,
   radius,
+  shadows,
   transitions,
   typography,
 } from "@/styles/design-tokens";
@@ -64,7 +65,7 @@ export function Header() {
           style={{
             transitionDuration: transitions.duration.fast,
             transitionTimingFunction: transitions.easing.standard,
-            ["--tw-ring-color" as string]: "rgb(47 111 237 / 0.18)",
+            ["--tw-ring-color" as string]: shadows.focus.replace("0 0 0 3px ", ""),
           }}
           aria-label="TECH4 strona główna"
         >
@@ -95,7 +96,7 @@ export function Header() {
                 lineHeight: typography.scale.sm.lineHeight,
                 transitionDuration: transitions.duration.fast,
                 transitionTimingFunction: transitions.easing.standard,
-                ["--tw-ring-color" as string]: "rgb(47 111 237 / 0.18)",
+                ["--tw-ring-color" as string]: shadows.focus.replace("0 0 0 3px ", ""),
               }}
             >
               <span className="transition-colors group-hover:text-[#0A1220]">{item.label}</span>
@@ -115,19 +116,19 @@ export function Header() {
         <div className="hidden items-center lg:flex">
           <a
             href="#kontakt"
-            className="inline-flex items-center justify-center rounded-full border outline-none transition-colors hover:bg-[#1E3A5F] focus-visible:ring-3"
+            className="inline-flex items-center justify-center rounded-full border outline-none transition-colors hover:bg-[#1B5E0B] focus-visible:ring-3"
             style={{
               minHeight: buttons.size.lg.height,
               paddingInline: "1.625rem",
-              backgroundColor: colors.primary.ink,
-              borderColor: colors.primary.ink,
+              backgroundColor: colors.primary.signal,
+              borderColor: colors.primary.signal,
               color: colors.neutral[0],
               fontSize: buttons.size.lg.fontSize,
               fontWeight: typography.weight.medium,
               lineHeight: typography.scale.base.lineHeight,
               transitionDuration: transitions.duration.fast,
               transitionTimingFunction: transitions.easing.standard,
-              ["--tw-ring-color" as string]: "rgb(47 111 237 / 0.18)",
+              ["--tw-ring-color" as string]: shadows.focus.replace("0 0 0 3px ", ""),
             }}
           >
             Skontaktuj się
@@ -142,7 +143,7 @@ export function Header() {
             color: colors.primary.ink,
             transitionDuration: transitions.duration.fast,
             transitionTimingFunction: transitions.easing.standard,
-            ["--tw-ring-color" as string]: "rgb(47 111 237 / 0.18)",
+            ["--tw-ring-color" as string]: shadows.focus.replace("0 0 0 3px ", ""),
           }}
           aria-label="Otwórz menu"
           aria-controls={menuId}
@@ -202,7 +203,7 @@ export function Header() {
                 color: colors.primary.ink,
                 transitionDuration: transitions.duration.fast,
                 transitionTimingFunction: transitions.easing.standard,
-                ["--tw-ring-color" as string]: "rgb(47 111 237 / 0.18)",
+                ["--tw-ring-color" as string]: shadows.focus.replace("0 0 0 3px ", ""),
               }}
               aria-label="Zamknij menu"
               onClick={closeMenu}
@@ -227,7 +228,7 @@ export function Header() {
                   lineHeight: typography.scale.lg.lineHeight,
                   transitionDuration: transitions.duration.fast,
                   transitionTimingFunction: transitions.easing.standard,
-                  ["--tw-ring-color" as string]: "rgb(47 111 237 / 0.18)",
+                  ["--tw-ring-color" as string]: shadows.focus.replace("0 0 0 3px ", ""),
                 }}
                 onClick={closeMenu}
               >
@@ -238,12 +239,12 @@ export function Header() {
 
           <a
             href="#kontakt"
-            className="mt-8 inline-flex items-center justify-center rounded-full border outline-none transition-colors hover:bg-[#1E3A5F] focus-visible:ring-3"
+            className="mt-8 inline-flex items-center justify-center rounded-full border outline-none transition-colors hover:bg-[#1B5E0B] focus-visible:ring-3"
             style={{
               minHeight: buttons.size.lg.height,
               paddingInline: buttons.size.lg.paddingInline,
-              backgroundColor: colors.primary.ink,
-              borderColor: colors.primary.ink,
+              backgroundColor: colors.primary.signal,
+              borderColor: colors.primary.signal,
               borderRadius: radius.full,
               color: colors.neutral[0],
               fontSize: buttons.size.lg.fontSize,
@@ -251,7 +252,7 @@ export function Header() {
               lineHeight: typography.scale.base.lineHeight,
               transitionDuration: transitions.duration.fast,
               transitionTimingFunction: transitions.easing.standard,
-              ["--tw-ring-color" as string]: "rgb(47 111 237 / 0.18)",
+              ["--tw-ring-color" as string]: shadows.focus.replace("0 0 0 3px ", ""),
             }}
             onClick={closeMenu}
           >

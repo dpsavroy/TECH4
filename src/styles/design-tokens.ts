@@ -1,9 +1,10 @@
 export const colors = {
   primary: {
     ink: "#0A1220",
-    steel: "#1E3A5F",
-    signal: "#2F6FED",
-    mist: "#EAF1FF",
+    steel: "#1B5E0B",
+    signal: "#23870B",
+    signalHover: "#1C6E09",
+    mist: "#E8F5E2",
   },
   neutral: {
     0: "#FFFFFF",
@@ -70,7 +71,7 @@ export const shadows = {
   sm: "0 1px 2px rgb(10 18 32 / 0.06)",
   md: "0 8px 24px rgb(10 18 32 / 0.08)",
   lg: "0 18px 48px rgb(10 18 32 / 0.10)",
-  focus: "0 0 0 3px rgb(47 111 237 / 0.18)",
+  focus: "0 0 0 3px rgb(35 135 11 / 0.18)",
 } as const;
 
 export const layout = {

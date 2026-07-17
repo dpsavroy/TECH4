@@ -1,7 +1,7 @@
 "use client";
 
 import { memo } from "react";
-import { colors, radius, transitions, typography } from "@/styles/design-tokens";
+import { colors, radius, shadows, transitions, typography } from "@/styles/design-tokens";
 import { SYSTEM_COLORS } from "./BuildingSchematic";
 import { systemsList } from "./useHeroOrchestration";
 import type { SystemType } from "./useHeroOrchestration";
@@ -91,7 +91,7 @@ export const SystemCards = memo(function SystemCards({
                 transform: isVisible ? "translateX(0)" : "translateX(20px)",
                 transition: `opacity 420ms ${transitions.easing.entrance}, transform 420ms ${transitions.easing.entrance}, border-color ${transitions.duration.fast} ${transitions.easing.standard}`,
                 pointerEvents: isVisible ? "auto" : "none",
-                ["--tw-ring-color" as string]: "rgb(47 111 237 / 0.18)",
+                ["--tw-ring-color" as string]: shadows.focus.replace("0 0 0 3px ", ""),
               }}
             >
               <div className="flex items-center justify-between w-full mb-1">
