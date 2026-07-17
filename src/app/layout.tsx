@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Header } from "@/components/layout/Header";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -21,6 +22,22 @@ export const metadata: Metadata = {
   },
 };
 
+const themeInitializationScript = `
+  try {
+    const savedTheme = localStorage.getItem("tech4-theme");
+    const theme = savedTheme === "light" || savedTheme === "dark"
+      ? savedTheme
+      : window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    document.documentElement.style.colorScheme = theme;
+  } catch {
+    // The page remains in the default light theme when storage is unavailable.
+  }
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -30,10 +47,14 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
-        <Header />
-        {children}
+        <script dangerouslySetInnerHTML={{ __html: themeInitializationScript }} />
+        <ThemeProvider>
+          <Header />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

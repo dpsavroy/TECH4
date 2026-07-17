@@ -1,7 +1,16 @@
 "use client";
 
 import { memo } from "react";
-import { colors, radius, shadows, transitions, typography } from "@/styles/design-tokens";
+import { useTheme } from "@/components/theme/ThemeProvider";
+import {
+  colors,
+  darkColors,
+  darkShadows,
+  radius,
+  shadows,
+  transitions,
+  typography,
+} from "@/styles/design-tokens";
 import { SYSTEM_COLORS } from "./BuildingSchematic";
 import { systemsList } from "./useHeroOrchestration";
 import type { SystemType } from "./useHeroOrchestration";
@@ -34,6 +43,11 @@ export const SystemCards = memo(function SystemCards({
   onHoverChange,
   compact = false,
 }: SystemCardsProps) {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+  const themeColors = isDark ? darkColors : colors;
+  const themeShadows = isDark ? darkShadows : shadows;
+
   return (
     <div
       className={
@@ -79,19 +93,24 @@ export const SystemCards = memo(function SystemCards({
                 onSelect(system.id);
               }}
               aria-pressed={isActive}
-              className="w-full flex flex-col text-left p-3.5 border bg-white/40 backdrop-blur-sm group dark:bg-[#0B111A]/20 focus-visible:outline-none focus-visible:ring-2"
+              className="w-full flex flex-col text-left p-3.5 border backdrop-blur-sm group focus-visible:outline-none focus-visible:ring-2"
               style={{
                 borderRadius: radius.sm,
+                backgroundColor: isDark
+                  ? "rgb(18 27 39 / 0.58)"
+                  : "rgb(255 255 255 / 0.40)",
                 borderColor: isActive
                   ? color
-                  : "rgba(221, 227, 234, 0.6)",
+                  : isDark
+                    ? "rgb(37 51 66 / 0.80)"
+                    : "rgb(221 227 234 / 0.60)",
                 // Entrance: slides in from the right when the system is first revealed.
                 // Post-entrance: only border-color transitions (for active state).
                 opacity: isVisible ? 1 : 0,
                 transform: isVisible ? "translateX(0)" : "translateX(20px)",
                 transition: `opacity 420ms ${transitions.easing.entrance}, transform 420ms ${transitions.easing.entrance}, border-color ${transitions.duration.fast} ${transitions.easing.standard}`,
                 pointerEvents: isVisible ? "auto" : "none",
-                ["--tw-ring-color" as string]: shadows.focus.replace("0 0 0 3px ", ""),
+                ["--tw-ring-color" as string]: themeShadows.focus.replace("0 0 0 3px ", ""),
               }}
             >
               <div className="flex items-center justify-between w-full mb-1">
@@ -109,12 +128,16 @@ export const SystemCards = memo(function SystemCards({
                   <span
                     style={{
                       fontFamily: typography.fontFamily.mono,
-                      color: isActive ? colors.primary.ink : colors.neutral[600],
+                      color: isActive
+                        ? themeColors.primary.ink
+                        : isDark
+                          ? darkColors.neutral[300]
+                          : colors.neutral[600],
                       fontSize: "0.75rem",
                       fontWeight: typography.weight.semibold,
                       letterSpacing: "0.05em",
                     }}
-                    className="uppercase dark:text-neutral-300 transition-colors duration-200"
+                    className="uppercase transition-colors duration-200"
                   >
                     {system.label}
                   </span>
@@ -137,7 +160,7 @@ export const SystemCards = memo(function SystemCards({
               {/* Description */}
               <p
                 style={{
-                  color: colors.neutral[500],
+                  color: isDark ? darkColors.neutral[400] : colors.neutral[500],
                   fontSize: "0.75rem",
                   lineHeight: "1.3",
                 }}

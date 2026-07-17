@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { memo } from "react";
-import { radius } from "@/styles/design-tokens";
+import { useTheme } from "@/components/theme/ThemeProvider";
+import { colors, darkColors, radius } from "@/styles/design-tokens";
 import { SYSTEM_COLORS } from "./BuildingSchematic";
 import type { SystemType } from "./useHeroOrchestration";
 
@@ -268,16 +269,19 @@ function SystemRoutes({ activeSystem }: { activeSystem: SystemType | null }) {
  * - On lg and below it appears on the RIGHT side as before.
  */
 function SystemStory({ activeSystem }: { activeSystem: SystemType | null }) {
+  const { theme } = useTheme();
   const story = activeSystem ? systemStories[activeSystem] : null;
   if (!story || !activeSystem) return null;
 
   const isBottom = activeSystem === "kd" || activeSystem === "sap";
+  const isDark = theme === "dark";
+  const themeColors = isDark ? darkColors : colors;
 
   return (
     <article
       className={[
         "story-enter pointer-events-none absolute z-30 w-52 overflow-hidden",
-        "border border-white/80 bg-white/95 shadow-[0_18px_42px_rgba(14,29,51,0.18)] backdrop-blur-sm",
+        "border backdrop-blur-sm",
         // Vertical position
         isBottom ? "bottom-[8%]" : "top-[12%]",
         // Horizontal: left at xl (right column occupied by SystemCards), right at lg/md
@@ -285,6 +289,13 @@ function SystemStory({ activeSystem }: { activeSystem: SystemType | null }) {
       ].join(" ")}
       style={{
         borderRadius: radius.md,
+        backgroundColor: isDark
+          ? "rgb(24 35 51 / 0.95)"
+          : "rgb(255 255 255 / 0.95)",
+        borderColor: isDark ? darkColors.neutral[800] : "rgb(255 255 255 / 0.80)",
+        boxShadow: isDark
+          ? "0 18px 42px rgb(0 0 0 / 0.36)"
+          : "0 18px 42px rgb(14 29 51 / 0.18)",
         animation: "story-enter 300ms cubic-bezier(.16, 1, .3, 1) both",
       }}
       aria-label={story.title}
@@ -310,13 +321,22 @@ function SystemStory({ activeSystem }: { activeSystem: SystemType | null }) {
         <span className="story-scan absolute inset-x-0 bottom-0 h-px bg-white/75 shadow-[0_0_12px_4px_rgba(166,210,255,0.8)]" />
       </div>
       <div className="p-3">
-        <span className="block font-mono text-[8px] font-medium tracking-[0.06em] text-neutral-500">
+        <span
+          className="block font-mono text-[8px] font-medium tracking-[0.06em]"
+          style={{ color: isDark ? darkColors.neutral[400] : colors.neutral[500] }}
+        >
           {story.tag}
         </span>
-        <strong className="mt-1 block text-[11px] leading-snug text-neutral-900">
+        <strong
+          className="mt-1 block text-[11px] leading-snug"
+          style={{ color: themeColors.primary.ink }}
+        >
           {story.title}
         </strong>
-        <p className="mt-1 text-[10px] leading-snug text-neutral-500">
+        <p
+          className="mt-1 text-[10px] leading-snug"
+          style={{ color: isDark ? darkColors.neutral[400] : colors.neutral[500] }}
+        >
           {story.description}
         </p>
       </div>
@@ -339,6 +359,9 @@ export function HeroVisual({
   onHoverChange,
   onSystemSelect: _onSystemSelect,
 }: HeroVisualProps) {
+  const { theme } = useTheme();
+  const cornerMarkColor = theme === "dark" ? darkColors.neutral[800] : colors.neutral[300];
+
   return (
     <div
       className="relative flex flex-col items-center justify-center w-full max-w-2xl xl:max-w-none mx-auto"
@@ -364,10 +387,10 @@ export function HeroVisual({
         <BuildingCutaway />
 
         {/* Engineering corner marks */}
-        <div className="pointer-events-none absolute top-0 left-0 z-20 w-4 h-4 border-t border-l border-neutral-300 dark:border-neutral-800" />
-        <div className="pointer-events-none absolute top-0 right-0 z-20 w-4 h-4 border-t border-r border-neutral-300 dark:border-neutral-800" />
-        <div className="pointer-events-none absolute bottom-0 left-0 z-20 w-4 h-4 border-b border-l border-neutral-300 dark:border-neutral-800" />
-        <div className="pointer-events-none absolute bottom-0 right-0 z-20 w-4 h-4 border-b border-r border-neutral-300 dark:border-neutral-800" />
+        <div className="pointer-events-none absolute top-0 left-0 z-20 w-4 h-4 border-t border-l" style={{ borderColor: cornerMarkColor }} />
+        <div className="pointer-events-none absolute top-0 right-0 z-20 w-4 h-4 border-t border-r" style={{ borderColor: cornerMarkColor }} />
+        <div className="pointer-events-none absolute bottom-0 left-0 z-20 w-4 h-4 border-b border-l" style={{ borderColor: cornerMarkColor }} />
+        <div className="pointer-events-none absolute bottom-0 right-0 z-20 w-4 h-4 border-b border-r" style={{ borderColor: cornerMarkColor }} />
 
         <SystemRoutes activeSystem={activeSystem} />
         <SystemHotspots activeSystem={activeSystem} />

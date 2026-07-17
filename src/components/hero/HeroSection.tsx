@@ -1,6 +1,7 @@
 "use client";
 
-import { layout } from "@/styles/design-tokens";
+import { useTheme } from "@/components/theme/ThemeProvider";
+import { colors, darkColors, layout } from "@/styles/design-tokens";
 import { HeroContent } from "./HeroContent";
 import { HeroVisual } from "./HeroVisual";
 import { SystemCards } from "./SystemCards";
@@ -18,6 +19,7 @@ import { useHeroOrchestration } from "./useHeroOrchestration";
  * and SystemCards so both respond to the same active system and intro sequence.
  */
 export function HeroSection() {
+  const { theme } = useTheme();
   const {
     activeSystem,
     visibleSystems,
@@ -29,8 +31,12 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative w-full overflow-hidden flex items-center justify-center bg-zinc-50 dark:bg-neutral-950 transition-colors duration-300"
-      style={{ minHeight: "calc(100vh - 88px)" }}
+      className="relative w-full overflow-hidden flex items-center justify-center transition-colors duration-300"
+      style={{
+        minHeight: "calc(100vh - 88px)",
+        backgroundColor:
+          theme === "dark" ? darkColors.background.page : colors.background.page,
+      }}
     >
       {/* Structural background grid — engineering motif */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.015]">

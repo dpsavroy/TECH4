@@ -1,8 +1,21 @@
 "use client";
 
-import { buttons, colors, radius, shadows, transitions, typography } from "@/styles/design-tokens";
+import { useTheme } from "@/components/theme/ThemeProvider";
+import {
+  buttons,
+  colors,
+  darkColors,
+  darkShadows,
+  shadows,
+  transitions,
+  typography,
+} from "@/styles/design-tokens";
 
 export function HeroContent() {
+  const { theme } = useTheme();
+  const themeColors = theme === "dark" ? darkColors : colors;
+  const themeShadows = theme === "dark" ? darkShadows : shadows;
+
   return (
     <div className="flex flex-col text-left max-w-xl lg:max-w-2xl">
       {/* Brand Badge */}
@@ -11,7 +24,7 @@ export function HeroContent() {
         <span
           style={{
             fontFamily: typography.fontFamily.mono,
-            color: colors.primary.signal,
+            color: themeColors.primary.signal,
             fontSize: "0.7rem",
             fontWeight: typography.weight.semibold,
             letterSpacing: "0.08em",
@@ -28,13 +41,13 @@ export function HeroContent() {
           fontFamily: typography.fontFamily.sans,
           fontWeight: typography.weight.semibold,
           letterSpacing: typography.tracking.tight,
-          color: colors.primary.ink,
+          color: themeColors.primary.ink,
         }}
-        className="text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.08] font-semibold lg:font-bold dark:text-neutral-50"
+        className="text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.08] font-semibold lg:font-bold"
       >
         Where Buildings
         <br />
-        Become <span style={{ color: colors.primary.signal }}>Intelligent</span>.
+        Become <span style={{ color: themeColors.primary.signal }}>Intelligent</span>.
       </h1>
 
       {/* Supporting Description */}
@@ -43,9 +56,10 @@ export function HeroContent() {
           fontFamily: typography.fontFamily.sans,
           fontSize: typography.scale.lg.fontSize,
           lineHeight: typography.scale.lg.lineHeight,
-          color: colors.neutral[500],
+          color:
+            theme === "dark" ? darkColors.neutral[300] : colors.neutral[500],
         }}
-        className="mt-6 text-zinc-600 dark:text-zinc-400 max-w-lg"
+        className="mt-6 max-w-lg"
       >
         TECH4 integrates building engineering systems into one reliable and manageable solution.
       </p>
@@ -64,7 +78,7 @@ export function HeroContent() {
             fontWeight: typography.weight.medium,
             transitionDuration: transitions.duration.fast,
             transitionTimingFunction: transitions.easing.standard,
-            ["--tw-ring-color" as string]: shadows.focus.replace("0 0 0 3px ", ""),
+            ["--tw-ring-color" as string]: themeShadows.focus.replace("0 0 0 3px ", ""),
           }}
         >
           Skontaktuj się
@@ -75,13 +89,14 @@ export function HeroContent() {
           style={{
             minHeight: buttons.size.lg.height,
             paddingInline: "2.25rem",
-            borderColor: colors.neutral[200],
-            color: colors.primary.ink,
+            borderColor:
+              theme === "dark" ? darkColors.neutral[800] : colors.neutral[200],
+            color: themeColors.primary.ink,
             fontSize: buttons.size.lg.fontSize,
             fontWeight: typography.weight.medium,
             transitionDuration: transitions.duration.fast,
             transitionTimingFunction: transitions.easing.standard,
-            ["--tw-ring-color" as string]: shadows.focus.replace("0 0 0 3px ", ""),
+            ["--tw-ring-color" as string]: themeShadows.focus.replace("0 0 0 3px ", ""),
           }}
         >
           Nasze usługi

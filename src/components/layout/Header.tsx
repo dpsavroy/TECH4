@@ -2,10 +2,14 @@
 
 import { useEffect, useId, useState } from "react";
 import Link from "next/link";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
+import { useTheme } from "@/components/theme/ThemeProvider";
 
 import {
   buttons,
   colors,
+  darkColors,
+  darkShadows,
   layout,
   radius,
   shadows,
@@ -22,8 +26,19 @@ const navigationItems = [
 ] as const;
 
 export function Header() {
+  const { theme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuId = useId();
+  const isDark = theme === "dark";
+  const themeColors = isDark ? darkColors : colors;
+  const themeShadows = isDark ? darkShadows : shadows;
+  const navigationColor = isDark ? darkColors.neutral[300] : colors.neutral[600];
+  const headerBackground = isDark
+    ? "rgb(18 27 39 / 0.88)"
+    : "rgb(255 255 255 / 0.82)";
+  const headerBorderColor = isDark
+    ? darkColors.neutral[800]
+    : colors.neutral[200];
 
   useEffect(() => {
     if (!isMenuOpen) {
@@ -47,11 +62,11 @@ export function Header() {
 
   return (
     <header
-      className="sticky top-0 z-50 border-b backdrop-blur-xl"
+      className="sticky top-0 z-50 border-b backdrop-blur-xl transition-colors duration-300"
       style={{
         minHeight: "88px",
-        backgroundColor: "rgb(255 255 255 / 0.82)",
-        borderColor: colors.neutral[200],
+        backgroundColor: headerBackground,
+        borderColor: headerBorderColor,
         boxShadow: "none",
       }}
     >
@@ -65,14 +80,14 @@ export function Header() {
           style={{
             transitionDuration: transitions.duration.fast,
             transitionTimingFunction: transitions.easing.standard,
-            ["--tw-ring-color" as string]: shadows.focus.replace("0 0 0 3px ", ""),
+            ["--tw-ring-color" as string]: themeShadows.focus.replace("0 0 0 3px ", ""),
           }}
           aria-label="TECH4 strona główna"
         >
           <span
             className="block select-none"
             style={{
-              color: colors.primary.ink,
+              color: themeColors.primary.ink,
               fontSize: typography.scale.xl.fontSize,
               fontWeight: typography.weight.semibold,
               letterSpacing: "0.08em",
@@ -90,21 +105,21 @@ export function Header() {
               href={item.href}
               className="group relative rounded-sm outline-none transition-colors focus-visible:ring-3"
               style={{
-                color: colors.neutral[600],
+                color: navigationColor,
                 fontSize: typography.scale.sm.fontSize,
                 fontWeight: typography.weight.medium,
                 lineHeight: typography.scale.sm.lineHeight,
                 transitionDuration: transitions.duration.fast,
                 transitionTimingFunction: transitions.easing.standard,
-                ["--tw-ring-color" as string]: shadows.focus.replace("0 0 0 3px ", ""),
+                ["--tw-ring-color" as string]: themeShadows.focus.replace("0 0 0 3px ", ""),
               }}
             >
-              <span className="transition-colors group-hover:text-[#0A1220]">{item.label}</span>
+              <span className="transition-colors group-hover:text-[#0A1220] dark:group-hover:text-neutral-50">{item.label}</span>
               <span
                 aria-hidden="true"
                 className="absolute -bottom-2 left-0 h-px w-full origin-left scale-x-0 transition-transform group-hover:scale-x-100 motion-reduce:transition-none"
                 style={{
-                  backgroundColor: colors.primary.steel,
+                  backgroundColor: themeColors.primary.steel,
                   transitionDuration: transitions.duration.fast,
                   transitionTimingFunction: transitions.easing.standard,
                 }}
@@ -113,7 +128,8 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden items-center lg:flex">
+        <div className="hidden items-center gap-3 lg:flex">
+          <ThemeToggle />
           <a
             href="#kontakt"
             className="inline-flex items-center justify-center rounded-full border outline-none transition-colors hover:bg-[#1B5E0B] focus-visible:ring-3"
@@ -128,7 +144,7 @@ export function Header() {
               lineHeight: typography.scale.base.lineHeight,
               transitionDuration: transitions.duration.fast,
               transitionTimingFunction: transitions.easing.standard,
-              ["--tw-ring-color" as string]: shadows.focus.replace("0 0 0 3px ", ""),
+              ["--tw-ring-color" as string]: themeShadows.focus.replace("0 0 0 3px ", ""),
             }}
           >
             Skontaktuj się
@@ -139,11 +155,11 @@ export function Header() {
           type="button"
           className="inline-flex h-12 w-12 items-center justify-center rounded-full border outline-none transition-colors focus-visible:ring-3 lg:hidden"
           style={{
-            borderColor: colors.neutral[200],
-            color: colors.primary.ink,
+            borderColor: headerBorderColor,
+            color: themeColors.primary.ink,
             transitionDuration: transitions.duration.fast,
             transitionTimingFunction: transitions.easing.standard,
-            ["--tw-ring-color" as string]: shadows.focus.replace("0 0 0 3px ", ""),
+            ["--tw-ring-color" as string]: themeShadows.focus.replace("0 0 0 3px ", ""),
           }}
           aria-label="Otwórz menu"
           aria-controls={menuId}
@@ -175,9 +191,10 @@ export function Header() {
         <nav
           id={menuId}
           aria-label="Menu mobilne"
-          className="absolute right-0 top-0 flex h-dvh w-[min(26rem,calc(100vw-2rem))] flex-col border-l bg-white p-6 transition-transform motion-reduce:transition-none"
+          className="absolute right-0 top-0 flex h-dvh w-[min(26rem,calc(100vw-2rem))] flex-col border-l p-6 transition-transform motion-reduce:transition-none"
           style={{
-            borderColor: colors.neutral[200],
+            backgroundColor: themeColors.background.surface,
+            borderColor: headerBorderColor,
             transitionDuration: transitions.duration.base,
             transitionTimingFunction: transitions.easing.entrance,
           }}
@@ -186,7 +203,7 @@ export function Header() {
             <span
               className="block select-none"
               style={{
-                color: colors.primary.ink,
+                color: themeColors.primary.ink,
                 fontSize: typography.scale.xl.fontSize,
                 fontWeight: typography.weight.semibold,
                 letterSpacing: "0.08em",
@@ -195,24 +212,27 @@ export function Header() {
             >
               TECH4
             </span>
-            <button
-              type="button"
-              className="inline-flex h-12 w-12 items-center justify-center rounded-full border outline-none transition-colors focus-visible:ring-3"
-              style={{
-                borderColor: colors.neutral[200],
-                color: colors.primary.ink,
-                transitionDuration: transitions.duration.fast,
-                transitionTimingFunction: transitions.easing.standard,
-                ["--tw-ring-color" as string]: shadows.focus.replace("0 0 0 3px ", ""),
-              }}
-              aria-label="Zamknij menu"
-              onClick={closeMenu}
-            >
-              <span aria-hidden="true" className="relative h-5 w-5">
-                <span className="absolute left-1/2 top-1/2 block h-px w-5 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-current" />
-                <span className="absolute left-1/2 top-1/2 block h-px w-5 -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-current" />
-              </span>
-            </button>
+            <div className="flex items-center gap-2">
+              <ThemeToggle />
+              <button
+                type="button"
+                className="inline-flex h-12 w-12 items-center justify-center rounded-full border outline-none transition-colors focus-visible:ring-3"
+                style={{
+                  borderColor: headerBorderColor,
+                  color: themeColors.primary.ink,
+                  transitionDuration: transitions.duration.fast,
+                  transitionTimingFunction: transitions.easing.standard,
+                  ["--tw-ring-color" as string]: themeShadows.focus.replace("0 0 0 3px ", ""),
+                }}
+                aria-label="Zamknij menu"
+                onClick={closeMenu}
+              >
+                <span aria-hidden="true" className="relative h-5 w-5">
+                  <span className="absolute left-1/2 top-1/2 block h-px w-5 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-current" />
+                  <span className="absolute left-1/2 top-1/2 block h-px w-5 -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-current" />
+                </span>
+              </button>
+            </div>
           </div>
 
           <div className="mt-10 flex flex-col gap-1">
@@ -220,15 +240,15 @@ export function Header() {
               <a
                 key={item.href}
                 href={item.href}
-                className="rounded-lg px-2 py-3 outline-none transition-colors hover:bg-[#F7F8FA] focus-visible:ring-3"
+                className="rounded-lg px-2 py-3 outline-none transition-colors hover:bg-[#F7F8FA] dark:hover:bg-[#182333] focus-visible:ring-3"
                 style={{
-                  color: colors.primary.ink,
+                  color: themeColors.primary.ink,
                   fontSize: typography.scale.lg.fontSize,
                   fontWeight: typography.weight.medium,
                   lineHeight: typography.scale.lg.lineHeight,
                   transitionDuration: transitions.duration.fast,
                   transitionTimingFunction: transitions.easing.standard,
-                  ["--tw-ring-color" as string]: shadows.focus.replace("0 0 0 3px ", ""),
+                  ["--tw-ring-color" as string]: themeShadows.focus.replace("0 0 0 3px ", ""),
                 }}
                 onClick={closeMenu}
               >
@@ -252,7 +272,7 @@ export function Header() {
               lineHeight: typography.scale.base.lineHeight,
               transitionDuration: transitions.duration.fast,
               transitionTimingFunction: transitions.easing.standard,
-              ["--tw-ring-color" as string]: shadows.focus.replace("0 0 0 3px ", ""),
+              ["--tw-ring-color" as string]: themeShadows.focus.replace("0 0 0 3px ", ""),
             }}
             onClick={closeMenu}
           >

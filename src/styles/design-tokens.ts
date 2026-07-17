@@ -28,6 +28,36 @@ export const colors = {
   },
 } as const;
 
+export const darkColors = {
+  primary: {
+    ink: "#F7F8FA",
+    steel: "#78C96A",
+    signal: "#23870B",
+    signalHover: "#1C6E09",
+    mist: "#173018",
+  },
+  neutral: {
+    0: "#FFFFFF",
+    50: "#F7F8FA",
+    100: "#E7ECF0",
+    200: "#CBD4DD",
+    300: "#AAB7C5",
+    400: "#8998A9",
+    500: "#6E7F91",
+    600: "#506174",
+    700: "#37485A",
+    800: "#253342",
+    900: "#111C28",
+  },
+  background: {
+    page: "#0B111A",
+    surface: "#121B27",
+    elevated: "#182333",
+    inverse: "#F7F8FA",
+    muted: "#101923",
+  },
+} as const;
+
 export const typography = {
   fontFamily: {
     sans: "var(--font-geist-sans), Arial, Helvetica, sans-serif",
@@ -72,6 +102,14 @@ export const shadows = {
   md: "0 8px 24px rgb(10 18 32 / 0.08)",
   lg: "0 18px 48px rgb(10 18 32 / 0.10)",
   focus: "0 0 0 3px rgb(35 135 11 / 0.18)",
+} as const;
+
+export const darkShadows = {
+  none: "none",
+  sm: "0 1px 2px rgb(0 0 0 / 0.24)",
+  md: "0 8px 24px rgb(0 0 0 / 0.32)",
+  lg: "0 18px 48px rgb(0 0 0 / 0.40)",
+  focus: "0 0 0 3px rgb(120 201 106 / 0.30)",
 } as const;
 
 export const layout = {
@@ -127,9 +165,11 @@ export const transitions = {
 
 export const designTokens = {
   colors,
+  darkColors,
   typography,
   radius,
   shadows,
+  darkShadows,
   layout,
   buttons,
   transitions,
