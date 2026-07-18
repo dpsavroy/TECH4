@@ -117,11 +117,15 @@ export const SystemCards = memo(function SystemCards({
                 <div className="flex items-center gap-2">
                   {/* System color indicator dot */}
                   <span
-                    className="w-1.5 h-1.5 rounded-full shrink-0"
+                    className={[
+                      "w-1.5 h-1.5 rounded-full shrink-0 transition-all duration-300 ease-out",
+                      isActive
+                        ? "bg-[var(--sys-color)]"
+                        : "bg-neutral-400 group-hover:bg-[var(--sys-color)]",
+                    ].join(" ")}
                     style={{
-                      backgroundColor: color,
+                      ["--sys-color" as string]: color,
                       transform: isActive ? "scale(1.45)" : "scale(1)",
-                      transition: `transform ${transitions.duration.base} ${transitions.easing.entrance}`,
                     }}
                   />
                   {/* System label */}

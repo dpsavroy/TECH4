@@ -293,9 +293,10 @@ function SystemStory({ activeSystem }: { activeSystem: SystemType | null }) {
           ? "rgb(24 35 51 / 0.95)"
           : "rgb(255 255 255 / 0.95)",
         borderColor: isDark ? darkColors.neutral[800] : "rgb(255 255 255 / 0.80)",
+        // Green-tinted shadow using the brand signal token instead of neutral black/blue
         boxShadow: isDark
-          ? "0 18px 42px rgb(0 0 0 / 0.36)"
-          : "0 18px 42px rgb(14 29 51 / 0.18)",
+          ? `0 18px 42px ${themeColors.primary.signal}40`
+          : `0 18px 42px ${themeColors.primary.signal}1F`,
         animation: "story-enter 300ms cubic-bezier(.16, 1, .3, 1) both",
       }}
       aria-label={story.title}

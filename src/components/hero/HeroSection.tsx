@@ -43,6 +43,15 @@ export function HeroSection() {
         <div className="w-full h-full bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:40px_40px]" />
       </div>
 
+      {/* Radial mask — keeps the grid pronounced behind the building, fades it softly toward the edges */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        aria-hidden="true"
+        style={{
+          background: `radial-gradient(ellipse 75% 65% at 50% 45%, transparent 30%, ${theme === "dark" ? darkColors.background.page : colors.background.page} 100%)`,
+        }}
+      />
+
       {/*
         Layout container.
 
