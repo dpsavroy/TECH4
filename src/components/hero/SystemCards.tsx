@@ -153,7 +153,7 @@ export const SystemCards = memo(function SystemCards({
                     transition: `color ${transitions.duration.base} ${transitions.easing.standard}`,
                   }}
                 >
-                  ● ACTIVE
+                  ● AKTYWNY
                 </span>
               </div>
 

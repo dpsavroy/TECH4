@@ -34,7 +34,7 @@ const themeInitializationScript = `
     document.documentElement.classList.toggle("dark", theme === "dark");
     document.documentElement.style.colorScheme = theme;
   } catch {
-    // The page remains in the default light theme when storage is unavailable.
+    // Strona pozostaje w domyślnym jasnym motywie, gdy localStorage jest niedostępny.
   }
 `;
 
@@ -45,7 +45,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="pl"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
