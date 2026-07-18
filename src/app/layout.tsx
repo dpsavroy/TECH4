@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TECH4 | Where Buildings Become Intelligent",
-  description: "TECH4 integrates building engineering systems into one reliable and manageable solution. We design, integrate, and support intelligent building automation, security, and HVAC systems throughout Europe.",
+  title: "TECH4 | Budynki stają się inteligentne",
+  description: "TECH4 integruje systemy techniczne budynków w jedno niezawodne i łatwe w zarządzaniu rozwiązanie. Projektujemy, integrujemy i serwisujemy inteligentne systemy automatyki budynkowej, bezpieczeństwa i HVAC w całej Europie.",
   other: {
     "theme-color": "#23870b",
   },

@@ -7,12 +7,12 @@ import { useEffect, useRef, useState } from "react";
 export type SystemType = "bms" | "bas" | "cctv" | "sap" | "kd" | "hvac";
 
 export const systemsList: { id: SystemType; label: string; desc: string }[] = [
-  { id: "bms", label: "BMS", desc: "Central management" },
-  { id: "bas", label: "BAS", desc: "Building automation" },
-  { id: "cctv", label: "CCTV", desc: "IP video surveillance" },
-  { id: "sap", label: "SAP", desc: "Fire alarm system" },
-  { id: "kd", label: "KD", desc: "Access control" },
-  { id: "hvac", label: "HVAC", desc: "HVAC automation" },
+  { id: "bms", label: "BMS", desc: "Centralne zarządzanie" },
+  { id: "bas", label: "BAS", desc: "Automatyka budynkowa" },
+  { id: "cctv", label: "CCTV", desc: "Monitoring wizyjny IP" },
+  { id: "sap", label: "SAP", desc: "System sygnalizacji pożarowej" },
+  { id: "kd", label: "KD", desc: "Kontrola dostępu" },
+  { id: "hvac", label: "HVAC", desc: "Automatyka HVAC" },
 ];
 
 // ─── Timing ─────────────────────────────────────────────────────────────────

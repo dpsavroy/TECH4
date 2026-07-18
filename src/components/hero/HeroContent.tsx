@@ -45,9 +45,11 @@ export function HeroContent() {
         }}
         className="text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.08] font-semibold lg:font-bold"
       >
-        Where Buildings
+        Budynki
         <br />
-        Become <span style={{ color: themeColors.primary.signal }}>Intelligent</span>.
+        stają się
+        <br />
+        <span style={{ color: themeColors.primary.signal }}>inteligentne</span>.
       </h1>
 
       {/* Supporting Description */}
@@ -61,7 +63,7 @@ export function HeroContent() {
         }}
         className="mt-6 max-w-lg"
       >
-        TECH4 integrates building engineering systems into one reliable and manageable solution.
+        TECH4 integruje systemy techniczne budynków w jedno niezawodne i łatwe w zarządzaniu rozwiązanie.
       </p>
 
       {/* Call to Actions */}

@@ -50,37 +50,37 @@ const systemStories: Partial<
 > = {
   bms: {
     image: "/bms-control-room.png",
-    tag: "BMS · CONTROL VIEW",
+    tag: "BMS · WIDOK NADZORU",
     title: "Centralny nadzór budynku",
     description: "Stan instalacji w jednym widoku.",
   },
   bas: {
     image: "/bas-control-panel.png",
-    tag: "BAS · AUTOMATION",
+    tag: "BAS · AUTOMATYKA",
     title: "Automatyka reaguje na potrzeby biura",
     description: "Światło i komfort pod kontrolą.",
   },
   cctv: {
     image: "/cctv-control-room.png",
-    tag: "CCTV · LIVE VIEW",
+    tag: "CCTV · PODGLĄD NA ŻYWO",
     title: "Monitoring w czasie rzeczywistym",
     description: "Obraz z kamer i punkt ochrony.",
   },
   kd: {
     image: "/access-card.png",
-    tag: "KD · ACCESS GRANTED",
+    tag: "KD · DOSTĘP PRZYZNANY",
     title: "Karta, czytnik, otwarte drzwi",
     description: "Bezpieczne wejście bez klucza.",
   },
   sap: {
     image: "/sap-detector-test.png",
-    tag: "SAP · SAFETY TEST",
+    tag: "SAP · TEST BEZPIECZEŃSTWA",
     title: "Gotowość systemu pożarowego",
     description: "Czujki i alarm pod stałym nadzorem.",
   },
   hvac: {
     image: "/hvac-service.png",
-    tag: "HVAC · PERFORMANCE",
+    tag: "HVAC · WYDAJNOŚĆ",
     title: "Komfort i jakość powietrza",
     description: "Wydajna wentylacja każdego dnia.",
   },
@@ -101,7 +101,7 @@ const BuildingCutaway = memo(function BuildingCutaway() {
   return (
     <Image
       src="/tech4-building-transparent.png"
-      alt="Engineering cutaway of a commercial building with visible technical systems"
+      alt="Przekrój techniczny budynku komercyjnego z widocznymi instalacjami technicznymi"
       width={1024}
       height={1024}
       priority
@@ -313,10 +313,10 @@ function SystemStory({ activeSystem }: { activeSystem: SystemType | null }) {
           style={{ backgroundColor: SYSTEM_COLORS[activeSystem] }}
         >
           {activeSystem === "cctv"
-            ? "LIVE"
+            ? "NA ŻYWO"
             : activeSystem === "kd"
-              ? "ACCESS"
-              : "ACTIVE"}
+              ? "DOSTĘP"
+              : "AKTYWNY"}
         </span>
         <span className="story-scan absolute inset-x-0 bottom-0 h-px bg-white/75 shadow-[0_0_12px_4px_rgba(166,210,255,0.8)]" />
       </div>

@@ -56,7 +56,7 @@ export function BuildingSchematic({ activeSystem }: BuildingSchematicProps) {
       role="img"
       aria-label="Izometryczny model BIM konstrukcji i instalacji budynku biurowego TECH4"
     >
-      <title>TECH4 Revit-style office building model</title>
+      <title>Model BIM budynku biurowego TECH4 w stylu Revit</title>
       <desc>Gęsty izometryczny model BIM budynku biurowego z konstrukcją, fasadą kurtynową, rdzeniem oraz instalacjami technicznymi.</desc>
 
       <defs>
