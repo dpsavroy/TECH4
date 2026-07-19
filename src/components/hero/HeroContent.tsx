@@ -70,7 +70,7 @@ export function HeroContent() {
       <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
         <a
           href="#kontakt"
-          className="inline-flex items-center justify-center rounded-full outline-none transition-all focus-visible:ring-3 text-center hover:bg-[#1C6E09] hover:dark:bg-[#1C6E09] active:scale-[0.98]"
+          className="inline-flex items-center justify-center rounded-full outline-none transition-all focus-visible:ring-3 text-center shadow-[0_0_0_rgba(18,217,67,0)] hover:bg-[#12D943] hover:dark:bg-[#12D943] hover:shadow-[0_0_28px_rgba(18,217,67,0.35)] active:scale-[0.98]"
           style={{
             minHeight: buttons.size.lg.height,
             paddingInline: "2.25rem",
@@ -78,8 +78,8 @@ export function HeroContent() {
             color: colors.neutral[0],
             fontSize: buttons.size.lg.fontSize,
             fontWeight: typography.weight.medium,
-            transitionDuration: transitions.duration.fast,
-            transitionTimingFunction: transitions.easing.standard,
+            transitionDuration: "300ms",
+            transitionTimingFunction: "ease",
             ["--tw-ring-color" as string]: themeShadows.focus.replace("0 0 0 3px ", ""),
           }}
         >
@@ -87,13 +87,13 @@ export function HeroContent() {
         </a>
         <a
           href="#uslugi"
-          className="inline-flex items-center justify-center rounded-full border outline-none transition-all focus-visible:ring-3 text-center hover:bg-neutral-100 hover:dark:bg-neutral-900 dark:text-neutral-300 dark:border-neutral-800 active:scale-[0.98]"
+          className="inline-flex items-center justify-center rounded-full border outline-none transition-all focus-visible:ring-3 text-center hover:bg-neutral-100 hover:dark:bg-neutral-900 dark:border-neutral-800 active:scale-[0.98]"
           style={{
             minHeight: buttons.size.lg.height,
             paddingInline: "2.25rem",
             borderColor:
               theme === "dark" ? darkColors.neutral[800] : colors.neutral[200],
-            color: themeColors.primary.ink,
+            color: theme === "dark" ? darkColors.neutral[300] : "#34433A",
             fontSize: buttons.size.lg.fontSize,
             fontWeight: typography.weight.medium,
             transitionDuration: transitions.duration.fast,

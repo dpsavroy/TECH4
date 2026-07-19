@@ -17,11 +17,11 @@ export const systemsList: { id: SystemType; label: string; desc: string }[] = [
 
 // ─── Timing ─────────────────────────────────────────────────────────────────
 
-/** Delay before first card appears (ms) */
-const INTRO_INITIAL_DELAY = 900;
+/** Delay before the terminal-style card sequence begins (ms) */
+const INTRO_INITIAL_DELAY = 0;
 
-/** How long each card's reveal is spaced during the intro sequence (ms) */
-const INTRO_STEP = 1400;
+/** Fast spacing between card reveals during the intro sequence (ms) */
+const INTRO_STEP = 75;
 
 /** After all cards appear, how long to pause before starting the auto-cycle (ms) */
 const INTRO_SETTLE_DELAY = 1800;

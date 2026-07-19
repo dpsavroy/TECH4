@@ -57,6 +57,16 @@ export const SystemCards = memo(function SystemCards({
       }
       onMouseLeave={() => onHoverChange(false)}
     >
+      <style>{`
+        @media (prefers-reduced-motion: reduce) {
+          [data-system-card] {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            transition: none !important;
+            pointer-events: auto !important;
+          }
+        }
+      `}</style>
       {systemsList.map((system) => {
         const isVisible = visibleSystems.includes(system.id);
         const isActive = activeSystem === system.id;
@@ -93,6 +103,7 @@ export const SystemCards = memo(function SystemCards({
                 onSelect(system.id);
               }}
               aria-pressed={isActive}
+              data-system-card
               className="w-full flex flex-col text-left p-3.5 border backdrop-blur-sm group focus-visible:outline-none focus-visible:ring-2"
               style={{
                 borderRadius: radius.sm,
@@ -104,10 +115,10 @@ export const SystemCards = memo(function SystemCards({
                   : isDark
                     ? "rgb(37 51 66 / 0.80)"
                     : "rgb(221 227 234 / 0.60)",
-                // Entrance: slides in from the right when the system is first revealed.
+                // Terminal boot entrance: each card reveals in its final position.
                 // Post-entrance: only border-color transitions (for active state).
                 opacity: isVisible ? 1 : 0,
-                transform: isVisible ? "translateX(0)" : "translateX(20px)",
+                transform: isVisible ? "translateY(0)" : "translateY(8px)",
                 transition: `opacity 420ms ${transitions.easing.entrance}, transform 420ms ${transitions.easing.entrance}, border-color ${transitions.duration.fast} ${transitions.easing.standard}`,
                 pointerEvents: isVisible ? "auto" : "none",
                 ["--tw-ring-color" as string]: themeShadows.focus.replace("0 0 0 3px ", ""),

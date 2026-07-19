@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import { useTheme } from "@/components/theme/ThemeProvider";
 import { colors, darkColors, radius } from "@/styles/design-tokens";
 import { SYSTEM_COLORS } from "./BuildingSchematic";
+import { systemsList } from "./useHeroOrchestration";
 import type { SystemType } from "./useHeroOrchestration";
 
 // ─── Static data ─────────────────────────────────────────────────────────────
@@ -94,6 +95,37 @@ const routePaths: Record<SystemType, string> = {
   kd: "M33 77H51V66H62V87",
   hvac: "M42 14H54V52H53V88",
 };
+
+const STORY_TRANSITION_MS = 420;
+const STORY_SETTLE_DELAY_MS = 120;
+
+function useSettledSystem(activeSystem: SystemType | null) {
+  const [displayedSystem, setDisplayedSystem] = useState<SystemType | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    if (!activeSystem) {
+      setIsVisible(false);
+      return;
+    }
+
+    // The main intro changes activeSystem every 75ms. Waiting until it settles
+    // keeps every building overlay in sync and prevents boot-time flashing.
+    setIsVisible(false);
+    let enterFrame: number | undefined;
+    const settleTimeout = setTimeout(() => {
+      setDisplayedSystem(activeSystem);
+      enterFrame = requestAnimationFrame(() => setIsVisible(true));
+    }, STORY_SETTLE_DELAY_MS);
+
+    return () => {
+      clearTimeout(settleTimeout);
+      if (enterFrame !== undefined) cancelAnimationFrame(enterFrame);
+    };
+  }, [activeSystem]);
+
+  return { displayedSystem, isVisible };
+}
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
@@ -211,16 +243,23 @@ function SystemMarker({
 
 function SystemHotspots({
   activeSystem,
+  isVisible,
 }: {
   activeSystem: SystemType | null;
+  isVisible: boolean;
 }) {
   if (!activeSystem) return null;
   const color = SYSTEM_COLORS[activeSystem];
   return (
     <svg
       viewBox="0 0 100 100"
+      data-system-hotspots
       className="pointer-events-none absolute inset-0 z-20 h-full w-full"
       aria-hidden="true"
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transition: `opacity ${STORY_TRANSITION_MS}ms cubic-bezier(.16, 1, .3, 1)`,
+      }}
     >
       {systemHotspots[activeSystem].map((hotspot, index) => (
         <g key={`${activeSystem}-${index}`}>
@@ -231,7 +270,13 @@ function SystemHotspots({
   );
 }
 
-function SystemRoutes({ activeSystem }: { activeSystem: SystemType | null }) {
+function SystemRoutes({
+  activeSystem,
+  isVisible,
+}: {
+  activeSystem: SystemType | null;
+  isVisible: boolean;
+}) {
   if (!activeSystem) return null;
   const color = SYSTEM_COLORS[activeSystem];
   const path = routePaths[activeSystem];
@@ -244,9 +289,13 @@ function SystemRoutes({ activeSystem }: { activeSystem: SystemType | null }) {
       <style>{`
         .system-route { stroke-dasharray: 3.5 2.5; animation: route-flow 1.7s linear infinite; }
         @keyframes route-flow { to { stroke-dashoffset: -12; } }
-        @media (prefers-reduced-motion: reduce) { .system-route { animation: none; } }
+        @media (prefers-reduced-motion: reduce) {
+          .system-route { animation: none; }
+          [data-system-route], [data-system-hotspots] { transition: none !important; }
+        }
       `}</style>
       <path
+        key={activeSystem}
         d={path}
         fill="none"
         stroke={color}
@@ -254,7 +303,11 @@ function SystemRoutes({ activeSystem }: { activeSystem: SystemType | null }) {
         strokeLinecap="round"
         strokeLinejoin="round"
         className="system-route"
-        opacity="0.9"
+        data-system-route
+        style={{
+          opacity: isVisible ? 0.9 : 0,
+          transition: `opacity ${STORY_TRANSITION_MS}ms cubic-bezier(.16, 1, .3, 1)`,
+        }}
       />
     </svg>
   );
@@ -268,80 +321,101 @@ function SystemRoutes({ activeSystem }: { activeSystem: SystemType | null }) {
  *   so it does not overlap the SystemCards in the right column.
  * - On lg and below it appears on the RIGHT side as before.
  */
-function SystemStory({ activeSystem }: { activeSystem: SystemType | null }) {
+function SystemStory({
+  activeSystem: displayedSystem,
+  isVisible,
+}: {
+  activeSystem: SystemType | null;
+  isVisible: boolean;
+}) {
   const { theme } = useTheme();
-  const story = activeSystem ? systemStories[activeSystem] : null;
-  if (!story || !activeSystem) return null;
+  const story = displayedSystem ? systemStories[displayedSystem] : null;
+  if (!story || !displayedSystem) return null;
 
-  const isBottom = activeSystem === "kd" || activeSystem === "sap";
+  const systemIndex = systemsList.findIndex(
+    (system) => system.id === displayedSystem,
+  );
+  const verticalProgress = systemIndex / (systemsList.length - 1);
   const isDark = theme === "dark";
   const themeColors = isDark ? darkColors : colors;
 
   return (
-    <article
+    <div
+      data-system-story-position
       className={[
-        "story-enter pointer-events-none absolute z-30 w-52 overflow-hidden",
-        "border backdrop-blur-sm",
-        // Vertical position
-        isBottom ? "bottom-[8%]" : "top-[12%]",
+        "pointer-events-none absolute z-30 w-52",
         // Horizontal: left at xl (right column occupied by SystemCards), right at lg/md
         "right-0 xl:right-auto xl:left-0",
       ].join(" ")}
       style={{
-        borderRadius: radius.md,
-        backgroundColor: isDark
-          ? "rgb(24 35 51 / 0.95)"
-          : "rgb(255 255 255 / 0.95)",
-        borderColor: isDark ? darkColors.neutral[800] : "rgb(255 255 255 / 0.80)",
-        // Green-tinted shadow using the brand signal token instead of neutral black/blue
-        boxShadow: isDark
-          ? `0 18px 42px ${themeColors.primary.signal}40`
-          : `0 18px 42px ${themeColors.primary.signal}1F`,
-        animation: "story-enter 300ms cubic-bezier(.16, 1, .3, 1) both",
+        // Spread the story card over the same top-to-bottom order as SystemCards.
+        // clamp keeps its center inside the building bounds at both ends.
+        top: `clamp(5.25rem, ${verticalProgress * 100}%, calc(100% - 5.25rem))`,
+        transform: "translateY(-50%)",
+        transition: `top ${STORY_TRANSITION_MS}ms cubic-bezier(.16, 1, .3, 1)`,
       }}
-      aria-label={story.title}
     >
-      <div className="relative h-24 overflow-hidden bg-neutral-900">
-        <Image
-          src={story.image}
-          alt=""
-          fill
-          sizes="208px"
-          className="story-pan object-cover"
-        />
-        <span
-          className="absolute left-2 top-2 px-1.5 py-1 font-mono text-[8px] font-medium tracking-[0.08em] text-white"
-          style={{ backgroundColor: SYSTEM_COLORS[activeSystem] }}
-        >
-          {activeSystem === "cctv"
-            ? "NA ŻYWO"
-            : activeSystem === "kd"
-              ? "DOSTĘP"
-              : "AKTYWNY"}
-        </span>
-        <span className="story-scan absolute inset-x-0 bottom-0 h-px bg-white/75 shadow-[0_0_12px_4px_rgba(166,210,255,0.8)]" />
-      </div>
-      <div className="p-3">
-        <span
-          className="block font-mono text-[8px] font-medium tracking-[0.06em]"
-          style={{ color: isDark ? darkColors.neutral[400] : colors.neutral[500] }}
-        >
-          {story.tag}
-        </span>
-        <strong
-          className="mt-1 block text-[11px] leading-snug"
-          style={{ color: themeColors.primary.ink }}
-        >
-          {story.title}
-        </strong>
-        <p
-          className="mt-1 text-[10px] leading-snug"
-          style={{ color: isDark ? darkColors.neutral[400] : colors.neutral[500] }}
-        >
-          {story.description}
-        </p>
-      </div>
-    </article>
+      <article
+        data-system-story
+        className="story-enter overflow-hidden border backdrop-blur-sm"
+        style={{
+          borderRadius: radius.md,
+          backgroundColor: isDark
+            ? "rgb(24 35 51 / 0.95)"
+            : "rgb(255 255 255 / 0.95)",
+          borderColor: isDark ? darkColors.neutral[800] : "rgb(255 255 255 / 0.80)",
+          // Green-tinted shadow using the brand signal token instead of neutral black/blue
+          boxShadow: isDark
+            ? `0 18px 42px ${themeColors.primary.signal}40`
+            : `0 18px 42px ${themeColors.primary.signal}1F`,
+          opacity: isVisible ? 1 : 0,
+          transform: isVisible ? "translateY(0)" : "translateY(8px)",
+          transition: `opacity ${STORY_TRANSITION_MS}ms cubic-bezier(.16, 1, .3, 1), transform ${STORY_TRANSITION_MS}ms cubic-bezier(.16, 1, .3, 1)`,
+        }}
+        aria-label={story.title}
+      >
+        <div className="relative h-24 overflow-hidden bg-neutral-900">
+          <Image
+            src={story.image}
+            alt=""
+            fill
+            sizes="208px"
+            className="story-pan object-cover"
+          />
+          <span
+            className="absolute left-2 top-2 px-1.5 py-1 font-mono text-[8px] font-medium tracking-[0.08em] text-white"
+            style={{ backgroundColor: SYSTEM_COLORS[displayedSystem] }}
+          >
+            {displayedSystem === "cctv"
+              ? "NA ŻYWO"
+              : displayedSystem === "kd"
+                ? "DOSTĘP"
+                : "AKTYWNY"}
+          </span>
+          <span className="story-scan absolute inset-x-0 bottom-0 h-px bg-white/75 shadow-[0_0_12px_4px_rgba(166,210,255,0.8)]" />
+        </div>
+        <div className="p-3">
+          <span
+            className="block font-mono text-[8px] font-medium tracking-[0.06em]"
+            style={{ color: isDark ? darkColors.neutral[400] : colors.neutral[500] }}
+          >
+            {story.tag}
+          </span>
+          <strong
+            className="mt-1 block text-[11px] leading-snug"
+            style={{ color: themeColors.primary.ink }}
+          >
+            {story.title}
+          </strong>
+          <p
+            className="mt-1 text-[10px] leading-snug"
+            style={{ color: isDark ? darkColors.neutral[400] : colors.neutral[500] }}
+          >
+            {story.description}
+          </p>
+        </div>
+      </article>
+    </div>
   );
 }
 
@@ -361,6 +435,7 @@ export function HeroVisual({
   onSystemSelect: _onSystemSelect,
 }: HeroVisualProps) {
   const { theme } = useTheme();
+  const { displayedSystem, isVisible } = useSettledSystem(activeSystem);
   const cornerMarkColor = theme === "dark" ? darkColors.neutral[800] : colors.neutral[300];
 
   return (
@@ -373,14 +448,12 @@ export function HeroVisual({
       <style>{`
         .story-pan  { animation: story-pan  3.2s ease-in-out infinite alternate; }
         .story-scan { animation: story-scan 2.8s linear infinite; }
-        @keyframes story-enter {
-          from { opacity: 0; transform: translateY(8px) scale(.98); }
-          to   { opacity: 1; transform: none; }
-        }
         @keyframes story-pan  { to { transform: scale(1.07); } }
         @keyframes story-scan { 0% { transform: translateY(0); } 100% { transform: translateY(-96px); } }
         @media (prefers-reduced-motion: reduce) {
-          .story-enter, .story-pan, .story-scan { animation: none !important; }
+          .story-pan, .story-scan { animation: none !important; }
+          [data-system-story] { transition: none !important; }
+          [data-system-story-position] { transition: none !important; }
         }
       `}</style>
 
@@ -393,9 +466,9 @@ export function HeroVisual({
         <div className="pointer-events-none absolute bottom-0 left-0 z-20 w-4 h-4 border-b border-l" style={{ borderColor: cornerMarkColor }} />
         <div className="pointer-events-none absolute bottom-0 right-0 z-20 w-4 h-4 border-b border-r" style={{ borderColor: cornerMarkColor }} />
 
-        <SystemRoutes activeSystem={activeSystem} />
-        <SystemHotspots activeSystem={activeSystem} />
-        <SystemStory activeSystem={activeSystem} />
+        <SystemRoutes activeSystem={displayedSystem} isVisible={isVisible} />
+        <SystemHotspots activeSystem={displayedSystem} isVisible={isVisible} />
+        <SystemStory activeSystem={displayedSystem} isVisible={isVisible} />
       </div>
     </div>
   );
