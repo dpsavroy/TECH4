@@ -350,7 +350,7 @@ function SystemStory({
       style={{
         // Spread the story card over the same top-to-bottom order as SystemCards.
         // clamp keeps its center inside the building bounds at both ends.
-        top: `clamp(5.25rem, ${verticalProgress * 100}%, calc(100% - 5.25rem))`,
+        top: `clamp(7.5rem, ${verticalProgress * 100}%, calc(100% - 7.5rem))`,
         transform: "translateY(-50%)",
         transition: `top ${STORY_TRANSITION_MS}ms cubic-bezier(.16, 1, .3, 1)`,
       }}
@@ -374,7 +374,7 @@ function SystemStory({
         }}
         aria-label={story.title}
       >
-        <div className="relative h-24 overflow-hidden bg-neutral-900">
+        <div className="relative aspect-[7/5] overflow-hidden bg-neutral-900">
           <Image
             src={story.image}
             alt=""
@@ -449,7 +449,7 @@ export function HeroVisual({
         .story-pan  { animation: story-pan  3.2s ease-in-out infinite alternate; }
         .story-scan { animation: story-scan 2.8s linear infinite; }
         @keyframes story-pan  { to { transform: scale(1.07); } }
-        @keyframes story-scan { 0% { transform: translateY(0); } 100% { transform: translateY(-96px); } }
+        @keyframes story-scan { 0% { transform: translateY(0); } 100% { transform: translateY(-148px); } }
         @media (prefers-reduced-motion: reduce) {
           .story-pan, .story-scan { animation: none !important; }
           [data-system-story] { transition: none !important; }
