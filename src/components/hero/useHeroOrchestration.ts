@@ -43,22 +43,18 @@ const CYCLE_INTERVAL = 4500;
  *   - Pauses while isHovered is true
  */
 export function useHeroOrchestration() {
-  const [activeSystem, setActiveSystem] = useState<SystemType | null>(null);
+  const [activeSystem, setActiveSystem] = useState<SystemType | null>("bms");
   const [visibleSystems, setVisibleSystems] = useState<SystemType[]>([]);
   const [isHovered, setIsHovered] = useState(false);
   const [introComplete, setIntroComplete] = useState(false);
 
   const currentIndexRef = useRef(-1);
   const cycleIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const introStartedRef = useRef(false);
 
   // ── Intro sequence ────────────────────────────────────────────────────────
   // Runs once. Not affected by hover state — users should see all cards
   // appear even if they hover during the intro.
   useEffect(() => {
-    if (introStartedRef.current) return;
-    introStartedRef.current = true;
-
     const timeouts: ReturnType<typeof setTimeout>[] = [];
 
     systemsList.forEach((system, index) => {
