@@ -28,7 +28,7 @@ export interface TypingState {
 // ─── Constants ─────────────────────────────────────────────────────────────────
 
 /** Target total duration of the typing animation (ms) */
-const TYPING_DURATION_MS = 1000;
+const TYPING_DURATION_MS = 2000;
 
 /** Short pause kept after typing finishes before signalling done (ms) */
 const TYPING_SETTLE_MS = 150;
@@ -39,26 +39,12 @@ const CARET_BLINK_MS = 530;
 /** How long the caret stays after typing completes before fading out (ms) */
 const CARET_LINGER_MS = 400;
 
-/** sessionStorage flag — effect runs once per browser session */
-const SESSION_FLAG = "tech4:hero-description-typed";
-
-/**
- * Returns true if the description typing effect has already run in this
- * browser session (or reduced-motion forced it to be marked done).
- * Lets consumers delay other animations only on the first occurrence.
- */
-export function hasTypedThisSession(): boolean {
-  if (typeof window === "undefined") return true;
-  return window.sessionStorage.getItem(SESSION_FLAG) === "1";
-}
-
 // ─── Hook ──────────────────────────────────────────────────────────────────────
 
 /**
  * Reveals the provided `lines` character-by-character, like a terminal
- * typing effect. Runs once per browser session (tracked via
- * `sessionStorage`), and respects `prefers-reduced-motion` (renders fully,
- * instantly, without a caret).
+ * typing effect. Runs on every mount (page load / refresh), and respects
+ * `prefers-reduced-motion` (renders fully, instantly, without a caret).
  *
  * Layout shift is handled by the rendering component, not here — this hook
  * only tracks how many characters are currently visible.
@@ -82,18 +68,6 @@ export function useTypingEffect(lines: TypingLine[]): TypingState {
   );
 
   useEffect(() => {
-    // Already typed earlier in this session → show full text instantly
-    if (
-      typeof window !== "undefined" &&
-      window.sessionStorage.getItem(SESSION_FLAG) === "1"
-    ) {
-      setRevealedChars(totalChars);
-      setIsTyping(false);
-      setIsDone(true);
-      setShowCaret(false);
-      return;
-    }
-
     const reduceMotion =
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -103,9 +77,6 @@ export function useTypingEffect(lines: TypingLine[]): TypingState {
       setIsTyping(false);
       setIsDone(true);
       setShowCaret(false);
-      if (typeof window !== "undefined") {
-        window.sessionStorage.setItem(SESSION_FLAG, "1");
-      }
       return;
     }
 
@@ -128,9 +99,6 @@ export function useTypingEffect(lines: TypingLine[]): TypingState {
 
         settleTimerRef.current = setTimeout(() => {
           setIsDone(true);
-          if (typeof window !== "undefined") {
-            window.sessionStorage.setItem(SESSION_FLAG, "1");
-          }
         }, TYPING_SETTLE_MS);
 
         // Slow caret blink while idle after typing completes

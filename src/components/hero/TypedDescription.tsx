@@ -12,10 +12,12 @@ export interface TypedDescriptionProps {
   textColor: string;
   /** Caret colour (defaults to textColor). */
   caretColor?: string;
-  /** Tailwind / inline className applied to the <p>. */
+  /** Tailwind / inline className applied to the terminal window. */
   className?: string;
-  /** Inline style applied to the <p> (font, weight, tracking, …). */
+  /** Inline style applied to the terminal window. */
   style?: CSSProperties;
+  /** Window title shown in the terminal header bar. */
+  title?: string;
   /** Called once the typing animation has fully completed. */
   onDone?: () => void;
 }
@@ -23,15 +25,17 @@ export interface TypedDescriptionProps {
 // ─── Component ──────────────────────────────────────────────────────────────────
 
 /**
- * Renders a <p> paragraph with a one-shot terminal-style typing effect.
+ * Renders a macOS-style terminal window whose body reveals text
+ * character-by-character with a blinking block caret.
  *
- * Anti-CLS strategy: the component always renders the *complete final
- * text* as an invisible "skeleton" that reserves the exact final layout
- * box. The typed characters are rendered as an absolutely-positioned
- * overlay on top, so surrounding elements never shift by a single pixel.
+ * Anti-CLS strategy: the body always renders the *complete final text* as
+ * an invisible "skeleton" that reserves the exact final layout box. The
+ * typed characters are rendered as an absolutely-positioned overlay on
+ * top, alongside a fixed-width prompt glyph, so surrounding elements
+ * never shift by a single pixel.
  *
- * The effect runs once per browser session (see `useTypingEffect`) and is
- * skipped entirely when `prefers-reduced-motion: reduce` is set.
+ * The effect runs on every mount and is skipped entirely (full text shown
+ * instantly, no caret) when `prefers-reduced-motion: reduce` is set.
  */
 export function TypedDescription({
   text,
@@ -39,6 +43,7 @@ export function TypedDescription({
   caretColor,
   className,
   style,
+  title = "tech4 — integrator",
   onDone,
 }: TypedDescriptionProps) {
   // Single line, single non-accent segment — the description has no
@@ -61,40 +66,87 @@ export function TypedDescription({
   const caret = caretColor ?? textColor;
 
   return (
-    <p
-      className={className}
-      style={{ ...style, position: "relative", color: textColor }}
+    <div
+      className={[
+        // Premium terminal window — calm, engineering-first (no glow)
+        "overflow-hidden rounded-lg border backdrop-blur-[2px]",
+        "border-[rgb(0_0_0/0.08)] dark:border-[rgb(255_255_255/0.08)]",
+        "bg-[rgb(247_248_250/0.65)] dark:bg-[rgb(18_35_51/0.55)]",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      style={style}
     >
-      {/* ── Skeleton: full final text, invisible, reserves layout ── */}
-      <span aria-hidden="true" style={{ visibility: "hidden" }}>
-        {text}
-      </span>
+      {/* ── Window chrome: traffic lights + title ───────────────────────── */}
+      <div
+        className="flex items-center gap-2 px-4 py-2.5 border-b"
+        style={{ borderColor: "inherit" }}
+      >
+        <div className="flex items-center gap-1.5" aria-hidden="true">
+          <span className="block w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
+          <span className="block w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
+          <span className="block w-2.5 h-2.5 rounded-full bg-[#28C840]" />
+        </div>
+        <span
+          className="ml-1 text-[0.7rem] font-medium uppercase tracking-[0.08em] opacity-50"
+          style={{ fontFamily: "var(--font-geist-mono), monospace" }}
+        >
+          {title}
+        </span>
+      </div>
 
-      {/* ── Overlay: typed characters, absolutely positioned ── */}
-      <span
-        aria-label={text}
+      {/* ── Terminal body ───────────────────────────────────────────────── */}
+      <div
+        className="relative px-4 py-3"
         style={{
-          position: "absolute",
-          inset: 0,
-          display: "block",
+          fontFamily: "var(--font-geist-mono), 'SFMono-Regular', Consolas, monospace",
+          fontSize: "1.0625rem",
+          lineHeight: "1.75rem",
+          color: textColor,
         }}
       >
-        {revealedText}
-        {showCaret && (
+        <p className="relative m-0 whitespace-pre-wrap break-words">
+          {/* Prompt glyph — fixed, never typed */}
           <span
             aria-hidden="true"
+            style={{ marginRight: "0.5rem", opacity: 0.55 }}
+          >
+            ›
+          </span>
+
+          {/* ── Skeleton: full final text, invisible, reserves layout ── */}
+          <span aria-hidden="true" style={{ visibility: "hidden" }}>
+            {text}
+          </span>
+
+          {/* ── Overlay: typed characters + caret, absolutely positioned ── */}
+          <span
+            aria-label={text}
             style={{
-              display: "inline-block",
-              width: "0.06em",
-              height: "1em",
-              marginLeft: "0.08em",
-              transform: "translateY(0.14em)",
-              backgroundColor: caret,
-              transition: "opacity 120ms ease",
+              position: "absolute",
+              inset: 0,
+              paddingLeft: "1.4375rem", // offset past the prompt glyph
             }}
-          />
-        )}
-      </span>
-    </p>
+          >
+            {revealedText}
+            {showCaret && (
+              <span
+                aria-hidden="true"
+                style={{
+                  display: "inline-block",
+                  width: "0.6em",
+                  height: "1.05em",
+                  marginLeft: "0.05em",
+                  transform: "translateY(0.18em)",
+                  backgroundColor: caret,
+                  transition: "opacity 120ms ease",
+                }}
+              />
+            )}
+          </span>
+        </p>
+      </div>
+    </div>
   );
 }

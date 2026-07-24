@@ -7,7 +7,6 @@ import { HeroContent } from "./HeroContent";
 import { HeroVisual } from "./HeroVisual";
 import { SystemCards } from "./SystemCards";
 import { useHeroOrchestration } from "./useHeroOrchestration";
-import { hasTypedThisSession } from "./useTypingEffect";
 
 /**
  * Hero section — full-viewport composition.
@@ -24,12 +23,10 @@ export function HeroSection() {
   const { theme } = useTheme();
 
   // Description → card cascade sequencing (Variant B).
-  // On the first visit of the session the typed description gates the card
-  // cascade. On subsequent visits (or reduced-motion / SSR) the cascade
-  // starts immediately.
-  const [descriptionReady, setDescriptionReady] = useState<boolean>(
-    hasTypedThisSession(),
-  );
+  // The typed description gates the card cascade on every page load; the
+  // cascade starts once the description finishes typing (or immediately
+  // when reduced-motion skips the effect).
+  const [descriptionReady, setDescriptionReady] = useState<boolean>(false);
 
   const {
     activeSystem,

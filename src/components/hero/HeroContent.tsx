@@ -62,16 +62,11 @@ export function HeroContent({
         <span style={{ color: themeColors.primary.signal }}>inteligentne</span>.
       </h1>
 
-      {/* Supporting Description — typed character-by-character on first session load */}
+      {/* Supporting Description — terminal-style typed description */}
       <TypedDescription
         text={descriptionText}
-        textColor={theme === "dark" ? darkColors.neutral[300] : colors.neutral[500]}
-        className="mt-6 max-w-lg"
-        style={{
-          fontFamily: typography.fontFamily.sans,
-          fontSize: typography.scale.lg.fontSize,
-          lineHeight: typography.scale.lg.lineHeight,
-        }}
+        textColor={theme === "dark" ? darkColors.neutral[300] : colors.neutral[600]}
+        className="mt-6 max-w-xl"
         onDone={onDescriptionDone}
       />
 
