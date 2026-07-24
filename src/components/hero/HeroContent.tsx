@@ -10,11 +10,21 @@ import {
   transitions,
   typography,
 } from "@/styles/design-tokens";
+import { TypedDescription } from "./TypedDescription";
 
-export function HeroContent() {
+export function HeroContent({
+  onDescriptionDone,
+}: {
+  onDescriptionDone?: () => void;
+}) {
   const { theme } = useTheme();
   const themeColors = theme === "dark" ? darkColors : colors;
   const themeShadows = theme === "dark" ? darkShadows : shadows;
+
+  // Description text — revealed character-by-character on first session
+  // load. No accent segments: the whole paragraph shares one colour.
+  const descriptionText =
+    "TECH4 integruje systemy techniczne budynków w jedno niezawodne i łatwe w zarządzaniu rozwiązanie.";
 
   return (
     <div className="flex flex-col text-left max-w-xl lg:max-w-2xl">
@@ -52,19 +62,18 @@ export function HeroContent() {
         <span style={{ color: themeColors.primary.signal }}>inteligentne</span>.
       </h1>
 
-      {/* Supporting Description */}
-      <p
+      {/* Supporting Description — typed character-by-character on first session load */}
+      <TypedDescription
+        text={descriptionText}
+        textColor={theme === "dark" ? darkColors.neutral[300] : colors.neutral[500]}
+        className="mt-6 max-w-lg"
         style={{
           fontFamily: typography.fontFamily.sans,
           fontSize: typography.scale.lg.fontSize,
           lineHeight: typography.scale.lg.lineHeight,
-          color:
-            theme === "dark" ? darkColors.neutral[300] : colors.neutral[500],
         }}
-        className="mt-6 max-w-lg"
-      >
-        TECH4 integruje systemy techniczne budynków w jedno niezawodne i łatwe w zarządzaniu rozwiązanie.
-      </p>
+        onDone={onDescriptionDone}
+      />
 
       {/* Call to Actions */}
       <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">

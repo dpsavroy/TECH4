@@ -31,6 +31,15 @@ const CYCLE_INTERVAL = 4500;
 
 // ─── Hook ────────────────────────────────────────────────────────────────────
 
+export interface UseHeroOrchestrationOptions {
+  /**
+   * Gate the start of the card intro cascade. When `false`, the sequence
+   * does not begin; when it later becomes `true` the cascade runs.
+   * Defaults to `true` (start immediately) for backward compatibility.
+   */
+  introStarted?: boolean;
+}
+
 /**
  * Orchestrates the Hero animation sequence.
  *
@@ -42,7 +51,9 @@ const CYCLE_INTERVAL = 4500;
  *   - Cycles through systems every CYCLE_INTERVAL ms
  *   - Pauses while isHovered is true
  */
-export function useHeroOrchestration() {
+export function useHeroOrchestration(opts?: UseHeroOrchestrationOptions) {
+  const introStarted = opts?.introStarted ?? true;
+
   const [activeSystem, setActiveSystem] = useState<SystemType | null>("bms");
   const [visibleSystems, setVisibleSystems] = useState<SystemType[]>([]);
   const [isHovered, setIsHovered] = useState(false);
@@ -54,7 +65,11 @@ export function useHeroOrchestration() {
   // ── Intro sequence ────────────────────────────────────────────────────────
   // Runs once. Not affected by hover state — users should see all cards
   // appear even if they hover during the intro.
+  // Gated by `introStarted` so external animations (e.g. the typed heading)
+  // can delay the cascade until they complete.
   useEffect(() => {
+    if (!introStarted) return;
+
     const timeouts: ReturnType<typeof setTimeout>[] = [];
 
     systemsList.forEach((system, index) => {
@@ -82,7 +97,7 @@ export function useHeroOrchestration() {
     });
 
     return () => timeouts.forEach(clearTimeout);
-  }, []);
+  }, [introStarted]);
 
   // ── Auto-cycle ────────────────────────────────────────────────────────────
   useEffect(() => {

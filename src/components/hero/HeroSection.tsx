@@ -1,11 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import { useTheme } from "@/components/theme/ThemeProvider";
 import { colors, darkColors, layout } from "@/styles/design-tokens";
 import { HeroContent } from "./HeroContent";
 import { HeroVisual } from "./HeroVisual";
 import { SystemCards } from "./SystemCards";
 import { useHeroOrchestration } from "./useHeroOrchestration";
+import { hasTypedThisSession } from "./useTypingEffect";
 
 /**
  * Hero section — full-viewport composition.
@@ -20,13 +22,22 @@ import { useHeroOrchestration } from "./useHeroOrchestration";
  */
 export function HeroSection() {
   const { theme } = useTheme();
+
+  // Description → card cascade sequencing (Variant B).
+  // On the first visit of the session the typed description gates the card
+  // cascade. On subsequent visits (or reduced-motion / SSR) the cascade
+  // starts immediately.
+  const [descriptionReady, setDescriptionReady] = useState<boolean>(
+    hasTypedThisSession(),
+  );
+
   const {
     activeSystem,
     visibleSystems,
     isHovered,
     setIsHovered,
     handleSelect,
-  } = useHeroOrchestration();
+  } = useHeroOrchestration({ introStarted: descriptionReady });
 
   return (
     <section
@@ -82,7 +93,7 @@ export function HeroSection() {
       >
         {/* ── Left column: copy & CTA ──────────────────────────────────────── */}
         <div className="w-full lg:w-[40%] xl:w-auto flex justify-start items-center">
-          <HeroContent />
+          <HeroContent onDescriptionDone={() => setDescriptionReady(true)} />
         </div>
 
         {/* ── Center column: interactive building ─────────────────────────── */}
