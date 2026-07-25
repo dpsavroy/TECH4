@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { memo, useEffect, useState } from "react";
 import { useTheme } from "@/components/theme/ThemeProvider";
+import { useTranslations } from "@/contexts/LocaleContext";
 import { colors, darkColors, radius } from "@/styles/design-tokens";
 import { SYSTEM_COLORS } from "./BuildingSchematic";
 import { systemsList } from "./useHeroOrchestration";
@@ -43,48 +44,17 @@ const systemHotspots: Record<SystemType, { x: number; y: number }[]> = {
   ],
 };
 
-const systemStories: Partial<
-  Record<
-    SystemType,
-    { image: string; tag: string; title: string; description: string }
-  >
-> = {
-  bms: {
-    image: "/bms-control-room.png",
-    tag: "BMS · WIDOK NADZORU",
-    title: "Centralny nadzór budynku",
-    description: "Stan instalacji w jednym widoku.",
-  },
-  bas: {
-    image: "/bas-control-panel.png",
-    tag: "BAS · AUTOMATYKA",
-    title: "Automatyka reaguje na potrzeby biura",
-    description: "Światło i komfort pod kontrolą.",
-  },
-  cctv: {
-    image: "/cctv-control-room.png",
-    tag: "CCTV · PODGLĄD NA ŻYWO",
-    title: "Monitoring w czasie rzeczywistym",
-    description: "Obraz z kamer i punkt ochrony.",
-  },
-  kd: {
-    image: "/access-card.png",
-    tag: "KD · DOSTĘP PRZYZNANY",
-    title: "Karta, czytnik, otwarte drzwi",
-    description: "Bezpieczne wejście bez klucza.",
-  },
-  sap: {
-    image: "/sap-detector-test.png",
-    tag: "SAP · TEST BEZPIECZEŃSTWA",
-    title: "Gotowość systemu pożarowego",
-    description: "Czujki i alarm pod stałym nadzorem.",
-  },
-  hvac: {
-    image: "/hvac-service.png",
-    tag: "HVAC · WYDAJNOŚĆ",
-    title: "Komfort i jakość powietrza",
-    description: "Wydajna wentylacja każdego dnia.",
-  },
+/**
+ * Story images per system — locale-independent.
+ * Text (tag, title, description, badge) comes from translations.
+ */
+const systemImages: Partial<Record<SystemType, string>> = {
+  bms: "/bms-control-room.png",
+  bas: "/bas-control-panel.png",
+  cctv: "/cctv-control-room.png",
+  kd: "/access-card.png",
+  sap: "/sap-detector-test.png",
+  hvac: "/hvac-service.png",
 };
 
 const routePaths: Record<SystemType, string> = {
@@ -329,8 +299,10 @@ function SystemStory({
   isVisible: boolean;
 }) {
   const { theme } = useTheme();
-  const story = displayedSystem ? systemStories[displayedSystem] : null;
-  if (!story || !displayedSystem) return null;
+  const t = useTranslations();
+  const image = displayedSystem ? systemImages[displayedSystem] : null;
+  const storyT = displayedSystem ? t.stories[displayedSystem] : null;
+  if (!image || !storyT || !displayedSystem) return null;
 
   const systemIndex = systemsList.findIndex(
     (system) => system.id === displayedSystem,
@@ -372,11 +344,11 @@ function SystemStory({
           transform: isVisible ? "translateY(0)" : "translateY(8px)",
           transition: `opacity ${STORY_TRANSITION_MS}ms cubic-bezier(.16, 1, .3, 1), transform ${STORY_TRANSITION_MS}ms cubic-bezier(.16, 1, .3, 1)`,
         }}
-        aria-label={story.title}
+        aria-label={storyT.title}
       >
         <div className="relative aspect-[7/5] overflow-hidden bg-neutral-900">
           <Image
-            src={story.image}
+            src={image}
             alt=""
             fill
             sizes="208px"
@@ -386,11 +358,7 @@ function SystemStory({
             className="absolute left-2 top-2 px-1.5 py-1 font-mono text-[8px] font-medium tracking-[0.08em] text-white"
             style={{ backgroundColor: SYSTEM_COLORS[displayedSystem] }}
           >
-            {displayedSystem === "cctv"
-              ? "NA ŻYWO"
-              : displayedSystem === "kd"
-                ? "DOSTĘP"
-                : "AKTYWNY"}
+            {storyT.badge}
           </span>
           <span className="story-scan absolute inset-x-0 bottom-0 h-px bg-white/75 shadow-[0_0_12px_4px_rgba(166,210,255,0.8)]" />
         </div>
@@ -399,19 +367,19 @@ function SystemStory({
             className="block font-mono text-[8px] font-medium tracking-[0.06em]"
             style={{ color: isDark ? darkColors.neutral[400] : colors.neutral[500] }}
           >
-            {story.tag}
+            {storyT.tag}
           </span>
           <strong
             className="mt-1 block text-[11px] leading-snug"
             style={{ color: themeColors.primary.ink }}
           >
-            {story.title}
+            {storyT.title}
           </strong>
           <p
             className="mt-1 text-[10px] leading-snug"
             style={{ color: isDark ? darkColors.neutral[400] : colors.neutral[500] }}
           >
-            {story.description}
+            {storyT.description}
           </p>
         </div>
       </article>

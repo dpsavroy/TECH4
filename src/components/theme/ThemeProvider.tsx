@@ -5,62 +5,71 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
   type ReactNode,
 } from "react";
 
-type Theme = "light" | "dark";
+export type ThemeMode = "light" | "dark";
+type ResolvedTheme = ThemeMode;
 
 type ThemeContextValue = {
-  theme: Theme;
-  setTheme: (theme: Theme) => void;
-  toggleTheme: () => void;
+  /** The user-selected mode (light | dark). */
+  mode: ThemeMode;
+  /** The resolved visual theme actually applied to the page. */
+  theme: ResolvedTheme;
+  /** Set a specific mode. */
+  setMode: (mode: ThemeMode) => void;
+  /** Toggle between light and dark. */
+  cycleMode: () => void;
 };
 
 const THEME_STORAGE_KEY = "tech4-theme";
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
-function getInitialTheme(): Theme {
-  if (typeof window === "undefined") {
-    return "light";
-  }
+function getInitialMode(): ThemeMode {
+  if (typeof window === "undefined") return "light";
 
   try {
-    const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
-
-    if (savedTheme === "light" || savedTheme === "dark") {
-      return savedTheme;
+    const saved = window.localStorage.getItem(THEME_STORAGE_KEY);
+    if (saved === "light" || saved === "dark") {
+      return saved;
     }
   } catch {
-    // Continue with the system preference when localStorage is unavailable.
+    // localStorage unavailable – fall through.
   }
 
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+  return "light";
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const [mode, setModeState] = useState<ThemeMode>(getInitialMode);
 
+  const resolved: ResolvedTheme = useMemo(() => mode, [mode]);
+
+  // Apply the resolved theme to <html>.
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", theme === "dark");
-    document.documentElement.style.colorScheme = theme;
+    document.documentElement.classList.toggle("dark", resolved === "dark");
+    document.documentElement.style.colorScheme = resolved;
 
     try {
-      window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+      window.localStorage.setItem(THEME_STORAGE_KEY, mode);
     } catch {
-      // The selected theme still applies for the current visit.
+      // The selected mode still applies for the current visit.
     }
-  }, [theme]);
+  }, [resolved, mode]);
 
-  const toggleTheme = useCallback(() => {
-    setTheme((currentTheme) => (currentTheme === "dark" ? "light" : "dark"));
+  const setMode = useCallback((next: ThemeMode) => {
+    setModeState(next);
+  }, []);
+
+  const cycleMode = useCallback(() => {
+    setModeState((prev) => (prev === "light" ? "dark" : "light"));
   }, []);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
+    <ThemeContext.Provider value={{ mode, theme: resolved, setMode, cycleMode }}>
       {children}
     </ThemeContext.Provider>
   );

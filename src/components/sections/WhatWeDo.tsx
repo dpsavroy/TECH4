@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useTheme } from "@/components/theme/ThemeProvider";
+import { useTranslations } from "@/contexts/LocaleContext";
 import {
   colors,
   darkColors,
@@ -11,29 +12,9 @@ import {
   typography,
 } from "@/styles/design-tokens";
 
-const cards = [
-  {
-    id: "01",
-    title: "Efektywność energetyczna",
-    description:
-      "Automatyka i BMS pomagające uzyskać komfort użytkowników oraz optymalizować koszty utrzymania przez mniejsze zużycie energii.",
-  },
-  {
-    id: "02",
-    title: "Serwis i przeglądy",
-    description:
-      "Okresowe przeglądy, raporty serwisowe, naprawy, usprawnienia oraz support techniczny na miejscu i zdalnie.",
-  },
-  {
-    id: "03",
-    title: "Systemy bezpieczeństwa",
-    description:
-      "CCTV, SSWiN, KD, RCP, SAP, DSO oraz integracja systemów bezpieczeństwa w centrach monitoringu i ochrony.",
-  },
-];
-
 export function WhatWeDo() {
   const { theme } = useTheme();
+  const t = useTranslations();
   const isDark = theme === "dark";
   const themeColors = isDark ? darkColors : colors;
 
@@ -51,7 +32,7 @@ export function WhatWeDo() {
           observer.unobserve(node);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     observer.observe(node);
@@ -89,12 +70,12 @@ export function WhatWeDo() {
         style={{ maxWidth: layout.container.xl }}
       >
         {/* ── Eyebrow ─────────────────────────────────────────────────── */}
-        <div className="inline-flex items-center self-start px-3.5 py-1.5 rounded-full mb-5"
+        <div
+          className="inline-flex items-center self-start px-3.5 py-1.5 rounded-full mb-5"
           style={{
-            backgroundColor:
-              theme === "dark"
-                ? darkColors.primary.mist
-                : colors.primary.mist,
+            backgroundColor: isDark
+              ? darkColors.primary.mist
+              : colors.primary.mist,
           }}
         >
           <span
@@ -107,7 +88,7 @@ export function WhatWeDo() {
             }}
             className="uppercase"
           >
-            CZYM SIĘ ZAJMUJEMY
+            {t.whatWeDo.eyebrow}
           </span>
         </div>
 
@@ -123,9 +104,11 @@ export function WhatWeDo() {
           }}
           className="max-w-3xl"
         >
-          Od koncepcji po serwis —{" "}
-          <span style={{ color: themeColors.primary.signal }}>kompleksowo</span>{" "}
-          albo w wybranym zakresie.
+          {t.whatWeDo.heading1}{" "}
+          <span style={{ color: themeColors.primary.signal }}>
+            {t.whatWeDo.headingAccent}
+          </span>{" "}
+          {t.whatWeDo.heading2}
         </h2>
 
         {/* ── Subheading ──────────────────────────────────────────────── */}
@@ -138,9 +121,7 @@ export function WhatWeDo() {
           }}
           className="mt-5 max-w-2xl"
         >
-          Łączymy doświadczenie inżynierskie z praktycznym wykonawstwem:
-          analizujemy potrzeby, projektujemy, uruchamiamy i utrzymujemy systemy
-          teletechniczne.
+          {t.whatWeDo.subheading}
         </p>
 
         {/* ── Cards grid ──────────────────────────────────────────────── */}
@@ -148,9 +129,9 @@ export function WhatWeDo() {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12"
           style={{ maxWidth: layout.container.lg }}
         >
-          {cards.map((card, i) => (
+          {t.whatWeDo.cards.map((card, i) => (
             <div
-              key={card.id}
+              key={i}
               data-what-we-do-card
               className="group rounded-lg p-6 border"
               style={{
@@ -161,9 +142,7 @@ export function WhatWeDo() {
                   ? "rgb(37 51 66 / 0.80)"
                   : "rgb(221 227 234 / 0.60)",
                 borderRadius: radius.lg,
-                boxShadow: isDark
-                  ? "0 2px 12px rgb(35 135 11 / 0.05)"
-                  : "0 2px 12px rgb(35 135 11 / 0.05)",
+                boxShadow: "0 2px 12px rgb(35 135 11 / 0.05)",
                 opacity: isVisible ? 1 : 0,
                 transform: isVisible ? "translateY(0)" : "translateY(24px)",
                 transition: `opacity ${transitions.duration.base} ${transitions.easing.entrance}, transform 280ms ${transitions.easing.standard}, box-shadow 280ms ${transitions.easing.standard}`,
@@ -179,9 +158,8 @@ export function WhatWeDo() {
                 e.currentTarget.style.transform = isVisible
                   ? "translateY(0)"
                   : "translateY(24px)";
-                e.currentTarget.style.boxShadow = isDark
-                  ? "0 2px 12px rgb(35 135 11 / 0.05)"
-                  : "0 2px 12px rgb(35 135 11 / 0.05)";
+                e.currentTarget.style.boxShadow =
+                  "0 2px 12px rgb(35 135 11 / 0.05)";
               }}
             >
               {/* Number badge */}
@@ -191,10 +169,9 @@ export function WhatWeDo() {
                   width: "2.5rem",
                   height: "2.5rem",
                   borderRadius: radius.md,
-                  backgroundColor:
-                    theme === "dark"
-                      ? darkColors.primary.mist
-                      : colors.primary.mist,
+                  backgroundColor: isDark
+                    ? darkColors.primary.mist
+                    : colors.primary.mist,
                 }}
               >
                 <span
@@ -205,7 +182,7 @@ export function WhatWeDo() {
                     fontWeight: typography.weight.semibold,
                   }}
                 >
-                  {card.id}
+                  {String(i + 1).padStart(2, "0")}
                 </span>
               </div>
 
@@ -229,9 +206,7 @@ export function WhatWeDo() {
                   fontFamily: typography.fontFamily.sans,
                   fontSize: typography.scale.base.fontSize,
                   lineHeight: typography.scale.base.lineHeight,
-                  color: isDark
-                    ? darkColors.neutral[400]
-                    : colors.neutral[500],
+                  color: isDark ? darkColors.neutral[400] : colors.neutral[500],
                 }}
               >
                 {card.description}

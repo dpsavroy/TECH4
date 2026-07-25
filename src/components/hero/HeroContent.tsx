@@ -1,6 +1,7 @@
 "use client";
 
 import { useTheme } from "@/components/theme/ThemeProvider";
+import { useTranslations } from "@/contexts/LocaleContext";
 import {
   buttons,
   colors,
@@ -18,13 +19,9 @@ export function HeroContent({
   onDescriptionDone?: () => void;
 }) {
   const { theme } = useTheme();
+  const t = useTranslations();
   const themeColors = theme === "dark" ? darkColors : colors;
   const themeShadows = theme === "dark" ? darkShadows : shadows;
-
-  // Description text — revealed character-by-character on first session
-  // load. No accent segments: the whole paragraph shares one colour.
-  const descriptionText =
-    "TECH4 integruje systemy techniczne budynków w jedno niezawodne i łatwe w zarządzaniu rozwiązanie.";
 
   return (
     <div className="flex flex-col text-left max-w-xl lg:max-w-2xl">
@@ -41,7 +38,7 @@ export function HeroContent({
           }}
           className="uppercase"
         >
-          Integrator Systemów Budynkowych
+          {t.hero.badge}
         </span>
       </div>
 
@@ -55,17 +52,22 @@ export function HeroContent({
         }}
         className="text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.08] font-semibold lg:font-bold"
       >
-        Budynki
+        {t.hero.h1_line1}
         <br />
-        stają się
+        {t.hero.h1_line2}
         <br />
-        <span style={{ color: themeColors.primary.signal }}>inteligentne</span>.
+        <span style={{ color: themeColors.primary.signal }}>
+          {t.hero.h1_accent}
+        </span>
+        .
       </h1>
 
       {/* Supporting Description — terminal-style typed description */}
       <TypedDescription
-        text={descriptionText}
-        textColor={theme === "dark" ? darkColors.neutral[300] : colors.neutral[600]}
+        text={t.hero.description}
+        textColor={
+          theme === "dark" ? darkColors.neutral[100] : colors.neutral[600]
+        }
         className="mt-6 max-w-xl"
         onDone={onDescriptionDone}
       />
@@ -84,10 +86,13 @@ export function HeroContent({
             fontWeight: typography.weight.medium,
             transitionDuration: "300ms",
             transitionTimingFunction: "ease",
-            ["--tw-ring-color" as string]: themeShadows.focus.replace("0 0 0 3px ", ""),
+            ["--tw-ring-color" as string]: themeShadows.focus.replace(
+              "0 0 0 3px ",
+              "",
+            ),
           }}
         >
-          Skontaktuj się
+          {t.hero.ctaPrimary}
         </a>
         <a
           href="#uslugi"
@@ -102,10 +107,13 @@ export function HeroContent({
             fontWeight: typography.weight.medium,
             transitionDuration: transitions.duration.fast,
             transitionTimingFunction: transitions.easing.standard,
-            ["--tw-ring-color" as string]: themeShadows.focus.replace("0 0 0 3px ", ""),
+            ["--tw-ring-color" as string]: themeShadows.focus.replace(
+              "0 0 0 3px ",
+              "",
+            ),
           }}
         >
-          Nasze usługi
+          {t.hero.ctaSecondary}
         </a>
       </div>
     </div>

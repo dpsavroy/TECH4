@@ -1,6 +1,7 @@
 "use client";
 
 import { CSSProperties, useEffect, useRef } from "react";
+import { useTheme } from "@/components/theme/ThemeProvider";
 import { useTypingEffect, TypingLine } from "./useTypingEffect";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -51,6 +52,8 @@ export function TypedDescription({
   const lines: TypingLine[] = [[{ text }]];
 
   const { revealedLines, isDone, showCaret } = useTypingEffect(lines);
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
 
   // Notify parent once typing is complete. Using an effect avoids calling
   // the parent callback during render.
@@ -70,18 +73,28 @@ export function TypedDescription({
       className={[
         // Premium terminal window — calm, engineering-first (no glow)
         "overflow-hidden rounded-lg border backdrop-blur-[2px]",
-        "border-[rgb(0_0_0/0.08)] dark:border-[rgb(255_255_255/0.08)]",
-        "bg-[rgb(247_248_250/0.65)] dark:bg-[rgb(18_35_51/0.55)]",
         className,
       ]
         .filter(Boolean)
         .join(" ")}
-      style={style}
+      style={{
+        borderColor: isDark
+          ? "rgb(255 255 255 / 0.08)"
+          : "rgb(0 0 0 / 0.08)",
+        backgroundColor: isDark
+          ? "rgb(18 27 39 / 0.58)"
+          : "rgb(247 248 250 / 0.65)",
+        ...style,
+      }}
     >
       {/* ── Window chrome: traffic lights + title ───────────────────────── */}
       <div
         className="flex items-center gap-2 px-4 py-2.5 border-b"
-        style={{ borderColor: "inherit" }}
+        style={{
+          borderColor: isDark
+            ? "rgb(255 255 255 / 0.06)"
+            : "rgb(0 0 0 / 0.06)",
+        }}
       >
         <div className="flex items-center gap-1.5" aria-hidden="true">
           <span className="block w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
@@ -90,7 +103,10 @@ export function TypedDescription({
         </div>
         <span
           className="ml-1 text-[0.7rem] font-medium uppercase tracking-[0.08em] opacity-50"
-          style={{ fontFamily: "var(--font-geist-mono), monospace" }}
+          style={{
+            fontFamily: "var(--font-geist-mono), monospace",
+            color: isDark ? "rgb(255 255 255 / 0.7)" : "inherit",
+          }}
         >
           {title}
         </span>

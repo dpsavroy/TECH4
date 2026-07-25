@@ -1,0 +1,93 @@
+{
+  "nav": {
+    "services": "Usługi",
+    "process": "Proces",
+    "systems": "Systemy",
+    "helpdesk": "HelpDesk",
+    "contact": "Kontakt",
+    "cta": "Skontaktuj się",
+    "openMenu": "Otwórz menu",
+    "closeMenu": "Zamknij menu"
+  },
+  "hero": {
+    "badge": "Integrator Systemów Budynkowych",
+    "h1_line1": "Budynki",
+    "h1_line2": "stają się",
+    "h1_accent": "inteligentne",
+    "description": "TECH4 integruje systemy techniczne budynków w jedno niezawodne i łatwe w zarządzaniu rozwiązanie.",
+    "ctaPrimary": "Skontaktuj się",
+    "ctaSecondary": "Nasze usługi",
+    "activeLabel": "● AKTYWNY"
+  },
+  "systems": {
+    "bms": { "label": "BMS", "desc": "Centralne zarządzanie" },
+    "bas": { "label": "BAS", "desc": "Automatyka budynkowa" },
+    "cctv": { "label": "CCTV", "desc": "Monitoring wizyjny IP" },
+    "sap": { "label": "SAP", "desc": "System sygnalizacji pożarowej" },
+    "kd": { "label": "KD", "desc": "Kontrola dostępu" },
+    "hvac": { "label": "HVAC", "desc": "Automatyka HVAC" }
+  },
+  "stories": {
+    "bms": {
+      "tag": "BMS · WIDOK NADZORU",
+      "title": "Centralny nadzór budynku",
+      "description": "Stan instalacji w jednym widoku.",
+      "badge": "AKTYWNY"
+    },
+    "bas": {
+      "tag": "BAS · AUTOMATYKA",
+      "title": "Automatyka reaguje na potrzeby biura",
+      "description": "Światło i komfort pod kontrolą.",
+      "badge": "AKTYWNY"
+    },
+    "cctv": {
+      "tag": "CCTV · PODGLĄD NA ŻYWO",
+      "title": "Monitoring w czasie rzeczywistym",
+      "description": "Obraz z kamer i punkt ochrony.",
+      "badge": "NA ŻYWO"
+    },
+    "kd": {
+      "tag": "KD · DOSTĘP PRZYZNANY",
+      "title": "Karta, czytnik, otwarte drzwi",
+      "description": "Bezpieczne wejście bez klucza.",
+      "badge": "DOSTĘP"
+    },
+    "sap": {
+      "tag": "SAP · TEST BEZPIECZEŃSTWA",
+      "title": "Gotowość systemu pożarowego",
+      "description": "Czujki i alarm pod stałym nadzorem.",
+      "badge": "AKTYWNY"
+    },
+    "hvac": {
+      "tag": "HVAC · WYDAJNOŚĆ",
+      "title": "Komfort i jakość powietrza",
+      "description": "Wydajna wentylacja każdego dnia.",
+      "badge": "AKTYWNY"
+    }
+  },
+  "whatWeDo": {
+    "eyebrow": "CZYM SIĘ ZAJMUJEMY",
+    "heading1": "Od koncepcji po serwis —",
+    "headingAccent": "kompleksowo",
+    "heading2": "albo w wybranym zakresie.",
+    "subheading": "Łączymy doświadczenie inżynierskie z praktycznym wykonawstwem: analizujemy potrzeby, projektujemy, uruchamiamy i utrzymujemy systemy teletechniczne.",
+    "cards": [
+      {
+        "title": "Efektywność energetyczna",
+        "description": "Automatyka i BMS pomagające uzyskać komfort użytkowników oraz optymalizować koszty utrzymania przez mniejsze zużycie energii."
+      },
+      {
+        "title": "Serwis i przeglądy",
+        "description": "Okresowe przeglądy, raporty serwisowe, naprawy, usprawnienia oraz support techniczny na miejscu i zdalnie."
+      },
+      {
+        "title": "Systemy bezpieczeństwa",
+        "description": "CCTV, SSWiN, KD, RCP, SAP, DSO oraz integracja systemów bezpieczeństwa w centrach monitoringu i ochrony."
+      }
+    ]
+  },
+  "meta": {
+    "title": "TECH4 | Budynki stają się inteligentne",
+    "description": "TECH4 integruje systemy techniczne budynków w jedno niezawodne i łatwe w zarządzaniu rozwiązanie. Projektujemy, integrujemy i serwisujemy inteligentne systemy automatyki budynkowej, bezpieczeństwa i HVAC w całej Europie."
+  }
+}

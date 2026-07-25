@@ -2,6 +2,7 @@
 
 import { memo } from "react";
 import { useTheme } from "@/components/theme/ThemeProvider";
+import { useTranslations } from "@/contexts/LocaleContext";
 import {
   colors,
   darkColors,
@@ -44,6 +45,7 @@ export const SystemCards = memo(function SystemCards({
   compact = false,
 }: SystemCardsProps) {
   const { theme } = useTheme();
+  const t = useTranslations();
   const isDark = theme === "dark";
   const themeColors = isDark ? darkColors : colors;
   const themeShadows = isDark ? darkShadows : shadows;
@@ -71,6 +73,7 @@ export const SystemCards = memo(function SystemCards({
         const isVisible = visibleSystems.includes(system.id);
         const isActive = activeSystem === system.id;
         const color = SYSTEM_COLORS[system.id];
+        const systemT = t.systems[system.id];
 
         return (
           <div key={system.id} className="relative">
@@ -154,7 +157,7 @@ export const SystemCards = memo(function SystemCards({
                     }}
                     className="uppercase transition-colors duration-200"
                   >
-                    {system.label}
+                    {systemT.label}
                   </span>
                 </div>
 
@@ -168,7 +171,7 @@ export const SystemCards = memo(function SystemCards({
                     transition: `color ${transitions.duration.base} ${transitions.easing.standard}`,
                   }}
                 >
-                  ● AKTYWNY
+                  {t.hero.activeLabel}
                 </span>
               </div>
 
@@ -181,7 +184,7 @@ export const SystemCards = memo(function SystemCards({
                 }}
                 className="transition-colors duration-200 group-hover:text-neutral-700 dark:group-hover:text-neutral-300"
               >
-                {system.desc}
+                {systemT.desc}
               </p>
             </button>
           </div>

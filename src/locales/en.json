@@ -1,0 +1,93 @@
+{
+  "nav": {
+    "services": "Services",
+    "process": "Process",
+    "systems": "Systems",
+    "helpdesk": "HelpDesk",
+    "contact": "Contact",
+    "cta": "Get in touch",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "hero": {
+    "badge": "Building Systems Integrator",
+    "h1_line1": "Where Buildings",
+    "h1_line2": "Become",
+    "h1_accent": "Intelligent",
+    "description": "TECH4 integrates building engineering systems into one reliable and manageable solution.",
+    "ctaPrimary": "Get in touch",
+    "ctaSecondary": "Our services",
+    "activeLabel": "● ACTIVE"
+  },
+  "systems": {
+    "bms": { "label": "BMS", "desc": "Central management" },
+    "bas": { "label": "BAS", "desc": "Building automation" },
+    "cctv": { "label": "CCTV", "desc": "IP video surveillance" },
+    "sap": { "label": "SAP", "desc": "Fire alarm system" },
+    "kd": { "label": "KD", "desc": "Access control" },
+    "hvac": { "label": "HVAC", "desc": "HVAC automation" }
+  },
+  "stories": {
+    "bms": {
+      "tag": "BMS · CONTROL VIEW",
+      "title": "Central building supervision",
+      "description": "All systems in a single view.",
+      "badge": "ACTIVE"
+    },
+    "bas": {
+      "tag": "BAS · AUTOMATION",
+      "title": "Automation responds to office needs",
+      "description": "Light and comfort under control.",
+      "badge": "ACTIVE"
+    },
+    "cctv": {
+      "tag": "CCTV · LIVE FEED",
+      "title": "Real-time monitoring",
+      "description": "Camera feed and security point.",
+      "badge": "LIVE"
+    },
+    "kd": {
+      "tag": "KD · ACCESS GRANTED",
+      "title": "Card, reader, open door",
+      "description": "Secure entry without a key.",
+      "badge": "ACCESS"
+    },
+    "sap": {
+      "tag": "SAP · SAFETY TEST",
+      "title": "Fire system readiness",
+      "description": "Sensors and alarm under constant watch.",
+      "badge": "ACTIVE"
+    },
+    "hvac": {
+      "tag": "HVAC · EFFICIENCY",
+      "title": "Comfort and air quality",
+      "description": "Efficient ventilation every day.",
+      "badge": "ACTIVE"
+    }
+  },
+  "whatWeDo": {
+    "eyebrow": "WHAT WE DO",
+    "heading1": "From concept to service —",
+    "headingAccent": "fully",
+    "heading2": "or in selected scope.",
+    "subheading": "We combine engineering experience with practical execution: we analyse needs, design, commission and maintain building technical systems.",
+    "cards": [
+      {
+        "title": "Energy efficiency",
+        "description": "Automation and BMS helping achieve user comfort and optimise maintenance costs through lower energy consumption."
+      },
+      {
+        "title": "Service & maintenance",
+        "description": "Periodic inspections, service reports, repairs, improvements and technical support on-site and remotely."
+      },
+      {
+        "title": "Security systems",
+        "description": "CCTV, IDS, ACS, T&A, FAS, PA and integration of security systems in monitoring and protection centres."
+      }
+    ]
+  },
+  "meta": {
+    "title": "TECH4 | Where Buildings Become Intelligent",
+    "description": "TECH4 integrates building engineering systems into one reliable and manageable solution. We design, integrate and service intelligent building automation, security and HVAC systems across Europe."
+  }
+}

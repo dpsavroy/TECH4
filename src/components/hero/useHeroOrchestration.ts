@@ -6,13 +6,18 @@ import { useEffect, useRef, useState } from "react";
 
 export type SystemType = "bms" | "bas" | "cctv" | "sap" | "kd" | "hvac";
 
-export const systemsList: { id: SystemType; label: string; desc: string }[] = [
-  { id: "bms", label: "BMS", desc: "Centralne zarządzanie" },
-  { id: "bas", label: "BAS", desc: "Automatyka budynkowa" },
-  { id: "cctv", label: "CCTV", desc: "Monitoring wizyjny IP" },
-  { id: "sap", label: "SAP", desc: "System sygnalizacji pożarowej" },
-  { id: "kd", label: "KD", desc: "Kontrola dostępu" },
-  { id: "hvac", label: "HVAC", desc: "Automatyka HVAC" },
+/**
+ * Ordered list of building systems for the hero sequence.
+ * Labels and descriptions are locale-aware and come from translations
+ * (useTranslations().systems[id]) — not stored here.
+ */
+export const systemsList: { id: SystemType }[] = [
+  { id: "bms" },
+  { id: "bas" },
+  { id: "cctv" },
+  { id: "sap" },
+  { id: "kd" },
+  { id: "hvac" },
 ];
 
 // ─── Timing ─────────────────────────────────────────────────────────────────

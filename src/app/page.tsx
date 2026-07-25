@@ -1,11 +1,10 @@
-import { HeroSection } from "@/components/hero/HeroSection";
-import { WhatWeDo } from "@/components/sections/WhatWeDo";
+import { redirect } from "next/navigation";
 
-export default function Home() {
-  return (
-    <main className="flex-1 flex flex-col">
-      <HeroSection />
-      <WhatWeDo />
-    </main>
-  );
+/**
+ * Root page — redirects to the default locale (/pl).
+ * The middleware handles this for most requests, but this ensures
+ * Next.js has a valid route at `/` without a 404.
+ */
+export default function RootPage() {
+  redirect("/pl");
 }
