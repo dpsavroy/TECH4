@@ -86,6 +86,120 @@
       }
     ]
   },
+  "proces": {
+    "eyebrow": "JAK PRACUJEMY",
+    "heading": "Proces realizacji projektu",
+    "subheading": "Prowadzimy projekt od pierwszego spotkania aż po długoterminowy serwis. Każdy etap jest udokumentowany i uzgodniony z klientem.",
+    "steps": [
+      {
+        "number": "01",
+        "title": "Analiza i audyt",
+        "description": "Oceniamy stan istniejących instalacji, wymagania techniczne i operacyjne obiektu. Przygotowujemy raport z rekomendacjami i zakresem prac."
+      },
+      {
+        "number": "02",
+        "title": "Projekt i inżynieria",
+        "description": "Opracowujemy dokumentację techniczną, dobieramy urządzenia i systemy. Projekt jest uzgadniany z inwestorem i uwzględnia przyszłą rozbudowę."
+      },
+      {
+        "number": "03",
+        "title": "Montaż i uruchomienie",
+        "description": "Realizujemy instalację według projektu, przeprowadzamy testy FAT/SAT, uruchamiamy systemy i szkolimy personel obiektu."
+      },
+      {
+        "number": "04",
+        "title": "Serwis i wsparcie",
+        "description": "Zapewniamy przeglądy cykliczne, monitoring zdalny, reakcję na usterki oraz wsparcie techniczne przez cały cykl życia instalacji."
+      }
+    ]
+  },
+  "systemy": {
+    "eyebrow": "SYSTEMY INŻYNIERSKIE",
+    "heading": "Sześć dziedzin, jedna integracja",
+    "subheading": "Projektujemy i integrujemy systemy techniczne budynku jako jedno spójne rozwiązanie — niezawodne, łatwe w zarządzaniu i gotowe na przyszłość.",
+    "items": [
+      {
+        "id": "bms",
+        "title": "BMS",
+        "subtitle": "Building Management System",
+        "description": "Centralny nadzór i zarządzanie wszystkimi instalacjami budynku z jednego interfejsu operatorskiego."
+      },
+      {
+        "id": "bas",
+        "title": "BAS",
+        "subtitle": "Building Automation System",
+        "description": "Automatyzacja sterowania oświetleniem, klimatyzacją i innymi systemami w oparciu o harmonogramy i czujniki."
+      },
+      {
+        "id": "cctv",
+        "title": "CCTV",
+        "subtitle": "Monitoring wizyjny IP",
+        "description": "Systemy telewizji przemysłowej IP: kamery, rejestratory NVR, zarządzanie wideo i integracja z KD."
+      },
+      {
+        "id": "sap",
+        "title": "SAP",
+        "subtitle": "System Sygnalizacji Pożarowej",
+        "description": "Projektowanie i wykonawstwo systemów pożarowych zgodnie z normami EN 54, z centralami adresowalnymi."
+      },
+      {
+        "id": "kd",
+        "title": "KD / RCP",
+        "subtitle": "Kontrola dostępu",
+        "description": "Systemy kontroli dostępu i rejestracji czasu pracy: czytniki kart, zamki elektromagnetyczne, integracja z HR."
+      },
+      {
+        "id": "hvac",
+        "title": "HVAC",
+        "subtitle": "Automatyka klimatyzacji i wentylacji",
+        "description": "Automatyzacja central wentylacyjnych, klimatyzatorów, pomp ciepła i instalacji chłodniczych."
+      }
+    ]
+  },
+  "helpdesk": {
+    "eyebrow": "WSPARCIE TECHNICZNE",
+    "heading": "HelpDesk i serwis",
+    "subheading": "Zapewniamy ciągłość działania instalacji. Nasz zespół serwisowy jest dostępny zdalnie i na miejscu, przez cały rok.",
+    "features": [
+      {
+        "title": "Dostępność 24/7",
+        "description": "Linia wsparcia technicznego czynna całą dobę, przez siedem dni w tygodniu, 365 dni w roku.",
+        "icon": "clock"
+      },
+      {
+        "title": "Szybki czas reakcji",
+        "description": "Gwarantowany czas reakcji zdalnej: do 2 godzin. Interwencja serwisowa na miejscu: zgodnie z SLA.",
+        "icon": "bolt"
+      },
+      {
+        "title": "Zdalnie i na miejscu",
+        "description": "Diagnostyka i zdalne sterowanie systemami BMS/BAS. W razie potrzeby — nasz technik przyjedzie na obiekt.",
+        "icon": "headset"
+      }
+    ],
+    "formTitle": "Zgłoś usterkę lub zapytanie",
+    "formPlaceholder": "Formularz zgłoszeniowy — wkrótce dostępny online.",
+    "formCta": "Napisz na helpdesk@tech4.eu"
+  },
+  "kontakt": {
+    "eyebrow": "KONTAKT",
+    "heading": "Porozmawiajmy o Twoim projekcie",
+    "subheading": "Wypełnij formularz lub skontaktuj się bezpośrednio. Odpowiadamy w ciągu jednego dnia roboczego.",
+    "form": {
+      "namePlaceholder": "Imię i nazwisko",
+      "emailPlaceholder": "Adres e-mail",
+      "messagePlaceholder": "Opisz krótko swój projekt lub pytanie...",
+      "submit": "Wyślij wiadomość"
+    },
+    "details": {
+      "addressLabel": "Adres",
+      "addressValue": "ul. Inżynierska 4, 00-000 Warszawa",
+      "phoneLabel": "Telefon",
+      "phoneValue": "+48 000 000 000",
+      "emailLabel": "E-mail",
+      "emailValue": "kontakt@tech4.eu"
+    }
+  },
   "meta": {
     "title": "TECH4 | Budynki stają się inteligentne",
     "description": "TECH4 integruje systemy techniczne budynków w jedno niezawodne i łatwe w zarządzaniu rozwiązanie. Projektujemy, integrujemy i serwisujemy inteligentne systemy automatyki budynkowej, bezpieczeństwa i HVAC w całej Europie."

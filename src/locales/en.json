@@ -86,6 +86,120 @@
       }
     ]
   },
+  "proces": {
+    "eyebrow": "HOW WE WORK",
+    "heading": "Project delivery process",
+    "subheading": "We manage every project from the first meeting through to long-term maintenance. Each phase is documented and agreed with the client.",
+    "steps": [
+      {
+        "number": "01",
+        "title": "Analysis & audit",
+        "description": "We assess existing installations, technical and operational requirements. We prepare a report with recommendations and scope of work."
+      },
+      {
+        "number": "02",
+        "title": "Design & engineering",
+        "description": "We develop technical documentation, select equipment and systems. The design is agreed with the investor and accounts for future expansion."
+      },
+      {
+        "number": "03",
+        "title": "Installation & commissioning",
+        "description": "We carry out installation according to the design, conduct FAT/SAT testing, commission systems and train facility staff."
+      },
+      {
+        "number": "04",
+        "title": "Service & support",
+        "description": "We provide periodic inspections, remote monitoring, fault response and technical support throughout the entire installation lifecycle."
+      }
+    ]
+  },
+  "systemy": {
+    "eyebrow": "ENGINEERING SYSTEMS",
+    "heading": "Six disciplines, one integration",
+    "subheading": "We design and integrate building engineering systems as a single coherent solution — reliable, easy to manage and ready for the future.",
+    "items": [
+      {
+        "id": "bms",
+        "title": "BMS",
+        "subtitle": "Building Management System",
+        "description": "Central supervision and management of all building installations from a single operator interface."
+      },
+      {
+        "id": "bas",
+        "title": "BAS",
+        "subtitle": "Building Automation System",
+        "description": "Automation of lighting, HVAC and other systems based on schedules, occupancy sensors and setpoints."
+      },
+      {
+        "id": "cctv",
+        "title": "CCTV",
+        "subtitle": "IP Video Surveillance",
+        "description": "IP industrial CCTV systems: cameras, NVR recorders, video management and access control integration."
+      },
+      {
+        "id": "sap",
+        "title": "FAS",
+        "subtitle": "Fire Alarm System",
+        "description": "Design and installation of fire alarm systems compliant with EN 54 standards, with addressable control panels."
+      },
+      {
+        "id": "kd",
+        "title": "ACS / T&A",
+        "subtitle": "Access Control",
+        "description": "Access control and time & attendance systems: card readers, electromagnetic locks, HR system integration."
+      },
+      {
+        "id": "hvac",
+        "title": "HVAC",
+        "subtitle": "HVAC Automation",
+        "description": "Automation of air handling units, chillers, heat pumps and refrigeration systems."
+      }
+    ]
+  },
+  "helpdesk": {
+    "eyebrow": "TECHNICAL SUPPORT",
+    "heading": "HelpDesk & service",
+    "subheading": "We ensure continuity of installation operation. Our service team is available remotely and on-site, all year round.",
+    "features": [
+      {
+        "title": "24/7 availability",
+        "description": "Technical support line active around the clock, seven days a week, 365 days a year.",
+        "icon": "clock"
+      },
+      {
+        "title": "Fast response time",
+        "description": "Guaranteed remote response time: up to 2 hours. On-site service intervention: in accordance with SLA.",
+        "icon": "bolt"
+      },
+      {
+        "title": "Remote and on-site",
+        "description": "BMS/BAS diagnostics and remote control. If needed — our technician will come to your facility.",
+        "icon": "headset"
+      }
+    ],
+    "formTitle": "Report a fault or submit a query",
+    "formPlaceholder": "Online submission form — coming soon.",
+    "formCta": "Write to helpdesk@tech4.eu"
+  },
+  "kontakt": {
+    "eyebrow": "CONTACT",
+    "heading": "Let\u2019s talk about your project",
+    "subheading": "Fill in the form or reach us directly. We respond within one business day.",
+    "form": {
+      "namePlaceholder": "Full name",
+      "emailPlaceholder": "Email address",
+      "messagePlaceholder": "Briefly describe your project or question...",
+      "submit": "Send message"
+    },
+    "details": {
+      "addressLabel": "Address",
+      "addressValue": "4 Engineering Street, 00-000 Warsaw, Poland",
+      "phoneLabel": "Phone",
+      "phoneValue": "+48 000 000 000",
+      "emailLabel": "Email",
+      "emailValue": "contact@tech4.eu"
+    }
+  },
   "meta": {
     "title": "TECH4 | Where Buildings Become Intelligent",
     "description": "TECH4 integrates building engineering systems into one reliable and manageable solution. We design, integrate and service intelligent building automation, security and HVAC systems across Europe."

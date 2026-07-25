@@ -12,7 +12,74 @@ import {
   typography,
 } from "@/styles/design-tokens";
 
-export function WhatWeDo() {
+// ─── Inline SVG icons ────────────────────────────────────────────────────────
+
+function ClockIcon({ color }: { color: string }) {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={color}
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="9" />
+      <polyline points="12 7 12 12 15.5 14.5" />
+    </svg>
+  );
+}
+
+function BoltIcon({ color }: { color: string }) {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={color}
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+    </svg>
+  );
+}
+
+function HeadsetIcon({ color }: { color: string }) {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={color}
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+      <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z" />
+      <path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
+    </svg>
+  );
+}
+
+const ICONS: Record<string, (color: string) => React.ReactNode> = {
+  clock: (c) => <ClockIcon color={c} />,
+  bolt: (c) => <BoltIcon color={c} />,
+  headset: (c) => <HeadsetIcon color={c} />,
+};
+
+// ─── Component ───────────────────────────────────────────────────────────────
+
+export function HelpDeskSection() {
   const { theme } = useTheme();
   const t = useTranslations();
   const isDark = theme === "dark";
@@ -42,22 +109,19 @@ export function WhatWeDo() {
   return (
     <section
       ref={sectionRef}
-      id="uslugi"
+      id="helpdesk"
       style={{
-        backgroundColor: themeColors.background.page,
+        backgroundColor: isDark
+          ? darkColors.background.muted
+          : colors.background.muted,
         paddingTop: layout.sectionSpacing.md,
         paddingBottom: layout.sectionSpacing.md,
         transition: `background-color ${transitions.duration.base} ${transitions.easing.standard}`,
       }}
     >
-      {/*
-        Reduced-motion override: entrance animation is entirely disabled
-        when the user prefers reduced motion. Cards render in their final
-        visible state with no opacity/transform transitions.
-      */}
       <style>{`
         @media (prefers-reduced-motion: reduce) {
-          [data-what-we-do-card] {
+          [data-helpdesk-card] {
             opacity: 1 !important;
             transform: translateY(0) !important;
             transition: none !important;
@@ -71,7 +135,7 @@ export function WhatWeDo() {
       >
         {/* ── Eyebrow ─────────────────────────────────────────────────── */}
         <div
-          className="inline-flex items-center self-start px-3.5 py-1.5 rounded-full mb-5"
+          className="inline-flex items-center px-3.5 py-1.5 rounded-full mb-5"
           style={{
             backgroundColor: isDark
               ? darkColors.primary.mist
@@ -88,7 +152,7 @@ export function WhatWeDo() {
             }}
             className="uppercase"
           >
-            {t.whatWeDo.eyebrow}
+            {t.helpdesk.eyebrow}
           </span>
         </div>
 
@@ -102,13 +166,9 @@ export function WhatWeDo() {
             lineHeight: typography.scale["4xl"].lineHeight,
             letterSpacing: typography.tracking.tight,
           }}
-          className="max-w-3xl"
+          className="max-w-2xl"
         >
-          {t.whatWeDo.heading1}{" "}
-          <span style={{ color: themeColors.primary.signal }}>
-            {t.whatWeDo.headingAccent}
-          </span>{" "}
-          {t.whatWeDo.heading2}
+          {t.helpdesk.heading}
         </h2>
 
         {/* ── Subheading ──────────────────────────────────────────────── */}
@@ -121,23 +181,20 @@ export function WhatWeDo() {
           }}
           className="mt-5 max-w-2xl"
         >
-          {t.whatWeDo.subheading}
+          {t.helpdesk.subheading}
         </p>
 
-        {/* ── Cards grid ──────────────────────────────────────────────── */}
-        <div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12"
-          style={{ maxWidth: layout.container.lg }}
-        >
-          {t.whatWeDo.cards.map((card, i) => (
+        {/* ── Feature cards ────────────────────────────────────────────── */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+          {t.helpdesk.features.map((feature, i) => (
             <div
               key={i}
-              data-what-we-do-card
+              data-helpdesk-card
               className="group rounded-lg p-6 border"
               style={{
                 backgroundColor: isDark
                   ? "rgb(18 27 39 / 0.58)"
-                  : "rgb(255 255 255 / 0.40)",
+                  : "rgb(255 255 255 / 0.70)",
                 borderColor: isDark
                   ? "rgb(37 51 66 / 0.80)"
                   : "rgb(221 227 234 / 0.60)",
@@ -162,31 +219,22 @@ export function WhatWeDo() {
                   "0 2px 12px rgb(35 135 11 / 0.05)";
               }}
             >
-              {/* Number badge */}
+              {/* Icon */}
               <div
-                className="inline-flex items-center justify-center mb-4"
+                className="inline-flex items-center justify-center mb-5"
                 style={{
-                  width: "2.5rem",
-                  height: "2.5rem",
+                  width: "3rem",
+                  height: "3rem",
                   borderRadius: radius.md,
                   backgroundColor: isDark
                     ? darkColors.primary.mist
                     : colors.primary.mist,
                 }}
               >
-                <span
-                  style={{
-                    fontFamily: typography.fontFamily.mono,
-                    color: themeColors.primary.signal,
-                    fontSize: typography.scale.sm.fontSize,
-                    fontWeight: typography.weight.semibold,
-                  }}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+                {ICONS[feature.icon]?.(themeColors.primary.signal)}
               </div>
 
-              {/* Card title */}
+              {/* Title */}
               <h3
                 style={{
                   fontFamily: typography.fontFamily.sans,
@@ -197,10 +245,10 @@ export function WhatWeDo() {
                 }}
                 className="mb-2"
               >
-                {card.title}
+                {feature.title}
               </h3>
 
-              {/* Card description */}
+              {/* Description */}
               <p
                 style={{
                   fontFamily: typography.fontFamily.sans,
@@ -209,10 +257,66 @@ export function WhatWeDo() {
                   color: isDark ? darkColors.neutral[400] : colors.neutral[500],
                 }}
               >
-                {card.description}
+                {feature.description}
               </p>
             </div>
           ))}
+        </div>
+
+        {/* ── Placeholder form area ────────────────────────────────────── */}
+        <div
+          data-helpdesk-card
+          className="mt-8 rounded-xl border p-8 flex flex-col items-center justify-center text-center gap-5"
+          style={{
+            backgroundColor: isDark
+              ? "rgb(18 27 39 / 0.40)"
+              : "rgb(255 255 255 / 0.60)",
+            borderColor: isDark
+              ? "rgb(37 51 66 / 0.80)"
+              : "rgb(221 227 234 / 0.60)",
+            borderRadius: radius.xl,
+            borderStyle: "dashed",
+            minHeight: "9rem",
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? "translateY(0)" : "translateY(24px)",
+            transition: `opacity ${transitions.duration.base} ${transitions.easing.entrance}, transform 280ms ${transitions.easing.standard}`,
+            transitionDelay: "360ms",
+          }}
+        >
+          <p
+            style={{
+              fontFamily: typography.fontFamily.sans,
+              fontSize: typography.scale.base.fontSize,
+              lineHeight: typography.scale.base.lineHeight,
+              color: isDark ? darkColors.neutral[400] : colors.neutral[500],
+            }}
+          >
+            {t.helpdesk.formPlaceholder}
+          </p>
+          <a
+            href={`mailto:${t.helpdesk.formCta.split(" ").at(-1)}`}
+            className="inline-flex items-center justify-center rounded-full"
+            style={{
+              minHeight: "2.75rem",
+              paddingInline: "1.5rem",
+              backgroundColor: colors.primary.signal,
+              color: colors.neutral[0],
+              fontSize: typography.scale.sm.fontSize,
+              fontWeight: typography.weight.medium,
+              fontFamily: typography.fontFamily.sans,
+              transition: `background-color ${transitions.duration.fast} ${transitions.easing.standard}`,
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.backgroundColor =
+                colors.primary.signalHover;
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.backgroundColor =
+                colors.primary.signal;
+            }}
+          >
+            {t.helpdesk.formCta}
+          </a>
         </div>
       </div>
     </section>
