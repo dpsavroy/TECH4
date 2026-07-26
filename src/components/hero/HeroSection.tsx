@@ -31,7 +31,6 @@ export function HeroSection() {
   const {
     activeSystem,
     visibleSystems,
-    isHovered,
     setIsHovered,
     handleSelect,
   } = useHeroOrchestration({ introStarted: descriptionReady });
@@ -102,9 +101,7 @@ export function HeroSection() {
         <div className="w-full lg:w-[60%] xl:w-auto flex flex-col items-center">
           <HeroVisual
             activeSystem={activeSystem}
-            isHovered={isHovered}
             onHoverChange={setIsHovered}
-            onSystemSelect={handleSelect}
           />
 
           {/* Compact card grid — visible on lg and below, hidden at xl */}

@@ -74,7 +74,6 @@ export function ThemeToggle() {
   const { mode, cycleMode, theme } = useTheme();
   const Icon = MODE_ICONS[mode];
   const isDark = theme === "dark";
-  const themeColors = isDark ? darkColors : colors;
   const themeShadows = isDark ? darkShadows : shadows;
 
   return (

@@ -391,16 +391,12 @@ function SystemStory({
 
 interface HeroVisualProps {
   activeSystem: SystemType | null;
-  isHovered: boolean;
   onHoverChange: (hovered: boolean) => void;
-  onSystemSelect: (id: SystemType) => void;
 }
 
 export function HeroVisual({
   activeSystem,
-  isHovered: _isHovered,
   onHoverChange,
-  onSystemSelect: _onSystemSelect,
 }: HeroVisualProps) {
   const { theme } = useTheme();
   const { displayedSystem, isVisible } = useSettledSystem(activeSystem);
