@@ -73,6 +73,79 @@ function MailIcon({ color }: { color: string }) {
   );
 }
 
+function ShieldIcon({ color }: { color: string }) {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={color}
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      <polyline points="9 12 11 14 15 10" />
+    </svg>
+  );
+}
+
+function MapDirectionsIcon({ color }: { color: string }) {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={color}
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M3 11l19-9-9 19-2-8-8-2z" />
+    </svg>
+  );
+}
+
+function ExternalLinkIcon({ color }: { color: string }) {
+  return (
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+      <polyline points="15 3 21 3 21 9" />
+      <line x1="10" y1="14" x2="21" y2="3" />
+    </svg>
+  );
+}
+
+// ─── Constants ────────────────────────────────────────────────────────────────
+
+const GOOGLE_MAPS_EMBED_URL =
+  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2443.5!2d20.8!3d52.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sTECH4+Sp.+z+o.o.%2C+ul.+Jana+Zamoyskiego+9%2C+05-080+Izabelin+B!5e0!3m2!1spl!2spl!4v1";
+
+const GOOGLE_MAPS_DIRECTIONS_URL =
+  "https://www.google.com/maps/dir/TECH4+Sp.+z+o.o.,+ul.+Jana+Zamoyskiego+9,+05-080+Izabelin+B";
+
+const GOOGLE_MAPS_URL =
+  "https://www.google.com/maps/search/TECH4+Sp.+z+o.o.,+ul.+Jana+Zamoyskiego+9,+05-080+Izabelin+B";
+
+const NIP = "5242750233";
+const KRS = "0000414891";
+const REGON = "146057573";
+const RZETELNA_FIRMA_URL = "https://www.rzetelnafirma.pl/3XWO5AAW";
+
 // ─── Component ───────────────────────────────────────────────────────────────
 
 export function KontaktSection() {
@@ -143,6 +216,8 @@ export function KontaktSection() {
       href: `mailto:${t.kontakt.details.emailValue}`,
     },
   ];
+
+  const departmentCards = t.kontakt.departments.items;
 
   return (
     <section
@@ -345,7 +420,7 @@ export function KontaktSection() {
             </form>
           </div>
 
-          {/* ── Contact details (2/5) ───────────────────────────────────── */}
+          {/* ── Right column (2/5): contacts + departments + map + legal + badge ── */}
           <div
             data-kontakt-panel
             className="lg:col-span-2 flex flex-col gap-8"
@@ -355,6 +430,22 @@ export function KontaktSection() {
               transition: `opacity 400ms ${transitions.easing.entrance} 100ms, transform 400ms ${transitions.easing.standard} 100ms`,
             }}
           >
+            {/* ── Company name ──────────────────────────────────────────── */}
+            <div>
+              <span
+                style={{
+                  fontFamily: typography.fontFamily.sans,
+                  fontSize: typography.scale.lg.fontSize,
+                  lineHeight: typography.scale.lg.lineHeight,
+                  color: themeColors.primary.ink,
+                  fontWeight: typography.weight.semibold,
+                }}
+              >
+                {t.kontakt.details.companyName}
+              </span>
+            </div>
+
+            {/* ── Contact rows (address, phone, email) ──────────────────── */}
             {contactRows.map((row, i) => (
               <div key={i} className="flex items-start gap-4">
                 {/* Icon badge */}
@@ -427,6 +518,268 @@ export function KontaktSection() {
                 </div>
               </div>
             ))}
+
+            {/* ── Department quick contacts ────────────────────────────── */}
+            <div>
+              <h3
+                style={{
+                  fontFamily: typography.fontFamily.sans,
+                  fontSize: typography.scale.sm.fontSize,
+                  lineHeight: typography.scale.sm.lineHeight,
+                  color: isDark ? darkColors.neutral[400] : colors.neutral[500],
+                  fontWeight: typography.weight.semibold,
+                  letterSpacing: "0.04em",
+                  textTransform: "uppercase",
+                  marginBottom: "0.75rem",
+                }}
+              >
+                {t.kontakt.departments.title}
+              </h3>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {departmentCards.map((dept, i) => (
+                  <div
+                    key={i}
+                    className="rounded-lg border p-3"
+                    style={{
+                      backgroundColor: isDark
+                        ? "rgb(18 27 39 / 0.60)"
+                        : "rgb(255 255 255 / 0.80)",
+                      borderColor: isDark
+                        ? "rgb(37 51 66 / 0.80)"
+                        : "rgb(221 227 234 / 0.60)",
+                      borderRadius: radius.lg,
+                    }}
+                  >
+                    <span
+                      className="block"
+                      style={{
+                        fontFamily: typography.fontFamily.sans,
+                        fontSize: typography.scale.sm.fontSize,
+                        lineHeight: typography.scale.sm.lineHeight,
+                        color: themeColors.primary.ink,
+                        fontWeight: typography.weight.semibold,
+                        marginBottom: "0.375rem",
+                      }}
+                    >
+                      {dept.label}
+                    </span>
+                    <a
+                      href={`mailto:${dept.email}`}
+                      style={{
+                        fontFamily: typography.fontFamily.sans,
+                        fontSize: typography.scale.xs.fontSize,
+                        lineHeight: typography.scale.xs.lineHeight,
+                        color: themeColors.primary.signal,
+                        textDecoration: "none",
+                        display: "block",
+                        marginBottom: "0.125rem",
+                        transition: `color ${transitions.duration.fast} ${transitions.easing.standard}`,
+                      }}
+                      onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLAnchorElement).style.color =
+                          themeColors.primary.signalHover;
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLAnchorElement).style.color =
+                          themeColors.primary.signal;
+                      }}
+                    >
+                      {dept.email}
+                    </a>
+                    <a
+                      href={`tel:${dept.phone.replace(/\s/g, "")}`}
+                      style={{
+                        fontFamily: typography.fontFamily.sans,
+                        fontSize: typography.scale.xs.fontSize,
+                        lineHeight: typography.scale.xs.lineHeight,
+                        color: isDark ? darkColors.neutral[300] : colors.neutral[600],
+                        textDecoration: "none",
+                        display: "block",
+                        transition: `color ${transitions.duration.fast} ${transitions.easing.standard}`,
+                      }}
+                      onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLAnchorElement).style.color =
+                          themeColors.primary.signal;
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLAnchorElement).style.color =
+                          isDark ? darkColors.neutral[300] : colors.neutral[600];
+                      }}
+                    >
+                      {dept.phone}
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* ── Google Maps embed ────────────────────────────────────── */}
+            <div>
+              <h3
+                style={{
+                  fontFamily: typography.fontFamily.sans,
+                  fontSize: typography.scale.sm.fontSize,
+                  lineHeight: typography.scale.sm.lineHeight,
+                  color: isDark ? darkColors.neutral[400] : colors.neutral[500],
+                  fontWeight: typography.weight.semibold,
+                  letterSpacing: "0.04em",
+                  textTransform: "uppercase",
+                  marginBottom: "0.75rem",
+                }}
+              >
+                {t.kontakt.map.title}
+              </h3>
+
+              <div
+                className="overflow-hidden rounded-lg border"
+                style={{
+                  borderColor: isDark
+                    ? "rgb(37 51 66 / 0.80)"
+                    : "rgb(221 227 234 / 0.60)",
+                  borderRadius: radius.lg,
+                }}
+              >
+                <iframe
+                  src={GOOGLE_MAPS_EMBED_URL}
+                  width="100%"
+                  height="220"
+                  style={{ border: 0, display: "block" }}
+                  allowFullScreen={false}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title={t.kontakt.map.title}
+                />
+              </div>
+
+              <div className="flex flex-wrap gap-3 mt-3">
+                <a
+                  href={GOOGLE_MAPS_DIRECTIONS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5"
+                  style={{
+                    fontFamily: typography.fontFamily.sans,
+                    fontSize: typography.scale.xs.fontSize,
+                    lineHeight: typography.scale.xs.lineHeight,
+                    color: themeColors.primary.signal,
+                    textDecoration: "none",
+                    transition: `color ${transitions.duration.fast} ${transitions.easing.standard}`,
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLAnchorElement).style.color =
+                      themeColors.primary.signalHover;
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLAnchorElement).style.color =
+                      themeColors.primary.signal;
+                  }}
+                >
+                  <MapDirectionsIcon color="currentColor" />
+                  {t.kontakt.map.openInMaps}
+                </a>
+                <a
+                  href={GOOGLE_MAPS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5"
+                  style={{
+                    fontFamily: typography.fontFamily.sans,
+                    fontSize: typography.scale.xs.fontSize,
+                    lineHeight: typography.scale.xs.lineHeight,
+                    color: themeColors.primary.signal,
+                    textDecoration: "none",
+                    transition: `color ${transitions.duration.fast} ${transitions.easing.standard}`,
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLAnchorElement).style.color =
+                      themeColors.primary.signalHover;
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLAnchorElement).style.color =
+                      themeColors.primary.signal;
+                  }}
+                >
+                  <ExternalLinkIcon color="currentColor" />
+                  {t.kontakt.map.openInGoogleMaps}
+                </a>
+              </div>
+            </div>
+
+            {/* ── Legal info + Trust badge (muted, no card border) ─────── */}
+            <div className="pt-2">
+              {/* Legal numbers */}
+              <div
+                className="flex flex-wrap gap-x-4 gap-y-1"
+                style={{
+                  fontFamily: typography.fontFamily.mono,
+                  fontSize: typography.scale.xs.fontSize,
+                  lineHeight: typography.scale.xs.lineHeight,
+                  color: isDark ? darkColors.neutral[500] : colors.neutral[400],
+                  marginBottom: "1rem",
+                }}
+              >
+                <span>{t.kontakt.legal.nip}: {NIP}</span>
+                <span>{t.kontakt.legal.krs}: {KRS}</span>
+                <span>{t.kontakt.legal.regon}: {REGON}</span>
+              </div>
+
+              {/* Trust badge — Rzetelna Firma */}
+              <div
+                className="flex items-center gap-2.5"
+                style={{
+                  fontFamily: typography.fontFamily.sans,
+                  fontSize: typography.scale.xs.fontSize,
+                  lineHeight: typography.scale.xs.lineHeight,
+                  color: isDark ? darkColors.neutral[500] : colors.neutral[400],
+                }}
+              >
+                <ShieldIcon
+                  color={isDark ? darkColors.primary.steel : colors.primary.signal}
+                />
+                <div>
+                  <span>
+                    {t.kontakt.trustBadge.programText}{" "}
+                    <span
+                      style={{
+                        fontWeight: typography.weight.semibold,
+                        color: isDark
+                          ? darkColors.primary.steel
+                          : colors.primary.signal,
+                      }}
+                    >
+                      {t.kontakt.trustBadge.badgeName}
+                    </span>
+                    {t.kontakt.trustBadge.badgeNameSuffix}
+                  </span>
+                  <br />
+                  <span>
+                    {t.kontakt.trustBadge.checkText}{" "}
+                    <a
+                      href={RZETELNA_FIRMA_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        color: themeColors.primary.signal,
+                        textDecoration: "underline",
+                        textDecorationColor: "transparent",
+                        transition: `text-decoration-color ${transitions.duration.fast} ${transitions.easing.standard}`,
+                      }}
+                      onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLAnchorElement).style.textDecorationColor =
+                          themeColors.primary.signal;
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLAnchorElement).style.textDecorationColor =
+                          "transparent";
+                      }}
+                    >
+                      rzetelnafirma.pl
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

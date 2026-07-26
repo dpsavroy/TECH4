@@ -210,12 +210,54 @@
       "submit": "Wyślij wiadomość"
     },
     "details": {
+      "companyName": "TECH4 Sp. z o.o.",
       "addressLabel": "Adres",
       "addressValue": "ul. Jana Zamoyskiego 9, 05-080 Izabelin B",
       "phoneLabel": "Telefon",
-      "phoneValue": "+48 000 000 000",
+      "phoneValue": "+48 22 350 62 56",
       "emailLabel": "E-mail",
-      "emailValue": "kontakt@tech4.eu"
+      "emailValue": "biuro@tech4.pl"
+    },
+    "departments": {
+      "title": "Szybkie kontakty",
+      "items": [
+        {
+          "label": "Sprawy techniczne",
+          "email": "p.jedrzejczyk@tech4.pl",
+          "phone": "+48 505 005 607"
+        },
+        {
+          "label": "Sprawy finansowe",
+          "email": "l.strugalski@tech4.pl",
+          "phone": "+48 600 220 686"
+        },
+        {
+          "label": "Biuro i organizacja",
+          "email": "i.lewaszkiewicz@tech4.pl",
+          "phone": "+48 515 000 576"
+        },
+        {
+          "label": "Serwis",
+          "email": "a.oblekowski@tech4.pl",
+          "phone": "+48 505 019 557"
+        }
+      ]
+    },
+    "map": {
+      "title": "Dojazd do siedziby TECH4",
+      "openInMaps": "Otwórz w Mapach",
+      "openInGoogleMaps": "Otwórz w Google Maps"
+    },
+    "legal": {
+      "nip": "NIP",
+      "krs": "KRS",
+      "regon": "REGON"
+    },
+    "trustBadge": {
+      "programText": "Jesteśmy uczestnikiem Programu",
+      "badgeName": "RZETELNA",
+      "badgeNameSuffix": " Firma",
+      "checkText": "Sprawdź naszą rzetelność na"
     }
   },
   "meta": {
