@@ -230,63 +230,64 @@ export function KontaktSection() {
         className="mx-auto px-6 md:px-8 lg:px-10"
         style={{ maxWidth: layout.container.xl }}
       >
-        {/* ── Eyebrow ─────────────────────────────────────────────────── */}
-        <div
-          className="inline-flex items-center px-3.5 py-1.5 rounded-full mb-5"
-          style={{
-            backgroundColor: isDark
-              ? darkColors.primary.mist
-              : colors.primary.mist,
-          }}
-        >
-          <span
-            style={{
-              fontFamily: typography.fontFamily.mono,
-              color: themeColors.primary.signal,
-              fontSize: "0.7rem",
-              fontWeight: typography.weight.semibold,
-              letterSpacing: "0.08em",
-            }}
-            className="uppercase"
-          >
-            {t.kontakt.eyebrow}
-          </span>
-        </div>
-
-        {/* ── Heading ─────────────────────────────────────────────────── */}
-        <h2
-          style={{
-            fontFamily: typography.fontFamily.sans,
-            fontWeight: typography.weight.semibold,
-            color: themeColors.primary.ink,
-            fontSize: typography.scale["4xl"].fontSize,
-            lineHeight: typography.scale["4xl"].lineHeight,
-            letterSpacing: typography.tracking.tight,
-          }}
-          className="max-w-2xl"
-        >
-          {t.kontakt.heading}
-        </h2>
-
-        {/* ── Subheading ──────────────────────────────────────────────── */}
-        <p
-          style={{
-            fontFamily: typography.fontFamily.sans,
-            fontSize: typography.scale.lg.fontSize,
-            lineHeight: typography.scale.lg.lineHeight,
-            color: isDark ? darkColors.neutral[300] : colors.neutral[500],
-          }}
-          className="mt-5 max-w-2xl"
-        >
-          {t.kontakt.subheading}
-        </p>
-
         {/* ── Two-column layout ────────────────────────────────────────── */}
-        <div className="mt-14 grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 items-start">
-          {/* ── Form (3/5) ──────────────────────────────────────────────── */}
-          <div
-            data-kontakt-panel
-            className="lg:col-span-3 rounded-xl border p-8 flex flex-col"
+        <div className="mt-0 grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 items-start">
+          {/* ── Left column (3/5): heading + form ───────────────────────── */}
+          <div className="lg:col-span-3 flex flex-col">
+            {/* Eyebrow */}
+            <div
+              className="inline-flex items-center px-3.5 py-1.5 rounded-full mb-5"
+              style={{
+                backgroundColor: isDark
+                  ? darkColors.primary.mist
+                  : colors.primary.mist,
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: typography.fontFamily.mono,
+                  color: themeColors.primary.signal,
+                  fontSize: "0.7rem",
+                  fontWeight: typography.weight.semibold,
+                  letterSpacing: "0.08em",
+                }}
+                className="uppercase"
+              >
+                {t.kontakt.eyebrow}
+              </span>
+            </div>
+
+            {/* Heading */}
+            <h2
+              style={{
+                fontFamily: typography.fontFamily.sans,
+                fontWeight: typography.weight.semibold,
+                color: themeColors.primary.ink,
+                fontSize: typography.scale["4xl"].fontSize,
+                lineHeight: typography.scale["4xl"].lineHeight,
+                letterSpacing: typography.tracking.tight,
+              }}
+            >
+              {t.kontakt.heading}
+            </h2>
+
+            {/* Subheading */}
+            <p
+              style={{
+                fontFamily: typography.fontFamily.sans,
+                fontSize: typography.scale.lg.fontSize,
+                lineHeight: typography.scale.lg.lineHeight,
+                color: isDark ? darkColors.neutral[300] : colors.neutral[500],
+              }}
+              className="mt-5"
+            >
+              {t.kontakt.subheading}
+            </p>
+
+            {/* Form card */}
+            <div
+              data-kontakt-panel
+              className="mt-10 rounded-xl border p-8 flex flex-col"
             style={{
               backgroundColor: isDark
                 ? "rgb(18 27 39 / 0.60)"
@@ -402,8 +403,9 @@ export function KontaktSection() {
               </div>
             </form>
           </div>
+          </div>
 
-          {/* ── Right column (2/5): contacts + departments + map + legal + badge ── */}
+          {/* ── Right column (2/5): contacts + departments + map ── */}
           <div
             data-kontakt-panel
             className="lg:col-span-2 flex flex-col gap-2"
