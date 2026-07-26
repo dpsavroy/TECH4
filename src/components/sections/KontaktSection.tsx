@@ -358,13 +358,13 @@ export function KontaktSection() {
                   <textarea
                     id="kontakt-message"
                     name="message"
-                    rows={5}
+                    rows={8}
                     placeholder={t.kontakt.form.messagePlaceholder}
                     data-kontakt-input
                     style={{
                       ...inputBase,
                       resize: "vertical",
-                      minHeight: "8rem",
+                      minHeight: "12rem",
                       flex: 1,
                     }}
                   />
@@ -415,6 +415,7 @@ export function KontaktSection() {
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? "translateY(0)" : "translateY(24px)",
               transition: `opacity 400ms ${transitions.easing.entrance} 100ms, transform 400ms ${transitions.easing.standard} 100ms`,
+              paddingTop: "0.375rem",
             }}
           >
             {/* ── Company name ──────────────────────────────────────────── */}
@@ -630,7 +631,7 @@ export function KontaktSection() {
                 <iframe
                   src={GOOGLE_MAPS_EMBED_URL}
                   width="100%"
-                  height="170"
+                  height="240"
                   style={{ border: 0, display: "block" }}
                   allowFullScreen={false}
                   loading="lazy"
@@ -688,7 +689,7 @@ export function KontaktSection() {
             className="flex flex-wrap gap-x-5 gap-y-1"
             style={{
               fontFamily: typography.fontFamily.mono,
-              fontSize: "0.8125rem",
+              fontSize: "1rem",
               lineHeight: "1.5",
               color: isDark ? darkColors.neutral[500] : colors.neutral[400],
             }}
@@ -715,7 +716,7 @@ export function KontaktSection() {
             className="flex items-center gap-2"
             style={{
               fontFamily: typography.fontFamily.sans,
-              fontSize: "0.8125rem",
+              fontSize: "1rem",
               lineHeight: "1.5",
               color: isDark ? darkColors.neutral[500] : colors.neutral[400],
             }}
