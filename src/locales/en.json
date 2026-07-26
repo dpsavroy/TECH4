@@ -20,12 +20,30 @@
     "activeLabel": "● ACTIVE"
   },
   "systems": {
-    "bms": { "label": "BMS", "desc": "Central management" },
-    "bas": { "label": "BAS", "desc": "Building automation" },
-    "cctv": { "label": "CCTV", "desc": "IP video surveillance" },
-    "sap": { "label": "SAP", "desc": "Fire alarm system" },
-    "kd": { "label": "KD", "desc": "Access control" },
-    "hvac": { "label": "HVAC", "desc": "HVAC automation" }
+    "bms": {
+      "label": "BMS",
+      "desc": "Central management"
+    },
+    "bas": {
+      "label": "BAS",
+      "desc": "Building automation"
+    },
+    "cctv": {
+      "label": "CCTV",
+      "desc": "IP video surveillance"
+    },
+    "sap": {
+      "label": "SAP",
+      "desc": "Fire alarm system"
+    },
+    "kd": {
+      "label": "KD",
+      "desc": "Access control"
+    },
+    "hvac": {
+      "label": "HVAC",
+      "desc": "HVAC automation"
+    }
   },
   "stories": {
     "bms": {
@@ -193,7 +211,7 @@
     },
     "details": {
       "addressLabel": "Address",
-      "addressValue": "4 Engineering Street, 00-000 Warsaw, Poland",
+      "addressValue": "ul. Jana Zamoyskiego 9, 05-080 Izabelin B",
       "phoneLabel": "Phone",
       "phoneValue": "+48 000 000 000",
       "emailLabel": "Email",

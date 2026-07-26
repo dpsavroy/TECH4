@@ -20,12 +20,30 @@
     "activeLabel": "● AKTYWNY"
   },
   "systems": {
-    "bms": { "label": "BMS", "desc": "Centralne zarządzanie" },
-    "bas": { "label": "BAS", "desc": "Automatyka budynkowa" },
-    "cctv": { "label": "CCTV", "desc": "Monitoring wizyjny IP" },
-    "sap": { "label": "SAP", "desc": "System sygnalizacji pożarowej" },
-    "kd": { "label": "KD", "desc": "Kontrola dostępu" },
-    "hvac": { "label": "HVAC", "desc": "Automatyka HVAC" }
+    "bms": {
+      "label": "BMS",
+      "desc": "Centralne zarządzanie"
+    },
+    "bas": {
+      "label": "BAS",
+      "desc": "Automatyka budynkowa"
+    },
+    "cctv": {
+      "label": "CCTV",
+      "desc": "Monitoring wizyjny IP"
+    },
+    "sap": {
+      "label": "SAP",
+      "desc": "System sygnalizacji pożarowej"
+    },
+    "kd": {
+      "label": "KD",
+      "desc": "Kontrola dostępu"
+    },
+    "hvac": {
+      "label": "HVAC",
+      "desc": "Automatyka HVAC"
+    }
   },
   "stories": {
     "bms": {
@@ -193,7 +211,7 @@
     },
     "details": {
       "addressLabel": "Adres",
-      "addressValue": "ul. Inżynierska 4, 00-000 Warszawa",
+      "addressValue": "ul. Jana Zamoyskiego 9, 05-080 Izabelin B",
       "phoneLabel": "Telefon",
       "phoneValue": "+48 000 000 000",
       "emailLabel": "E-mail",
