@@ -411,6 +411,7 @@ export function KontaktSection() {
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? "translateY(0)" : "translateY(24px)",
               transition: `opacity 400ms ${transitions.easing.entrance} 100ms, transform 400ms ${transitions.easing.standard} 100ms`,
+              paddingTop: "calc(2rem + 1px)",
             }}
           >
             {/* ── Company name ──────────────────────────────────────────── */}
