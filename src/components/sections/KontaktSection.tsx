@@ -207,8 +207,8 @@ export function KontaktSection() {
       id="kontakt"
       style={{
         backgroundColor: themeColors.background.page,
-        paddingTop: layout.sectionSpacing.md,
-        paddingBottom: layout.sectionSpacing.lg,
+        paddingTop: layout.sectionSpacing.lg,
+        paddingBottom: layout.sectionSpacing.xl,
         transition: `background-color ${transitions.duration.base} ${transitions.easing.standard}`,
       }}
     >
@@ -236,7 +236,7 @@ export function KontaktSection() {
           <div className="lg:col-span-3 flex flex-col">
             {/* Eyebrow */}
             <div
-              className="inline-flex items-center px-3.5 py-1.5 rounded-full mb-5"
+              className="self-start inline-flex items-center px-3.5 py-1.5 rounded-full mb-5"
               style={{
                 backgroundColor: isDark
                   ? darkColors.primary.mist
@@ -686,8 +686,8 @@ export function KontaktSection() {
             className="flex flex-wrap gap-x-5 gap-y-1"
             style={{
               fontFamily: typography.fontFamily.mono,
-              fontSize: typography.scale.xs.fontSize,
-              lineHeight: typography.scale.xs.lineHeight,
+              fontSize: typography.scale.sm.fontSize,
+              lineHeight: typography.scale.sm.lineHeight,
               color: isDark ? darkColors.neutral[500] : colors.neutral[400],
             }}
           >
@@ -713,8 +713,8 @@ export function KontaktSection() {
             className="flex items-center gap-2"
             style={{
               fontFamily: typography.fontFamily.sans,
-              fontSize: typography.scale.xs.fontSize,
-              lineHeight: typography.scale.xs.lineHeight,
+              fontSize: typography.scale.sm.fontSize,
+              lineHeight: typography.scale.sm.lineHeight,
               color: isDark ? darkColors.neutral[500] : colors.neutral[400],
             }}
           >
