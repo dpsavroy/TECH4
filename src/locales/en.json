@@ -202,12 +202,19 @@
   "kontakt": {
     "eyebrow": "CONTACT",
     "heading": "Let\u2019s talk about your project",
-    "subheading": "Fill in the form or reach us directly. We respond within one business day.",
+    "subheading": "Reach us by phone or email. We respond within one business day.",
     "form": {
       "namePlaceholder": "Full name",
       "emailPlaceholder": "Email address",
       "messagePlaceholder": "Briefly describe your project or question...",
       "submit": "Send message"
+    },
+    "cta": {
+      "callLabel": "Call us directly",
+      "emailLabel": "Send an email"
+    },
+    "hint": {
+      "text": "Planning a project? Send us your specification or floor plan by email — we'll prepare a preliminary quote."
     },
     "details": {
       "companyName": "TECH4 Sp. z o.o.",

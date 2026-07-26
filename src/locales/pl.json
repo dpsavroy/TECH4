@@ -202,12 +202,19 @@
   "kontakt": {
     "eyebrow": "KONTAKT",
     "heading": "Porozmawiajmy o Twoim projekcie",
-    "subheading": "Wypełnij formularz lub skontaktuj się bezpośrednio. Odpowiadamy w ciągu jednego dnia roboczego.",
+    "subheading": "Skontaktuj się z nami telefonicznie lub wyślij wiadomość e-mail. Odpowiadamy w ciągu jednego dnia roboczego.",
     "form": {
       "namePlaceholder": "Imię i nazwisko",
       "emailPlaceholder": "Adres e-mail",
       "messagePlaceholder": "Opisz krótko swój projekt lub pytanie...",
       "submit": "Wyślij wiadomość"
+    },
+    "cta": {
+      "callLabel": "Zadzwoń bezpośrednio",
+      "emailLabel": "Napisz e-mail"
+    },
+    "hint": {
+      "text": "Planujesz projekt? Wyślij nam specyfikację lub rzut obiektu na e-mail — przygotujemy wstępną wycenę."
     },
     "details": {
       "companyName": "TECH4 Sp. z o.o.",
