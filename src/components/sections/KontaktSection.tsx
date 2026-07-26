@@ -282,7 +282,7 @@ export function KontaktSection() {
         </p>
 
         {/* ── Two-column layout ────────────────────────────────────────── */}
-        <div className="mt-14 grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 items-stretch">
+        <div className="mt-14 grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 items-start">
           {/* ── Form (3/5) ──────────────────────────────────────────────── */}
           <div
             data-kontakt-panel
@@ -406,7 +406,7 @@ export function KontaktSection() {
           {/* ── Right column (2/5): contacts + departments + map + legal + badge ── */}
           <div
             data-kontakt-panel
-            className="lg:col-span-2 flex flex-col gap-3"
+            className="lg:col-span-2 flex flex-col gap-2"
             style={{
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? "translateY(0)" : "translateY(24px)",
@@ -503,7 +503,7 @@ export function KontaktSection() {
             ))}
 
             {/* ── Department quick contacts ────────────────────────────── */}
-            <div>
+            <div className="mt-1">
               <h3
                 style={{
                   fontFamily: typography.fontFamily.sans,
@@ -513,7 +513,7 @@ export function KontaktSection() {
                   fontWeight: typography.weight.semibold,
                   letterSpacing: "0.04em",
                   textTransform: "uppercase",
-                  marginBottom: "0.375rem",
+                  marginBottom: "0.25rem",
                 }}
               >
                 {t.kontakt.departments.title}
@@ -598,7 +598,7 @@ export function KontaktSection() {
             </div>
 
             {/* ── Google Maps embed ────────────────────────────────────── */}
-            <div>
+            <div className="mt-1">
               <h3
                 style={{
                   fontFamily: typography.fontFamily.sans,
@@ -608,7 +608,7 @@ export function KontaktSection() {
                   fontWeight: typography.weight.semibold,
                   letterSpacing: "0.04em",
                   textTransform: "uppercase",
-                  marginBottom: "0.375rem",
+                  marginBottom: "0.25rem",
                 }}
               >
                 {t.kontakt.map.title}
@@ -626,7 +626,7 @@ export function KontaktSection() {
                 <iframe
                   src={GOOGLE_MAPS_EMBED_URL}
                   width="100%"
-                  height="200"
+                  height="170"
                   style={{ border: 0, display: "block" }}
                   allowFullScreen={false}
                   loading="lazy"
@@ -664,88 +664,98 @@ export function KontaktSection() {
               </div>
             </div>
 
-            {/* ── Footer block: Legal info + Trust badge ────────────────── */}
-            <div
-              className="mt-auto pt-4 flex flex-col gap-2"
-              style={{
-                borderTopWidth: "1px",
-                borderTopStyle: "solid",
-                borderTopColor: isDark
-                  ? "rgb(37 51 66 / 0.60)"
-                  : "rgb(221 227 234 / 0.60)",
-              }}
-            >
-              {/* Legal numbers */}
-              <div
-                className="flex flex-wrap gap-x-4 gap-y-1"
-                style={{
-                  fontFamily: typography.fontFamily.mono,
-                  fontSize: typography.scale.xs.fontSize,
-                  lineHeight: typography.scale.xs.lineHeight,
-                  color: isDark ? darkColors.neutral[500] : colors.neutral[400],
-                }}
-              >
-                <span>{t.kontakt.legal.nip}: {NIP}</span>
-                <span>{t.kontakt.legal.krs}: {KRS}</span>
-                <span>{t.kontakt.legal.regon}: {REGON}</span>
-              </div>
 
-              {/* Trust badge — Rzetelna Firma */}
-              <div
-                className="flex items-center gap-2.5"
+          </div>
+        </div>
+
+        {/* ── Full-width legal / trust footer row ──────────────────────── */}
+        <div
+          className="mt-10 pt-6 flex flex-wrap items-center gap-x-6 gap-y-3"
+          style={{
+            borderTopWidth: "1px",
+            borderTopStyle: "solid",
+            borderTopColor: isDark
+              ? "rgb(37 51 66 / 0.50)"
+              : "rgb(221 227 234 / 0.70)",
+          }}
+        >
+          {/* Legal numbers */}
+          <div
+            className="flex flex-wrap gap-x-5 gap-y-1"
+            style={{
+              fontFamily: typography.fontFamily.mono,
+              fontSize: typography.scale.xs.fontSize,
+              lineHeight: typography.scale.xs.lineHeight,
+              color: isDark ? darkColors.neutral[500] : colors.neutral[400],
+            }}
+          >
+            <span>{t.kontakt.legal.nip}: {NIP}</span>
+            <span>{t.kontakt.legal.krs}: {KRS}</span>
+            <span>{t.kontakt.legal.regon}: {REGON}</span>
+          </div>
+
+          {/* Separator dot — hidden on mobile */}
+          <span
+            aria-hidden="true"
+            className="hidden sm:inline"
+            style={{
+              color: isDark ? darkColors.neutral[600] : colors.neutral[300],
+              fontSize: "0.6rem",
+            }}
+          >
+            ·
+          </span>
+
+          {/* Trust badge — Rzetelna Firma */}
+          <div
+            className="flex items-center gap-2"
+            style={{
+              fontFamily: typography.fontFamily.sans,
+              fontSize: typography.scale.xs.fontSize,
+              lineHeight: typography.scale.xs.lineHeight,
+              color: isDark ? darkColors.neutral[500] : colors.neutral[400],
+            }}
+          >
+            <ShieldIcon
+              color={isDark ? darkColors.primary.steel : colors.primary.signal}
+            />
+            <span>
+              {t.kontakt.trustBadge.programText}{" "}
+              <span
                 style={{
-                  fontFamily: typography.fontFamily.sans,
-                  fontSize: typography.scale.xs.fontSize,
-                  lineHeight: typography.scale.xs.lineHeight,
-                  color: isDark ? darkColors.neutral[500] : colors.neutral[400],
+                  fontWeight: typography.weight.semibold,
+                  color: isDark
+                    ? darkColors.primary.steel
+                    : colors.primary.signal,
                 }}
               >
-                <ShieldIcon
-                  color={isDark ? darkColors.primary.steel : colors.primary.signal}
-                />
-                <div>
-                  <span>
-                    {t.kontakt.trustBadge.programText}{" "}
-                    <span
-                      style={{
-                        fontWeight: typography.weight.semibold,
-                        color: isDark
-                          ? darkColors.primary.steel
-                          : colors.primary.signal,
-                      }}
-                    >
-                      {t.kontakt.trustBadge.badgeName}
-                    </span>
-                    {t.kontakt.trustBadge.badgeNameSuffix}
-                  </span>
-                  <br />
-                  <span>
-                    {t.kontakt.trustBadge.checkText}{" "}
-                    <a
-                      href={RZETELNA_FIRMA_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        color: themeColors.primary.signal,
-                        textDecoration: "underline",
-                        textDecorationColor: "transparent",
-                        transition: `text-decoration-color ${transitions.duration.fast} ${transitions.easing.standard}`,
-                      }}
-                      onMouseEnter={(e) => {
-                        (e.currentTarget as HTMLAnchorElement).style.textDecorationColor =
-                          themeColors.primary.signal;
-                      }}
-                      onMouseLeave={(e) => {
-                        (e.currentTarget as HTMLAnchorElement).style.textDecorationColor =
-                          "transparent";
-                      }}
-                    >
-                      rzetelnafirma.pl
-                    </a>
-                  </span>
-                </div>
-              </div>
-            </div>
+                {t.kontakt.trustBadge.badgeName}
+              </span>
+              {t.kontakt.trustBadge.badgeNameSuffix}
+              {" · "}
+              {t.kontakt.trustBadge.checkText}{" "}
+              <a
+                href={RZETELNA_FIRMA_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: themeColors.primary.signal,
+                  textDecoration: "underline",
+                  textDecorationColor: "transparent",
+                  transition: `text-decoration-color ${transitions.duration.fast} ${transitions.easing.standard}`,
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.textDecorationColor =
+                    themeColors.primary.signal;
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.textDecorationColor =
+                    "transparent";
+                }}
+              >
+                rzetelnafirma.pl
+              </a>
+            </span>
           </div>
         </div>
       </div>
