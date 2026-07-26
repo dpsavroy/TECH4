@@ -202,7 +202,7 @@
   "kontakt": {
     "eyebrow": "KONTAKT",
     "heading": "Porozmawiajmy o Twoim projekcie",
-    "subheading": "Skontaktuj się z nami telefonicznie lub wyślij wiadomość e-mail. Odpowiadamy w ciągu jednego dnia roboczego.",
+    "subheading": "Skontaktuj się z nami telefonicznie lub wyślij wiadomość e-mail.",
     "form": {
       "namePlaceholder": "Imię i nazwisko",
       "emailPlaceholder": "Adres e-mail",
@@ -217,6 +217,7 @@
       "text": "Planujesz projekt? Wyślij nam specyfikację lub rzut obiektu na e-mail — przygotujemy wstępną wycenę."
     },
     "details": {
+      "officeTitle": "Główne biuro",
       "companyName": "TECH4 Sp. z o.o.",
       "addressLabel": "Adres",
       "addressValue": "ul. Jana Zamoyskiego 9, 05-080 Izabelin B",

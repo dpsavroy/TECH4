@@ -202,7 +202,7 @@
   "kontakt": {
     "eyebrow": "CONTACT",
     "heading": "Let\u2019s talk about your project",
-    "subheading": "Reach us by phone or email. We respond within one business day.",
+    "subheading": "Reach us by phone or email.",
     "form": {
       "namePlaceholder": "Full name",
       "emailPlaceholder": "Email address",
@@ -217,6 +217,7 @@
       "text": "Planning a project? Send us your specification or floor plan by email — we'll prepare a preliminary quote."
     },
     "details": {
+      "officeTitle": "Main office",
       "companyName": "TECH4 Sp. z o.o.",
       "addressLabel": "Address",
       "addressValue": "ul. Jana Zamoyskiego 9, 05-080 Izabelin B",

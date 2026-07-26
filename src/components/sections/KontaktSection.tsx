@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useRef, useState } from "react";
 import { useTheme } from "@/components/theme/ThemeProvider";
@@ -8,8 +8,6 @@ import {
   darkColors,
   layout,
   radius,
-  shadows,
-  darkShadows,
   transitions,
   typography,
 } from "@/styles/design-tokens";
@@ -111,27 +109,6 @@ function ExternalLinkIcon({ color }: { color: string }) {
   );
 }
 
-function InfoIcon({ color }: { color: string }) {
-  return (
-    <svg
-      width="15"
-      height="15"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke={color}
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      style={{ flexShrink: 0, marginTop: "0.1rem" }}
-    >
-      <circle cx="12" cy="12" r="10" />
-      <line x1="12" y1="8" x2="12" y2="12" />
-      <line x1="12" y1="16" x2="12.01" y2="16" />
-    </svg>
-  );
-}
-
 // ─── Constants ────────────────────────────────────────────────────────────────
 
 const MAP_LAT = "52.28335881425612";
@@ -146,11 +123,11 @@ const KRS = "0000414891";
 const REGON = "146057573";
 const RZETELNA_FIRMA_URL = "https://www.rzetelnafirma.pl/3XWO5AAW";
 
-// ─── Shared mono label style ──────────────────────────────────────────────────
+// ─── Shared mono typography ───────────────────────────────────────────────────
 
 const monoLabel = {
   fontFamily: typography.fontFamily.mono,
-  fontSize: "0.65rem",
+  fontSize: "0.6875rem",
   fontWeight: typography.weight.semibold,
   letterSpacing: "0.08em",
   textTransform: "uppercase" as const,
@@ -163,7 +140,6 @@ export function KontaktSection() {
   const t = useTranslations();
   const isDark = theme === "dark";
   const themeColors = isDark ? darkColors : colors;
-  const themeShadows = isDark ? darkShadows : shadows;
 
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -193,9 +169,9 @@ export function KontaktSection() {
   const cardBorder = isDark ? "rgb(37 51 66 / 0.80)" : "rgb(221 227 234 / 0.70)";
   const cardBg = isDark ? "rgb(18 27 39 / 0.60)" : colors.background.surface;
 
-  const iconBadgeSmall = {
-    width: "2rem",
-    height: "2rem",
+  const iconBadgeStyle = {
+    width: "2.25rem",
+    height: "2.25rem",
     borderRadius: radius.md,
     backgroundColor: isDark ? darkColors.primary.mist : colors.primary.mist,
     display: "flex",
@@ -210,8 +186,8 @@ export function KontaktSection() {
       id="kontakt"
       style={{
         backgroundColor: themeColors.background.page,
-        paddingTop: "8rem",
-        paddingBottom: "10rem",
+        paddingTop: "7rem",
+        paddingBottom: "8rem",
         transition: `background-color ${transitions.duration.base} ${transitions.easing.standard}`,
       }}
     >
@@ -226,364 +202,72 @@ export function KontaktSection() {
       `}</style>
 
       <div
-        className="mx-auto px-6 md:px-8 lg:px-10"
+        className="mx-auto px-6 md:px-8 lg:px-12"
         style={{ maxWidth: layout.container.xl }}
       >
-        {/* ── Two-column grid ──────────────────────────────────────────── */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 items-start">
+        {/* ── 2-Column Symmetrical Grid ─────────────────────────────────── */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
 
-          {/* LEFT COLUMN (3/5) */}
+          {/* ══ LEFT COLUMN: Contacts & Quick Directory ════════════════════ */}
           <div
             data-kontakt-panel
-            className="lg:col-span-3 flex flex-col"
+            className="flex flex-col justify-between gap-8"
             style={{
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? "translateY(0)" : "translateY(24px)",
               transition: `opacity 420ms ${transitions.easing.entrance}, transform 420ms ${transitions.easing.standard}`,
             }}
           >
-            {/* Eyebrow */}
-            <div
-              className="inline-flex items-center px-3.5 py-1.5 rounded-full mb-5"
-              style={{
-                backgroundColor: isDark ? darkColors.primary.mist : colors.primary.mist,
-                width: "fit-content",
-                alignSelf: "flex-start",
-              }}
-            >
-              <span
-                className="uppercase"
-                style={{ ...monoLabel, color: themeColors.primary.signal }}
-              >
-                {t.kontakt.eyebrow}
-              </span>
-            </div>
-
-            {/* Heading */}
-            <h2
-              style={{
-                fontFamily: typography.fontFamily.sans,
-                fontWeight: typography.weight.semibold,
-                color: themeColors.primary.ink,
-                fontSize: typography.scale["4xl"].fontSize,
-                lineHeight: typography.scale["4xl"].lineHeight,
-                letterSpacing: typography.tracking.tight,
-              }}
-            >
-              {t.kontakt.heading}
-            </h2>
-
-            {/* Subheading */}
-            <p
-              className="mt-4"
-              style={{
-                fontFamily: typography.fontFamily.sans,
-                fontSize: typography.scale.lg.fontSize,
-                lineHeight: typography.scale.lg.lineHeight,
-                color: isDark ? darkColors.neutral[300] : colors.neutral[500],
-                maxWidth: "38rem",
-              }}
-            >
-              {t.kontakt.subheading}
-            </p>
-
-            {/* CTA cards */}
-            <div className="mt-8 flex flex-col gap-4">
-
-              {/* Phone */}
-              <a
-                id="kontakt-call-cta"
-                href={`tel:${phone.replace(/\s/g, "")}`}
-                className="flex items-center gap-5 rounded-xl border"
+            {/* 1. Header & Subheading */}
+            <div>
+              <div
+                className="inline-flex items-center px-3.5 py-1.5 rounded-full mb-4"
                 style={{
-                  padding: "1.25rem 1.5rem",
-                  backgroundColor: cardBg,
-                  borderColor: cardBorder,
-                  borderRadius: radius.xl,
-                  boxShadow: themeShadows.sm,
-                  textDecoration: "none",
-                  transition: `border-color ${transitions.duration.fast} ${transitions.easing.standard}, box-shadow ${transitions.duration.fast} ${transitions.easing.standard}`,
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = colors.primary.signal;
-                  e.currentTarget.style.boxShadow = themeShadows.md;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = cardBorder;
-                  e.currentTarget.style.boxShadow = themeShadows.sm;
+                  backgroundColor: isDark ? darkColors.primary.mist : colors.primary.mist,
+                  width: "fit-content",
                 }}
               >
-                <div
-                  style={{
-                    width: "3rem",
-                    height: "3rem",
-                    borderRadius: radius.lg,
-                    backgroundColor: isDark ? darkColors.primary.mist : colors.primary.mist,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
-                  }}
-                >
-                  <PhoneIcon color={themeColors.primary.signal} size={20} />
-                </div>
-                <div>
-                  <span
-                    className="block uppercase"
-                    style={{
-                      ...monoLabel,
-                      color: isDark ? darkColors.neutral[400] : colors.neutral[400],
-                      marginBottom: "0.3rem",
-                    }}
-                  >
-                    {t.kontakt.cta.callLabel}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: typography.fontFamily.sans,
-                      fontSize: typography.scale["2xl"].fontSize,
-                      lineHeight: "1.2",
-                      fontWeight: typography.weight.semibold,
-                      color: themeColors.primary.ink,
-                      letterSpacing: "-0.01em",
-                    }}
-                  >
-                    {phone}
-                  </span>
-                </div>
-              </a>
+                <span style={{ ...monoLabel, color: themeColors.primary.signal }}>
+                  {t.kontakt.eyebrow}
+                </span>
+              </div>
 
-              {/* Email */}
-              <a
-                id="kontakt-email-cta"
-                href={`mailto:${email}`}
-                className="flex items-center gap-5 rounded-xl border"
-                style={{
-                  padding: "1.25rem 1.5rem",
-                  backgroundColor: cardBg,
-                  borderColor: cardBorder,
-                  borderRadius: radius.xl,
-                  boxShadow: themeShadows.sm,
-                  textDecoration: "none",
-                  transition: `border-color ${transitions.duration.fast} ${transitions.easing.standard}, box-shadow ${transitions.duration.fast} ${transitions.easing.standard}`,
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = colors.primary.signal;
-                  e.currentTarget.style.boxShadow = themeShadows.md;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = cardBorder;
-                  e.currentTarget.style.boxShadow = themeShadows.sm;
-                }}
-              >
-                <div
-                  style={{
-                    width: "3rem",
-                    height: "3rem",
-                    borderRadius: radius.lg,
-                    backgroundColor: isDark ? darkColors.primary.mist : colors.primary.mist,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
-                  }}
-                >
-                  <MailIcon color={themeColors.primary.signal} size={20} />
-                </div>
-                <div>
-                  <span
-                    className="block uppercase"
-                    style={{
-                      ...monoLabel,
-                      color: isDark ? darkColors.neutral[400] : colors.neutral[400],
-                      marginBottom: "0.3rem",
-                    }}
-                  >
-                    {t.kontakt.cta.emailLabel}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: typography.fontFamily.sans,
-                      fontSize: typography.scale.xl.fontSize,
-                      lineHeight: "1.3",
-                      fontWeight: typography.weight.medium,
-                      color: themeColors.primary.ink,
-                    }}
-                  >
-                    {email}
-                  </span>
-                </div>
-              </a>
-            </div>
-
-            {/* UX hint */}
-            <div
-              className="mt-5 flex items-start gap-3 rounded-lg px-4 py-3.5"
-              style={{
-                backgroundColor: isDark
-                  ? "rgb(23 48 24 / 0.45)"
-                  : "rgb(232 245 226 / 0.80)",
-                borderLeftWidth: "3px",
-                borderLeftStyle: "solid",
-                borderLeftColor: colors.primary.signal,
-              }}
-            >
-              <InfoIcon
-                color={isDark ? darkColors.primary.steel : colors.primary.signal}
-              />
-              <p
+              <h2
                 style={{
                   fontFamily: typography.fontFamily.sans,
-                  fontSize: typography.scale.sm.fontSize,
-                  lineHeight: "1.6",
-                  color: isDark ? darkColors.neutral[300] : colors.neutral[600],
+                  fontWeight: typography.weight.semibold,
+                  color: themeColors.primary.ink,
+                  fontSize: typography.scale["4xl"].fontSize,
+                  lineHeight: typography.scale["4xl"].lineHeight,
+                  letterSpacing: typography.tracking.tight,
                 }}
               >
-                {t.kontakt.hint.text}
+                {t.kontakt.heading}
+              </h2>
+
+              <p
+                className="mt-3"
+                style={{
+                  fontFamily: typography.fontFamily.sans,
+                  fontSize: typography.scale.lg.fontSize,
+                  lineHeight: typography.scale.lg.lineHeight,
+                  color: isDark ? darkColors.neutral[300] : colors.neutral[500],
+                }}
+              >
+                {t.kontakt.subheading}
               </p>
             </div>
-          </div>
 
-          {/* RIGHT COLUMN (2/5) */}
-          <div
-            data-kontakt-panel
-            className="lg:col-span-2 flex flex-col gap-3"
-            style={{
-              opacity: isVisible ? 1 : 0,
-              transform: isVisible ? "translateY(0)" : "translateY(24px)",
-              transition: `opacity 420ms ${transitions.easing.entrance} 100ms, transform 420ms ${transitions.easing.standard} 100ms`,
-              paddingTop: "0.375rem",
-            }}
-          >
-            {/* Company name */}
-            <span
+            {/* 2. Main Office Card (Główne biuro) */}
+            <div
+              className="rounded-2xl border p-6 flex flex-col gap-5 shadow-sm"
               style={{
-                fontFamily: typography.fontFamily.sans,
-                fontSize: typography.scale.lg.fontSize,
-                lineHeight: typography.scale.lg.lineHeight,
-                color: themeColors.primary.ink,
-                fontWeight: typography.weight.semibold,
+                backgroundColor: cardBg,
+                borderColor: cardBorder,
+                borderRadius: radius.xl,
               }}
             >
-              {t.kontakt.details.companyName}
-            </span>
-
-            {/* Address */}
-            <div className="flex items-start gap-3">
-              <div style={iconBadgeSmall}>
-                <MapPinIcon color={themeColors.primary.signal} />
-              </div>
-              <div>
-                <span
-                  className="block uppercase"
-                  style={{
-                    ...monoLabel,
-                    color: isDark ? darkColors.neutral[500] : colors.neutral[400],
-                    marginBottom: "0.2rem",
-                  }}
-                >
-                  {t.kontakt.details.addressLabel}
-                </span>
-                <span
-                  style={{
-                    fontFamily: typography.fontFamily.sans,
-                    fontSize: typography.scale.sm.fontSize,
-                    lineHeight: typography.scale.sm.lineHeight,
-                    color: themeColors.primary.ink,
-                    fontWeight: typography.weight.medium,
-                  }}
-                >
-                  {t.kontakt.details.addressValue}
-                </span>
-              </div>
-            </div>
-
-            {/* Phone */}
-            <div className="flex items-start gap-3">
-              <div style={iconBadgeSmall}>
-                <PhoneIcon color={themeColors.primary.signal} size={16} />
-              </div>
-              <div>
-                <span
-                  className="block uppercase"
-                  style={{
-                    ...monoLabel,
-                    color: isDark ? darkColors.neutral[500] : colors.neutral[400],
-                    marginBottom: "0.2rem",
-                  }}
-                >
-                  {t.kontakt.details.phoneLabel}
-                </span>
-                <a
-                  href={`tel:${phone.replace(/\s/g, "")}`}
-                  style={{
-                    fontFamily: typography.fontFamily.sans,
-                    fontSize: typography.scale.sm.fontSize,
-                    lineHeight: typography.scale.sm.lineHeight,
-                    color: themeColors.primary.ink,
-                    fontWeight: typography.weight.medium,
-                    textDecoration: "none",
-                    transition: `color ${transitions.duration.fast} ${transitions.easing.standard}`,
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.color =
-                      themeColors.primary.signal;
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.color =
-                      themeColors.primary.ink;
-                  }}
-                >
-                  {phone}
-                </a>
-              </div>
-            </div>
-
-            {/* Email */}
-            <div className="flex items-start gap-3">
-              <div style={iconBadgeSmall}>
-                <MailIcon color={themeColors.primary.signal} size={16} />
-              </div>
-              <div>
-                <span
-                  className="block uppercase"
-                  style={{
-                    ...monoLabel,
-                    color: isDark ? darkColors.neutral[500] : colors.neutral[400],
-                    marginBottom: "0.2rem",
-                  }}
-                >
-                  {t.kontakt.details.emailLabel}
-                </span>
-                <a
-                  href={`mailto:${email}`}
-                  style={{
-                    fontFamily: typography.fontFamily.sans,
-                    fontSize: typography.scale.sm.fontSize,
-                    lineHeight: typography.scale.sm.lineHeight,
-                    color: themeColors.primary.ink,
-                    fontWeight: typography.weight.medium,
-                    textDecoration: "none",
-                    transition: `color ${transitions.duration.fast} ${transitions.easing.standard}`,
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.color =
-                      themeColors.primary.signal;
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.color =
-                      themeColors.primary.ink;
-                  }}
-                >
-                  {email}
-                </a>
-              </div>
-            </div>
-
-            {/* Department quick contacts */}
-            <div className="mt-3">
               <h3
-                className="uppercase"
                 style={{
                   fontFamily: typography.fontFamily.sans,
                   fontSize: typography.scale.sm.fontSize,
@@ -591,196 +275,322 @@ export function KontaktSection() {
                   color: isDark ? darkColors.neutral[400] : colors.neutral[500],
                   fontWeight: typography.weight.semibold,
                   letterSpacing: "0.04em",
-                  marginBottom: "0.625rem",
+                  textTransform: "uppercase",
+                }}
+              >
+                {t.kontakt.details.officeTitle} &mdash; {t.kontakt.details.companyName}
+              </h3>
+
+              <div className="flex flex-col gap-4">
+                {/* Address */}
+                <div className="flex items-start gap-4">
+                  <div style={iconBadgeStyle}>
+                    <MapPinIcon color={themeColors.primary.signal} />
+                  </div>
+                  <div>
+                    <span
+                      className="block"
+                      style={{
+                        ...monoLabel,
+                        color: isDark ? darkColors.neutral[500] : colors.neutral[400],
+                        marginBottom: "0.2rem",
+                      }}
+                    >
+                      {t.kontakt.details.addressLabel}
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: typography.fontFamily.sans,
+                        fontSize: typography.scale.base.fontSize,
+                        color: themeColors.primary.ink,
+                        fontWeight: typography.weight.medium,
+                      }}
+                    >
+                      {t.kontakt.details.addressValue}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Phone */}
+                <div className="flex items-start gap-4">
+                  <div style={iconBadgeStyle}>
+                    <PhoneIcon color={themeColors.primary.signal} size={18} />
+                  </div>
+                  <div>
+                    <span
+                      className="block"
+                      style={{
+                        ...monoLabel,
+                        color: isDark ? darkColors.neutral[500] : colors.neutral[400],
+                        marginBottom: "0.2rem",
+                      }}
+                    >
+                      {t.kontakt.details.phoneLabel}
+                    </span>
+                    <a
+                      href={`tel:${phone.replace(/\s/g, "")}`}
+                      style={{
+                        fontFamily: typography.fontFamily.sans,
+                        fontSize: typography.scale.base.fontSize,
+                        color: themeColors.primary.ink,
+                        fontWeight: typography.weight.semibold,
+                        textDecoration: "none",
+                        transition: `color ${transitions.duration.fast} ${transitions.easing.standard}`,
+                      }}
+                      onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLAnchorElement).style.color =
+                          themeColors.primary.signal;
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLAnchorElement).style.color =
+                          themeColors.primary.ink;
+                      }}
+                    >
+                      {phone}
+                    </a>
+                  </div>
+                </div>
+
+                {/* Email */}
+                <div className="flex items-start gap-4">
+                  <div style={iconBadgeStyle}>
+                    <MailIcon color={themeColors.primary.signal} size={18} />
+                  </div>
+                  <div>
+                    <span
+                      className="block"
+                      style={{
+                        ...monoLabel,
+                        color: isDark ? darkColors.neutral[500] : colors.neutral[400],
+                        marginBottom: "0.2rem",
+                      }}
+                    >
+                      {t.kontakt.details.emailLabel}
+                    </span>
+                    <a
+                      href={`mailto:${email}`}
+                      style={{
+                        fontFamily: typography.fontFamily.sans,
+                        fontSize: typography.scale.base.fontSize,
+                        color: themeColors.primary.ink,
+                        fontWeight: typography.weight.semibold,
+                        textDecoration: "none",
+                        transition: `color ${transitions.duration.fast} ${transitions.easing.standard}`,
+                      }}
+                      onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLAnchorElement).style.color =
+                          themeColors.primary.signal;
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLAnchorElement).style.color =
+                          themeColors.primary.ink;
+                      }}
+                    >
+                      {email}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* 3. Quick Contacts (2x2 grid) */}
+            <div>
+              <h3
+                style={{
+                  fontFamily: typography.fontFamily.sans,
+                  fontSize: typography.scale.sm.fontSize,
+                  color: isDark ? darkColors.neutral[400] : colors.neutral[500],
+                  fontWeight: typography.weight.semibold,
+                  letterSpacing: "0.04em",
+                  textTransform: "uppercase",
+                  marginBottom: "0.75rem",
                 }}
               >
                 {t.kontakt.departments.title}
               </h3>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 {departmentCards.map((dept, i) => (
                   <div
                     key={i}
-                    className="rounded-lg border px-3 py-2.5"
+                    className="rounded-xl border p-4 flex flex-col justify-between"
                     style={{
                       backgroundColor: cardBg,
                       borderColor: cardBorder,
                       borderRadius: radius.lg,
                     }}
                   >
-                    <span
-                      className="block"
-                      style={{
-                        fontFamily: typography.fontFamily.sans,
-                        fontSize: typography.scale.sm.fontSize,
-                        lineHeight: typography.scale.sm.lineHeight,
-                        color: themeColors.primary.ink,
-                        fontWeight: typography.weight.semibold,
-                        marginBottom: "0.2rem",
-                      }}
-                    >
-                      {dept.label}
-                    </span>
-                    <a
-                      href={`mailto:${dept.email}`}
-                      style={{
-                        fontFamily: typography.fontFamily.sans,
-                        fontSize: typography.scale.xs.fontSize,
-                        lineHeight: typography.scale.xs.lineHeight,
-                        color: themeColors.primary.signal,
-                        textDecoration: "none",
-                        display: "block",
-                        marginBottom: "0.125rem",
-                        transition: `color ${transitions.duration.fast} ${transitions.easing.standard}`,
-                      }}
-                      onMouseEnter={(e) => {
-                        (e.currentTarget as HTMLAnchorElement).style.color =
-                          themeColors.primary.signalHover;
-                      }}
-                      onMouseLeave={(e) => {
-                        (e.currentTarget as HTMLAnchorElement).style.color =
-                          themeColors.primary.signal;
-                      }}
-                    >
-                      {dept.email}
-                    </a>
-                    <a
-                      href={`tel:${dept.phone.replace(/\s/g, "")}`}
-                      style={{
-                        fontFamily: typography.fontFamily.sans,
-                        fontSize: typography.scale.xs.fontSize,
-                        lineHeight: typography.scale.xs.lineHeight,
-                        color: isDark ? darkColors.neutral[300] : colors.neutral[600],
-                        textDecoration: "none",
-                        display: "block",
-                        transition: `color ${transitions.duration.fast} ${transitions.easing.standard}`,
-                      }}
-                      onMouseEnter={(e) => {
-                        (e.currentTarget as HTMLAnchorElement).style.color =
-                          themeColors.primary.signal;
-                      }}
-                      onMouseLeave={(e) => {
-                        (e.currentTarget as HTMLAnchorElement).style.color =
-                          isDark ? darkColors.neutral[300] : colors.neutral[600];
-                      }}
-                    >
-                      {dept.phone}
-                    </a>
+                    <div>
+                      <span
+                        className="block font-semibold"
+                        style={{
+                          fontFamily: typography.fontFamily.sans,
+                          fontSize: typography.scale.sm.fontSize,
+                          color: themeColors.primary.ink,
+                          marginBottom: "0.25rem",
+                        }}
+                      >
+                        {dept.label}
+                      </span>
+                    </div>
+                    <div className="mt-2 flex flex-col gap-1">
+                      <a
+                        href={`mailto:${dept.email}`}
+                        style={{
+                          fontFamily: typography.fontFamily.sans,
+                          fontSize: typography.scale.xs.fontSize,
+                          color: themeColors.primary.signal,
+                          fontWeight: typography.weight.medium,
+                          textDecoration: "none",
+                          transition: `color ${transitions.duration.fast} ${transitions.easing.standard}`,
+                        }}
+                        onMouseEnter={(e) => {
+                          (e.currentTarget as HTMLAnchorElement).style.color =
+                            themeColors.primary.signalHover;
+                        }}
+                        onMouseLeave={(e) => {
+                          (e.currentTarget as HTMLAnchorElement).style.color =
+                            themeColors.primary.signal;
+                        }}
+                      >
+                        {dept.email}
+                      </a>
+                      <a
+                        href={`tel:${dept.phone.replace(/\s/g, "")}`}
+                        style={{
+                          fontFamily: typography.fontFamily.sans,
+                          fontSize: typography.scale.xs.fontSize,
+                          color: isDark ? darkColors.neutral[300] : colors.neutral[600],
+                          textDecoration: "none",
+                          transition: `color ${transitions.duration.fast} ${transitions.easing.standard}`,
+                        }}
+                        onMouseEnter={(e) => {
+                          (e.currentTarget as HTMLAnchorElement).style.color =
+                            themeColors.primary.signal;
+                        }}
+                        onMouseLeave={(e) => {
+                          (e.currentTarget as HTMLAnchorElement).style.color =
+                            isDark ? darkColors.neutral[300] : colors.neutral[600];
+                        }}
+                      >
+                        {dept.phone}
+                      </a>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
           </div>
-        </div>
 
-        {/* ── Full-width Google Maps ────────────────────────────────────── */}
-        <div className="mt-14">
-          <h3
-            className="uppercase"
-            style={{
-              fontFamily: typography.fontFamily.sans,
-              fontSize: typography.scale.sm.fontSize,
-              lineHeight: typography.scale.sm.lineHeight,
-              color: isDark ? darkColors.neutral[400] : colors.neutral[500],
-              fontWeight: typography.weight.semibold,
-              letterSpacing: "0.04em",
-              marginBottom: "0.625rem",
-            }}
-          >
-            {t.kontakt.map.title}
-          </h3>
-
+          {/* ══ RIGHT COLUMN: Interactive Map (Symmetrical Block) ══════════ */}
           <div
-            className="overflow-hidden border"
+            data-kontakt-panel
+            className="flex flex-col h-full"
             style={{
-              borderColor: cardBorder,
-              borderRadius: radius.xl,
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? "translateY(0)" : "translateY(24px)",
+              transition: `opacity 420ms ${transitions.easing.entrance} 120ms, transform 420ms ${transitions.easing.standard} 120ms`,
             }}
           >
-            <iframe
-              src={GOOGLE_MAPS_EMBED_URL}
-              width="100%"
-              height="280"
-              style={{ border: 0, display: "block" }}
-              allowFullScreen={false}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title={t.kontakt.map.title}
-            />
-          </div>
-
-          <div className="mt-2.5">
-            <a
-              href={GOOGLE_MAPS_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5"
+            {/* Block Title */}
+            <h3
               style={{
                 fontFamily: typography.fontFamily.sans,
-                fontSize: typography.scale.xs.fontSize,
-                lineHeight: typography.scale.xs.lineHeight,
-                color: themeColors.primary.signal,
-                textDecoration: "none",
-                transition: `color ${transitions.duration.fast} ${transitions.easing.standard}`,
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.color =
-                  themeColors.primary.signalHover;
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.color =
-                  themeColors.primary.signal;
+                fontSize: typography.scale.sm.fontSize,
+                color: isDark ? darkColors.neutral[400] : colors.neutral[500],
+                fontWeight: typography.weight.semibold,
+                letterSpacing: "0.04em",
+                textTransform: "uppercase",
+                marginBottom: "0.75rem",
               }}
             >
-              <ExternalLinkIcon color="currentColor" />
-              {t.kontakt.map.openInGoogleMaps}
-            </a>
+              {t.kontakt.map.title}
+            </h3>
+
+            {/* Rounded Map Container - fills remaining height down to left column bottom */}
+            <div
+              className="flex-1 w-full min-h-[420px] relative overflow-hidden rounded-2xl border shadow-sm"
+              style={{
+                borderColor: cardBorder,
+                borderRadius: radius.xl,
+              }}
+            >
+              <iframe
+                src={GOOGLE_MAPS_EMBED_URL}
+                className="absolute inset-0 w-full h-full"
+                style={{ border: 0, display: "block" }}
+                allowFullScreen={false}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title={t.kontakt.map.title}
+              />
+            </div>
+
+            {/* External Google Maps link */}
+            <div className="mt-3 flex justify-end">
+              <a
+                href={GOOGLE_MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 font-medium"
+                style={{
+                  fontFamily: typography.fontFamily.sans,
+                  fontSize: typography.scale.sm.fontSize,
+                  color: themeColors.primary.signal,
+                  textDecoration: "none",
+                  transition: `color ${transitions.duration.fast} ${transitions.easing.standard}`,
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.color =
+                    themeColors.primary.signalHover;
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.color =
+                    themeColors.primary.signal;
+                }}
+              >
+                <ExternalLinkIcon color="currentColor" />
+                {t.kontakt.map.openInGoogleMaps}
+              </a>
+            </div>
           </div>
+
         </div>
 
-        {/* ── Legal / trust footer bar ──────────────────────────────────── */}
+        {/* ── LEGAL & TRUST FOOTER BAR ─────────────────────────────────── */}
         <div
-          className="mt-10 pt-6 flex flex-wrap items-center gap-x-6 gap-y-3"
+          className="mt-12 pt-6 flex flex-wrap items-center justify-between gap-6 border-t"
           style={{
-            borderTopWidth: "1px",
-            borderTopStyle: "solid",
-            borderTopColor: isDark
-              ? "rgb(37 51 66 / 0.50)"
-              : "rgb(221 227 234 / 0.70)",
+            borderColor: isDark
+              ? "rgb(37 51 66 / 0.60)"
+              : "rgb(221 227 234 / 0.80)",
           }}
         >
+          {/* Legal details (NIP / KRS / REGON) */}
           <div
-            className="flex flex-wrap gap-x-5 gap-y-1"
+            className="flex flex-wrap items-center gap-x-6 gap-y-2"
             style={{
               fontFamily: typography.fontFamily.mono,
-              fontSize: "1rem",
+              fontSize: typography.scale.sm.fontSize,
               lineHeight: "1.5",
-              color: isDark ? darkColors.neutral[400] : colors.neutral[500],
+              color: isDark ? darkColors.neutral[300] : colors.neutral[600],
             }}
           >
             <span>{t.kontakt.legal.nip}: {NIP}</span>
+            <span aria-hidden="true" className="hidden sm:inline text-neutral-400">&bull;</span>
             <span>{t.kontakt.legal.krs}: {KRS}</span>
+            <span aria-hidden="true" className="hidden sm:inline text-neutral-400">&bull;</span>
             <span>{t.kontakt.legal.regon}: {REGON}</span>
           </div>
 
-          <span
-            aria-hidden="true"
-            className="hidden sm:inline"
-            style={{
-              color: isDark ? darkColors.neutral[600] : colors.neutral[300],
-              fontSize: "0.6rem",
-            }}
-          >
-            &middot;
-          </span>
-
+          {/* Trust badge (Rzetelna Firma) */}
           <div
-            className="flex items-center gap-2"
+            className="flex items-center gap-2.5"
             style={{
               fontFamily: typography.fontFamily.sans,
-              fontSize: "1rem",
+              fontSize: typography.scale.sm.fontSize,
               lineHeight: "1.5",
-              color: isDark ? darkColors.neutral[400] : colors.neutral[500],
+              color: isDark ? darkColors.neutral[300] : colors.neutral[600],
             }}
           >
             <ShieldIcon
@@ -799,7 +609,7 @@ export function KontaktSection() {
                 {t.kontakt.trustBadge.badgeName}
               </span>
               {t.kontakt.trustBadge.badgeNameSuffix}
-              {" \u00b7 "}
+              {" \u2014 "}
               {t.kontakt.trustBadge.checkText}{" "}
               <a
                 href={RZETELNA_FIRMA_URL}
@@ -807,6 +617,7 @@ export function KontaktSection() {
                 rel="noopener noreferrer"
                 style={{
                   color: themeColors.primary.signal,
+                  fontWeight: typography.weight.medium,
                   textDecoration: "underline",
                   textDecorationColor: "transparent",
                   transition: `text-decoration-color ${transitions.duration.fast} ${transitions.easing.standard}`,
@@ -825,6 +636,7 @@ export function KontaktSection() {
             </span>
           </div>
         </div>
+
       </div>
     </section>
   );
