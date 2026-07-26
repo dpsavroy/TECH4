@@ -92,24 +92,6 @@ function ShieldIcon({ color }: { color: string }) {
   );
 }
 
-function MapDirectionsIcon({ color }: { color: string }) {
-  return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke={color}
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M3 11l19-9-9 19-2-8-8-2z" />
-    </svg>
-  );
-}
-
 function ExternalLinkIcon({ color }: { color: string }) {
   return (
     <svg
@@ -132,14 +114,14 @@ function ExternalLinkIcon({ color }: { color: string }) {
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
-const GOOGLE_MAPS_EMBED_URL =
-  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2443.5!2d20.8!3d52.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sTECH4+Sp.+z+o.o.%2C+ul.+Jana+Zamoyskiego+9%2C+05-080+Izabelin+B!5e0!3m2!1spl!2spl!4v1";
+const MAP_LAT = "52.28335881425612";
+const MAP_LNG = "20.82599052997835";
 
-const GOOGLE_MAPS_DIRECTIONS_URL =
-  "https://www.google.com/maps/dir/TECH4+Sp.+z+o.o.,+ul.+Jana+Zamoyskiego+9,+05-080+Izabelin+B";
+const GOOGLE_MAPS_EMBED_URL =
+  `https://www.google.com/maps?q=${MAP_LAT},${MAP_LNG}&z=16&output=embed`;
 
 const GOOGLE_MAPS_URL =
-  "https://www.google.com/maps/search/TECH4+Sp.+z+o.o.,+ul.+Jana+Zamoyskiego+9,+05-080+Izabelin+B";
+  `https://www.google.com/maps?q=${MAP_LAT},${MAP_LNG}`;
 
 const NIP = "5242750233";
 const KRS = "0000414891";
@@ -652,32 +634,7 @@ export function KontaktSection() {
                 />
               </div>
 
-              <div className="flex flex-wrap gap-3 mt-3">
-                <a
-                  href={GOOGLE_MAPS_DIRECTIONS_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5"
-                  style={{
-                    fontFamily: typography.fontFamily.sans,
-                    fontSize: typography.scale.xs.fontSize,
-                    lineHeight: typography.scale.xs.lineHeight,
-                    color: themeColors.primary.signal,
-                    textDecoration: "none",
-                    transition: `color ${transitions.duration.fast} ${transitions.easing.standard}`,
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.color =
-                      themeColors.primary.signalHover;
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.color =
-                      themeColors.primary.signal;
-                  }}
-                >
-                  <MapDirectionsIcon color="currentColor" />
-                  {t.kontakt.map.openInMaps}
-                </a>
+              <div className="mt-3">
                 <a
                   href={GOOGLE_MAPS_URL}
                   target="_blank"
@@ -706,8 +663,17 @@ export function KontaktSection() {
               </div>
             </div>
 
-            {/* ── Legal info + Trust badge (muted, no card border) ─────── */}
-            <div className="pt-2">
+            {/* ── Footer block: Legal info + Trust badge ────────────────── */}
+            <div
+              className="mt-2 pt-6 flex flex-col gap-4"
+              style={{
+                borderTopWidth: "1px",
+                borderTopStyle: "solid",
+                borderTopColor: isDark
+                  ? "rgb(37 51 66 / 0.60)"
+                  : "rgb(221 227 234 / 0.60)",
+              }}
+            >
               {/* Legal numbers */}
               <div
                 className="flex flex-wrap gap-x-4 gap-y-1"
@@ -716,7 +682,6 @@ export function KontaktSection() {
                   fontSize: typography.scale.xs.fontSize,
                   lineHeight: typography.scale.xs.lineHeight,
                   color: isDark ? darkColors.neutral[500] : colors.neutral[400],
-                  marginBottom: "1rem",
                 }}
               >
                 <span>{t.kontakt.legal.nip}: {NIP}</span>
