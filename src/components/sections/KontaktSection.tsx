@@ -282,11 +282,11 @@ export function KontaktSection() {
         </p>
 
         {/* ── Two-column layout ────────────────────────────────────────── */}
-        <div className="mt-14 grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 items-start">
+        <div className="mt-14 grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 items-stretch">
           {/* ── Form (3/5) ──────────────────────────────────────────────── */}
           <div
             data-kontakt-panel
-            className="lg:col-span-3 rounded-xl border p-8"
+            className="lg:col-span-3 rounded-xl border p-8 flex flex-col"
             style={{
               backgroundColor: isDark
                 ? "rgb(18 27 39 / 0.60)"
@@ -301,8 +301,8 @@ export function KontaktSection() {
               transition: `opacity 400ms ${transitions.easing.entrance}, transform 400ms ${transitions.easing.standard}`,
             }}
           >
-            <form action="#" method="post" noValidate>
-              <div className="flex flex-col gap-5">
+            <form action="#" method="post" noValidate className="flex-1 flex flex-col">
+              <div className="flex flex-col gap-5 flex-1">
                 {/* Name */}
                 <div>
                   <label
@@ -362,6 +362,7 @@ export function KontaktSection() {
                       ...inputBase,
                       resize: "vertical",
                       minHeight: "8rem",
+                      flex: 1,
                     }}
                   />
                 </div>
@@ -405,7 +406,7 @@ export function KontaktSection() {
           {/* ── Right column (2/5): contacts + departments + map + legal + badge ── */}
           <div
             data-kontakt-panel
-            className="lg:col-span-2 flex flex-col gap-8"
+            className="lg:col-span-2 flex flex-col gap-3"
             style={{
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? "translateY(0)" : "translateY(24px)",
@@ -512,17 +513,17 @@ export function KontaktSection() {
                   fontWeight: typography.weight.semibold,
                   letterSpacing: "0.04em",
                   textTransform: "uppercase",
-                  marginBottom: "0.75rem",
+                  marginBottom: "0.375rem",
                 }}
               >
                 {t.kontakt.departments.title}
               </h3>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {departmentCards.map((dept, i) => (
                   <div
                     key={i}
-                    className="rounded-lg border p-3"
+                    className="rounded-lg border px-3 py-2"
                     style={{
                       backgroundColor: isDark
                         ? "rgb(18 27 39 / 0.60)"
@@ -541,7 +542,7 @@ export function KontaktSection() {
                         lineHeight: typography.scale.sm.lineHeight,
                         color: themeColors.primary.ink,
                         fontWeight: typography.weight.semibold,
-                        marginBottom: "0.375rem",
+                        marginBottom: "0.125rem",
                       }}
                     >
                       {dept.label}
@@ -607,7 +608,7 @@ export function KontaktSection() {
                   fontWeight: typography.weight.semibold,
                   letterSpacing: "0.04em",
                   textTransform: "uppercase",
-                  marginBottom: "0.75rem",
+                  marginBottom: "0.375rem",
                 }}
               >
                 {t.kontakt.map.title}
@@ -625,7 +626,7 @@ export function KontaktSection() {
                 <iframe
                   src={GOOGLE_MAPS_EMBED_URL}
                   width="100%"
-                  height="220"
+                  height="200"
                   style={{ border: 0, display: "block" }}
                   allowFullScreen={false}
                   loading="lazy"
@@ -634,7 +635,7 @@ export function KontaktSection() {
                 />
               </div>
 
-              <div className="mt-3">
+              <div className="mt-2">
                 <a
                   href={GOOGLE_MAPS_URL}
                   target="_blank"
@@ -665,7 +666,7 @@ export function KontaktSection() {
 
             {/* ── Footer block: Legal info + Trust badge ────────────────── */}
             <div
-              className="mt-2 pt-6 flex flex-col gap-4"
+              className="mt-auto pt-4 flex flex-col gap-2"
               style={{
                 borderTopWidth: "1px",
                 borderTopStyle: "solid",
