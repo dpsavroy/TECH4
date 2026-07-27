@@ -3,14 +3,11 @@
 import { useTheme } from "@/components/theme/ThemeProvider";
 import { useTranslations } from "@/contexts/LocaleContext";
 import {
-  buttons,
   colors,
   darkColors,
-  darkShadows,
-  shadows,
-  transitions,
   typography,
 } from "@/styles/design-tokens";
+import ScanButton from "@/components/ui/ScanButton";
 import { TypedDescription } from "./TypedDescription";
 
 export function HeroContent({
@@ -21,7 +18,6 @@ export function HeroContent({
   const { theme } = useTheme();
   const t = useTranslations();
   const themeColors = theme === "dark" ? darkColors : colors;
-  const themeShadows = theme === "dark" ? darkShadows : shadows;
 
   return (
     <div className="flex flex-col text-left max-w-xl lg:max-w-2xl">
@@ -74,47 +70,12 @@ export function HeroContent({
 
       {/* Call to Actions */}
       <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-        <a
-          href="#kontakt"
-          className="inline-flex items-center justify-center rounded-full outline-none transition-all focus-visible:ring-3 text-center shadow-[0_0_0_rgba(18,217,67,0)] hover:bg-[#12D943] hover:dark:bg-[#12D943] hover:shadow-[0_0_28px_rgba(18,217,67,0.35)] active:scale-[0.98]"
-          style={{
-            minHeight: buttons.size.lg.height,
-            paddingInline: "2.25rem",
-            backgroundColor: colors.primary.signal,
-            color: colors.neutral[0],
-            fontSize: buttons.size.lg.fontSize,
-            fontWeight: typography.weight.medium,
-            transitionDuration: "300ms",
-            transitionTimingFunction: "ease",
-            ["--tw-ring-color" as string]: themeShadows.focus.replace(
-              "0 0 0 3px ",
-              "",
-            ),
-          }}
-        >
+        <ScanButton href="#kontakt" variant="solid">
           {t.hero.ctaPrimary}
-        </a>
-        <a
-          href="#uslugi"
-          className="inline-flex items-center justify-center rounded-full border outline-none transition-all focus-visible:ring-3 text-center hover:bg-neutral-100 hover:dark:bg-neutral-900 dark:border-neutral-800 active:scale-[0.98]"
-          style={{
-            minHeight: buttons.size.lg.height,
-            paddingInline: "2.25rem",
-            borderColor:
-              theme === "dark" ? darkColors.neutral[800] : colors.neutral[200],
-            color: theme === "dark" ? darkColors.neutral[300] : "#34433A",
-            fontSize: buttons.size.lg.fontSize,
-            fontWeight: typography.weight.medium,
-            transitionDuration: transitions.duration.fast,
-            transitionTimingFunction: transitions.easing.standard,
-            ["--tw-ring-color" as string]: themeShadows.focus.replace(
-              "0 0 0 3px ",
-              "",
-            ),
-          }}
-        >
+        </ScanButton>
+        <ScanButton href="#uslugi" variant="outline">
           {t.hero.ctaSecondary}
-        </a>
+        </ScanButton>
       </div>
     </div>
   );

@@ -11,6 +11,7 @@ import {
   transitions,
   typography,
 } from "@/styles/design-tokens";
+import ScanButton from "@/components/ui/ScanButton";
 
 // ─── Inline SVG icons ────────────────────────────────────────────────────────
 
@@ -293,30 +294,12 @@ export function HelpDeskSection() {
           >
             {t.helpdesk.formPlaceholder}
           </p>
-          <a
+          <ScanButton
             href={`mailto:${t.helpdesk.formCta.split(" ").at(-1)}`}
-            className="inline-flex items-center justify-center rounded-full"
-            style={{
-              minHeight: "2.75rem",
-              paddingInline: "1.5rem",
-              backgroundColor: colors.primary.signal,
-              color: colors.neutral[0],
-              fontSize: typography.scale.sm.fontSize,
-              fontWeight: typography.weight.medium,
-              fontFamily: typography.fontFamily.sans,
-              transition: `background-color ${transitions.duration.fast} ${transitions.easing.standard}`,
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.backgroundColor =
-                colors.primary.signalHover;
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.backgroundColor =
-                colors.primary.signal;
-            }}
+            variant="solid"
           >
             {t.helpdesk.formCta}
-          </a>
+          </ScanButton>
         </div>
       </div>
     </section>

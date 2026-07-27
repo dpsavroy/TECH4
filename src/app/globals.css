@@ -24,3 +24,78 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
+
+/* ── ScanButton ──────────────────────────────────────────────────────────── */
+
+.scan-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 34px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #eaf3e0;
+  background: rgba(35, 135, 11, 0.06);
+  border: 1px solid rgba(35, 135, 11, 0.4);
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.25s ease, background 0.25s ease;
+  white-space: nowrap;
+}
+
+.scan-btn[data-variant='solid'] {
+  background: #23870b;
+  border-color: #23870b;
+  color: #ffffff;
+}
+
+.scan-btn::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 40%;
+  top: -40%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(74, 222, 128, 0.25),
+    transparent
+  );
+  animation: scan 2.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.scan-btn[data-variant='solid']::after {
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+}
+
+.scan-btn:hover {
+  border-color: rgba(35, 135, 11, 0.7);
+  background: rgba(35, 135, 11, 0.12);
+}
+
+.scan-btn[data-variant='solid']:hover {
+  background: #1c6e09;
+  border-color: #1c6e09;
+}
+
+@keyframes scan {
+  0%   { top: -40%; }
+  50%  { top: 100%; }
+  100% { top: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scan-btn::after {
+    animation: none;
+  }
+}
