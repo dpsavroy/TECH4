@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useEffect, useRef, useState } from 'react';
 
@@ -38,10 +38,6 @@ export default function LogoIntro() {
   const overlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (sessionStorage.getItem('tech4-intro-shown')) {
-      setPhase('done');
-      return;
-    }
     document.body.style.overflow = 'hidden';
 
     // Phase: reveal
@@ -93,7 +89,7 @@ export default function LogoIntro() {
 
     const tagline = row.parentElement?.querySelector('.tagline') as HTMLElement | null;
     if (tagline) {
-      tagline.style.transition = 'opacity 0.3s ease';
+      tagline.style.transition = 'opacity 0.8s ease';
       tagline.style.opacity = '0';
     }
 
@@ -105,7 +101,6 @@ export default function LogoIntro() {
       }
       setTimeout(() => {
         document.body.style.overflow = '';
-        sessionStorage.setItem('tech4-intro-shown', '1');
         setPhase('done');
       }, 350);
     };
