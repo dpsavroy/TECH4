@@ -134,18 +134,31 @@ export function Header() {
           }}
           aria-label="TECH4 strona główna"
         >
-          <div
-            id="site-logo"
-            className="block select-none"
-            style={{
-              width: "172px",
-              height: "36px",
-              backgroundImage: "url('/logo/tech4-logo.png')",
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "202.35px 73.41px",
-              backgroundPosition: "-18.47px -10.24px",
-            }}
-          />
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '2px' }}>
+            <div
+              id="site-logo"
+              className="block select-none"
+              style={{
+                width: "172px",
+                height: "36px",
+                backgroundImage: "url('/logo/tech4-logo.png')",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "202.35px 73.41px",
+                backgroundPosition: "-18.47px -10.24px",
+              }}
+            />
+            <div
+              id="site-tagline"
+              style={{
+                width: 140,
+                height: Math.round(140 * (31 / 686)),
+                backgroundImage: "url('/logo/tech4-logo.png')",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: `${140 / 686 * 860}px ${140 / 686 * 312}px`,
+                backgroundPosition: `${-110 * (140 / 686)}px ${-246 * (140 / 686)}px`,
+              }}
+            />
+          </div>
         </Link>
 
         {/* ── Desktop navigation — column 2 (1fr, centered) ───────────── */}
@@ -268,17 +281,29 @@ export function Header() {
           >
             {/* Panel header */}
             <div className="flex h-12 items-center justify-between">
-              <div
-                className="block select-none"
-                style={{
-                  width: "172px",
-                  height: "36px",
-                  backgroundImage: "url('/logo/tech4-logo.png')",
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "202.35px 73.41px",
-                  backgroundPosition: "-18.47px -10.24px",
-                }}
-              />
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '2px' }}>
+                <div
+                  className="block select-none"
+                  style={{
+                    width: "172px",
+                    height: "36px",
+                    backgroundImage: "url('/logo/tech4-logo.png')",
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "202.35px 73.41px",
+                    backgroundPosition: "-18.47px -10.24px",
+                  }}
+                />
+                <div
+                  style={{
+                    width: 140,
+                    height: Math.round(140 * (31 / 686)),
+                    backgroundImage: "url('/logo/tech4-logo.png')",
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: `${140 / 686 * 860}px ${140 / 686 * 312}px`,
+                    backgroundPosition: `${-110 * (140 / 686)}px ${-246 * (140 / 686)}px`,
+                  }}
+                />
+              </div>
               <div className="flex items-center gap-2">
                 <LanguageSwitcher />
                 <ThemeToggle />

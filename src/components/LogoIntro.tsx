@@ -88,7 +88,21 @@ export default function LogoIntro() {
     row.style.transform = `translate(${dx}px, ${dy}px) scale(${scale})`;
 
     const tagline = row.parentElement?.querySelector('.tagline') as HTMLElement | null;
-    if (tagline) {
+    const taglineTarget = document.getElementById('site-tagline');
+
+    if (tagline && taglineTarget) {
+      const tStart = tagline.getBoundingClientRect();
+      const tEnd = taglineTarget.getBoundingClientRect();
+
+      const tScale = tEnd.width / tStart.width;
+      const tdx = tEnd.left + tEnd.width / 2 - (tStart.left + tStart.width / 2);
+      const tdy = tEnd.top + tEnd.height / 2 - (tStart.top + tStart.height / 2);
+
+      tagline.style.transformOrigin = 'center center';
+      tagline.style.transition = 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
+      tagline.style.transform = `translate(${tdx}px, ${tdy}px) scale(${tScale})`;
+    } else if (tagline) {
+      // fallback
       tagline.style.transition = 'opacity 0.8s ease';
       tagline.style.opacity = '0';
     }
