@@ -25,77 +25,70 @@ body {
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
-/* ── ScanButton ──────────────────────────────────────────────────────────── */
+/* ── TraceButton ─────────────────────────────────────────────────────────── */
 
-.scan-btn {
+.trace-btn {
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
   padding: 14px 34px;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 15px;
   font-weight: 500;
   color: #eaf3e0;
-  background: rgba(35, 135, 11, 0.06);
-  border: 1px solid rgba(35, 135, 11, 0.4);
-  overflow: hidden;
+  background: #17201a;
+  border: none;
   cursor: pointer;
   text-decoration: none;
-  transition: border-color 0.25s ease, background 0.25s ease;
-  white-space: nowrap;
+  overflow: visible;
 }
 
-.scan-btn[data-variant='solid'] {
+.trace-btn[data-variant='solid'] {
   background: #23870b;
-  border-color: #23870b;
-  color: #ffffff;
+  color: #fff;
 }
 
-.scan-btn::after {
-  content: '';
+.trace-btn svg {
   position: absolute;
-  left: 0;
-  right: 0;
-  height: 40%;
-  top: -40%;
-  background: linear-gradient(
-    180deg,
-    transparent,
-    rgba(74, 222, 128, 0.25),
-    transparent
-  );
-  animation: scan 2.8s ease-in-out infinite;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
+  overflow: visible;
 }
 
-.scan-btn[data-variant='solid']::after {
-  background: linear-gradient(
-    180deg,
-    transparent,
-    rgba(255, 255, 255, 0.35),
-    transparent
-  );
+.trace-btn .trace-base {
+  fill: none;
+  stroke: rgba(35, 135, 11, 0.25);
+  stroke-width: 1.5;
 }
 
-.scan-btn:hover {
-  border-color: rgba(35, 135, 11, 0.7);
-  background: rgba(35, 135, 11, 0.12);
+.trace-btn[data-variant='solid'] .trace-base {
+  stroke: rgba(255, 255, 255, 0.25);
 }
 
-.scan-btn[data-variant='solid']:hover {
-  background: #1c6e09;
-  border-color: #1c6e09;
+.trace-btn .trace-glow {
+  fill: none;
+  stroke: #4ade80;
+  stroke-width: 2;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 4px #23870b) drop-shadow(0 0 8px rgba(35, 135, 11, 0.6));
+  stroke-dasharray: 40 360;
+  animation: trace 3s linear infinite;
 }
 
-@keyframes scan {
-  0%   { top: -40%; }
-  50%  { top: 100%; }
-  100% { top: 100%; }
+.trace-btn[data-variant='solid'] .trace-glow {
+  stroke: #ffffff;
+  filter: drop-shadow(0 0 4px #ffffff) drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+}
+
+@keyframes trace {
+  to {
+    stroke-dashoffset: -400;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .scan-btn::after {
+  .trace-btn .trace-glow {
     animation: none;
   }
 }

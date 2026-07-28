@@ -11,7 +11,7 @@ import {
   transitions,
   typography,
 } from "@/styles/design-tokens";
-import ScanButton from "@/components/ui/ScanButton";
+import TraceButton from "@/components/ui/TraceButton";
 
 // ─── Inline SVG icons ────────────────────────────────────────────────────────
 
@@ -294,12 +294,12 @@ export function HelpDeskSection() {
           >
             {t.helpdesk.formPlaceholder}
           </p>
-          <ScanButton
+          <TraceButton
             href={`mailto:${t.helpdesk.formCta.split(" ").at(-1)}`}
             variant="solid"
           >
             {t.helpdesk.formCta}
-          </ScanButton>
+          </TraceButton>
         </div>
       </div>
     </section>

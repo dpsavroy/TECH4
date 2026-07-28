@@ -7,7 +7,7 @@ import {
   darkColors,
   typography,
 } from "@/styles/design-tokens";
-import ScanButton from "@/components/ui/ScanButton";
+import TraceButton from "@/components/ui/TraceButton";
 import { TypedDescription } from "./TypedDescription";
 
 export function HeroContent({
@@ -70,12 +70,12 @@ export function HeroContent({
 
       {/* Call to Actions */}
       <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-        <ScanButton href="#kontakt" variant="solid">
+        <TraceButton href="#kontakt" variant="solid">
           {t.hero.ctaPrimary}
-        </ScanButton>
-        <ScanButton href="#uslugi" variant="outline">
+        </TraceButton>
+        <TraceButton href="#uslugi" variant="outline">
           {t.hero.ctaSecondary}
-        </ScanButton>
+        </TraceButton>
       </div>
     </div>
   );
