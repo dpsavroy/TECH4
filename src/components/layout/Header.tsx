@@ -134,18 +134,18 @@ export function Header() {
           }}
           aria-label="TECH4 strona główna"
         >
-          <span
+          <div
+            id="site-logo"
             className="block select-none"
             style={{
-              color: themeColors.primary.ink,
-              fontSize: typography.scale.xl.fontSize,
-              fontWeight: typography.weight.semibold,
-              letterSpacing: "0.08em",
-              lineHeight: "1",
+              width: "172px",
+              height: "36px",
+              backgroundImage: "url('/logo/tech4-logo.png')",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "202.35px 73.41px",
+              backgroundPosition: "-18.47px -10.24px",
             }}
-          >
-            TECH4
-          </span>
+          />
         </Link>
 
         {/* ── Desktop navigation — column 2 (1fr, centered) ───────────── */}
@@ -268,18 +268,17 @@ export function Header() {
           >
             {/* Panel header */}
             <div className="flex h-12 items-center justify-between">
-              <span
+              <div
                 className="block select-none"
                 style={{
-                  color: themeColors.primary.ink,
-                  fontSize: typography.scale.xl.fontSize,
-                  fontWeight: typography.weight.semibold,
-                  letterSpacing: "0.08em",
-                  lineHeight: "1",
+                  width: "172px",
+                  height: "36px",
+                  backgroundImage: "url('/logo/tech4-logo.png')",
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "202.35px 73.41px",
+                  backgroundPosition: "-18.47px -10.24px",
                 }}
-              >
-                TECH4
-              </span>
+              />
               <div className="flex items-center gap-2">
                 <LanguageSwitcher />
                 <ThemeToggle />

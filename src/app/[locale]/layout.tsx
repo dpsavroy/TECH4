@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Header } from "@/components/layout/Header";
+import LogoIntro from "@/components/LogoIntro";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { LocaleProvider } from "@/contexts/LocaleContext";
 import type { Locale } from "@/contexts/LocaleContext";
@@ -86,6 +87,7 @@ export default async function LocaleLayout({
     >
       <body className="min-h-full flex flex-col">
         <script dangerouslySetInnerHTML={{ __html: themeInitializationScript }} />
+        <LogoIntro />
         <LocaleProvider locale={validLocale}>
           <ThemeProvider>
             <Header />
