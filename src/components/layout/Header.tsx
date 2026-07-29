@@ -150,12 +150,14 @@ export function Header() {
             <div
               id="site-tagline"
               style={{
-                width: 140,
-                height: Math.round(140 * (31 / 686)),
+                width: 210,
+                height: Math.round(210 * (31 / 686)),
                 backgroundImage: "url('/logo/tech4-logo.png')",
                 backgroundRepeat: "no-repeat",
-                backgroundSize: `${140 / 686 * 860}px ${140 / 686 * 312}px`,
-                backgroundPosition: `${-110 * (140 / 686)}px ${-246 * (140 / 686)}px`,
+                backgroundSize: `${210 / 686 * 860}px ${210 / 686 * 312}px`,
+                backgroundPosition: `${-110 * (210 / 686)}px ${-246 * (210 / 686)}px`,
+                marginTop: 6,
+                marginLeft: 14,
               }}
             />
           </div>
@@ -295,12 +297,14 @@ export function Header() {
                 />
                 <div
                   style={{
-                    width: 140,
-                    height: Math.round(140 * (31 / 686)),
+                    width: 210,
+                    height: Math.round(210 * (31 / 686)),
                     backgroundImage: "url('/logo/tech4-logo.png')",
                     backgroundRepeat: "no-repeat",
-                    backgroundSize: `${140 / 686 * 860}px ${140 / 686 * 312}px`,
-                    backgroundPosition: `${-110 * (140 / 686)}px ${-246 * (140 / 686)}px`,
+                    backgroundSize: `${210 / 686 * 860}px ${210 / 686 * 312}px`,
+                    backgroundPosition: `${-110 * (210 / 686)}px ${-246 * (210 / 686)}px`,
+                    marginTop: 6,
+                    marginLeft: 14,
                   }}
                 />
               </div>
