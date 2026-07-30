@@ -1,30 +1,30 @@
 # TECH4 2.0
 
-## Project Vision
+## Wizja Projektu
 
-Status: Draft
+Status: Szkic (Draft)
 
-Last updated: 2026-07-08
+Ostatnia aktualizacja: 2026-07-08
 
-## Goal
+## Cel
 
-To create the best website for a building systems integration company in Europe.
+Stworzenie najlepszej strony internetowej dla firmy integrującej systemy budynkowe w Europie.
 
-The website must immediately communicate trust, technological excellence and predictability.
+Strona musi natychmiast komunikować zaufanie, doskonałość technologiczną i przewidywalność.
 
-It should clearly demonstrate how TECH4 transforms independent engineering systems into one intelligent building ecosystem.
+Powinna jasno pokazywać, jak TECH4 przekształca niezależne systemy inżynieryjne w jeden inteligentny ekosystem budynku.
 
-## Mission
+## Misja
 
-Create a premium digital experience that explains complex engineering through simple, beautiful and interactive visuals.
+Stworzenie doświadczenia cyfrowego premium, które wyjaśnia złożoną inżynierię poprzez proste, piękne i interaktywne wizualizacje.
 
-## Success Criteria
+## Kryteria Sukcesu
 
-- Visitor understands what TECH4 does within 5 seconds.
-- Visitor trusts TECH4 as an engineering partner.
-- Visitor wants to contact the company.
-- The website becomes a reference for the building automation industry.
+- Odwiedzający rozumie, czym zajmuje się TECH4, w ciągu 5 sekund.
+- Odwiedzający ufa TECH4 jako partnerowi inżynieryjnemu.
+- Odwiedzający chce skontaktować się z firmą.
+- Strona staje się punktem odniesienia (reference) dla branży automatyki budynkowej.
 
-## Decisions
+## Decyzje
 
-(To be filled during the project.)
+(Do uzupełnienia w trakcie projektu.)
