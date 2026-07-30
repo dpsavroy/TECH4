@@ -1,125 +1,125 @@
-# Brand Core
+# Rdzeń Marki (Brand Core)
 
-Status: Draft
+Status: Szkic (Draft)
 
-Last Updated: 2026-07-08
-
----
-
-# Why TECH4 Exists
-
-TECH4 exists to transform independent engineering systems into a reliable and manageable building solution.
+Ostatnia aktualizacja: 2026-07-08
 
 ---
 
-# Mission
+# Dlaczego istnieje TECH4
 
-To design, integrate and support intelligent building engineering systems throughout their entire lifecycle.
-
----
-
-# Vision
-
-To set the European standard for intelligent building systems integration.
+TECH4 istnieje, aby przekształcać niezależne systemy inżynieryjne w niezawodne i łatwe w zarządzaniu rozwiązanie budynkowe.
 
 ---
 
-# Core Idea
+# Misja
 
-TECH4 integrates building engineering systems into one reliable and manageable solution.
-
----
-
-# Brand Promise
-
-We make complex buildings predictable.
+Projektowanie, integracja i wsparcie inteligentnych systemów inżynieryjnych budynku w całym cyklu ich życia.
 
 ---
 
-# Primary Visual Concept
+# Wizja
 
-## Living Digital Building
-
-The building is presented as a living digital organism.
-
-Its engineering systems work together as one coordinated solution, regardless of whether they operate on a single platform or on multiple specialized systems.
-
-The visual concept communicates intelligence, coordination and engineering excellence — not a single software platform.
+Wyznaczenie europejskiego standardu dla integracji inteligentnych systemów budynkowych.
 
 ---
 
-# Emotional Response
+# Główna Idea
 
-Within the first five seconds every visitor should feel:
-
-- Trust
-- Control
-- Predictability
-- Engineering Excellence
+TECH4 integruje systemy inżynieryjne budynku w jedno niezawodne i łatwe w zarządzaniu rozwiązanie.
 
 ---
 
-# Brand Personality
+# Obietnica Marki
 
-- Professional
-- Intelligent
-- Reliable
-- Modern
-- Engineering First
+Sprawiamy, że złożone budynki stają się przewidywalne.
 
 ---
 
-# Brand Values
+# Główny Koncept Wizualny
 
-- Engineering Excellence
-- Responsibility
-- Predictability
-- Long-Term Partnership
-- Continuous Innovation
+## Żywy Cyfrowy Budynek (Living Digital Building)
 
----
+Budynek jest przedstawiany jako żywy cyfrowy organizm.
 
-# Tagline
+Jego systemy inżynieryjne współpracują ze sobą jako jedno skoordynowane rozwiązanie, niezależnie od tego, czy działają na jednej platformie, czy w wielu specjalistycznych systemach.
 
-Where Buildings Become Intelligent.
+Koncept wizualny komunikuje inteligencję, koordynację i doskonałość inżynieryjną — a nie pojedynczą platformę oprogramowania.
 
 ---
 
-# Positioning Statement
+# Reakcja Emocjonalna
 
-TECH4 is an engineering partner that designs, integrates and supports intelligent building engineering systems.
+W ciągu pierwszych pięciu sekund każdy odwiedzający powinien poczuć:
 
----
-
-# What We Are NOT
-
-- We are not only a CCTV company.
-- We are not only a BMS contractor.
-- We are not a hardware reseller.
-- We are not just another systems integrator.
-
-We are an engineering partner.
+- Zaufanie
+- Kontrolę
+- Przewidywalność
+- Doskonałość Inżynieryjną
 
 ---
 
-# Approved Project Decisions
+# Osobowość Marki
 
-## Primary Audience
+- Profesjonalna
+- Inteligentna
+- Niezawodna
+- Nowoczesna
+- Inżynieria na pierwszym miejscu
 
-Business decision makers.
+---
 
-## Primary Visual Concept
+# Wartości Marki
 
-Living Digital Building.
+- Doskonałość Inżynieryjna
+- Odpowiedzialność
+- Przewidywalność
+- Długoterminowe Partnerstwo
+- Ciągłe Innowacje
 
-## Core Business Message
+---
 
-Predictability.
+# Slogan (Tagline)
 
-## Primary Emotional Message
+Tam, Gdzie Budynki Stają Się Inteligentne.
 
-Engineering Excellence.
+---
 
-## Commercial Message
+# Oświadczenie o Pozycjonowaniu (Positioning Statement)
 
-One engineering partner from concept to long-term support.
+TECH4 to partner inżynieryjny, który projektuje, integruje i wspiera inteligentne systemy inżynieryjne budynków.
+
+---
+
+# Czym NIE Jesteśmy
+
+- Nie jesteśmy tylko firmą od CCTV.
+- Nie jesteśmy tylko wykonawcą BMS.
+- Nie jesteśmy sprzedawcą sprzętu.
+- Nie jesteśmy po prostu kolejnym integratorem systemów.
+
+Jesteśmy partnerem inżynieryjnym.
+
+---
+
+# Zatwierdzone Decyzje Projektowe
+
+## Główna Grupa Docelowa
+
+Osoby decyzyjne w biznesie (Business decision makers).
+
+## Główny Koncept Wizualny
+
+Żywy Cyfrowy Budynek (Living Digital Building).
+
+## Główny Przekaz Biznesowy
+
+Przewidywalność.
+
+## Główny Przekaz Emocjonalny
+
+Doskonałość Inżynieryjna.
+
+## Przekaz Komercyjny
+
+Jeden partner inżynieryjny od koncepcji po długoterminowe wsparcie.
