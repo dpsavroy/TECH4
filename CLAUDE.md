@@ -120,3 +120,15 @@ Utrzymuj komponenty małe i czytelne.
 - **Kontekst marki:** Szukaj informacji o marce i wytycznych wizualnych w folderze `docs/branding/`.
 - **Architektura:** Decyzje architektoniczne i strukturalne znajdują się w `docs/architecture/`.
 - **Konflikty:** Kategoryczny zakaz pracy dwóch agentów (lub agenta i człowieka) na tym samym pliku lub na tej samej gałęzi jednocześnie. Sprawdzaj aktywne zadania/gałęzie.
+
+## Dodatkowo dla Claude (Lider Architektoniczny)
+
+- **Aktualny brand green:** `#23870b`
+- **Mapowanie kolorów systemów:**
+  - HVAC: `#3B82F6`
+  - SAP/fire: `#EF4444`
+  - KD: `#22C55E`
+  - CCTV: `#8B5CF6`
+  - BAS: `#F97316`
+  - BMS: `#23870B`
+- **Krótka historia (ważne dla kontekstu):** Został naprawiony błąd niezgodności typu `SystemType` między komponentami `HeroVisual.tsx` a `BuildingSchematic.tsx`. Pamiętaj o spójności typów.

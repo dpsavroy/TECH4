@@ -1,88 +1,88 @@
-# Target Audience
+# Grupa Docelowa
 
-## Primary Audience
+## Główna Grupa Odbiorców
 
-### 1. Commercial Property Owner
+### 1. Właściciel Nieruchomości Komercyjnych
 
-Examples:
-- Business centers
-- Office buildings
-- Commercial real estate
+Przykłady:
+- Centra biznesowe
+- Budynki biurowe
+- Nieruchomości komercyjne
 
-Goals:
-- Increase property value
-- Reduce operating costs
-- Ensure long-term reliability
-- Work with one trusted engineering partner
-
----
-
-### 2. Office Owner / Office Tenant
-
-Examples:
-- Companies renting office space
-- Companies owning office space
-
-Typical needs:
-- Access Control
-- CCTV
-- Intrusion Alarm
-- Networking
-- Smart Office
+Cele:
+- Wzrost wartości nieruchomości
+- Redukcja kosztów operacyjnych
+- Zapewnienie długoterminowej niezawodności
+- Współpraca z jednym zaufanym partnerem inżynieryjnym
 
 ---
 
-### 3. Industrial Facility Owner
+### 2. Właściciel Biura / Najemca Biura
 
-Examples:
-- Manufacturing plants
-- Warehouses
-- Logistics centers
+Przykłady:
+- Firmy wynajmujące powierzchnie biurowe
+- Firmy posiadające powierzchnie biurowe
 
-Typical needs:
-- Building Automation
+Typowe potrzeby:
+- Kontrola Dostępu (Access Control / KD)
+- Telewizja Przemysłowa (CCTV)
+- System Sygnalizacji Włamania i Napadu (Intrusion Alarm)
+- Sieci LAN
+- Inteligentne Biuro (Smart Office)
+
+---
+
+### 3. Właściciel Obiektu Przemysłowego
+
+Przykłady:
+- Zakłady produkcyjne
+- Magazyny
+- Centra logistyczne
+
+Typowe potrzeby:
+- Automatyka Budynkowa
 - HVAC
-- CCTV
-- Fire Alarm
-- Energy Management
+- Telewizja Przemysłowa (CCTV)
+- System Sygnalizacji Pożaru (SAP / Fire Alarm)
+- Zarządzanie Energią (Energy Management)
 
 ---
 
 ### 4. Facility Manager / Technical Manager
 
-Goals:
-- Reliable operation
-- Fast service
-- Centralized management
-- Predictable maintenance
+Cele:
+- Niezawodne działanie
+- Szybki serwis
+- Scentralizowane zarządzanie
+- Przewidywalna konserwacja
 
 ---
 
-### 5. General Contractor
+### 5. Generalny Wykonawca
 
-Goals:
-- One engineering partner
-- Predictable delivery
-- No conflicts between subcontractors
-
----
-
-# Core Customer Problem
-
-Customers do not want engineering systems.
-
-They want:
-
-- Predictability
-- Reliability
-- One responsible partner
-- Reduced risk
-- Long-term support
+Cele:
+- Jeden partner inżynieryjny
+- Przewidywalna dostawa
+- Brak konfliktów między podwykonawcami
 
 ---
 
-# Decision
+# Główny Problem Klienta
 
-The website will primarily speak to business decision makers.
+Klienci nie chcą systemów inżynieryjnych.
 
-Technical details will support the decision, not dominate it.
+Oni chcą:
+
+- Przewidywalności
+- Niezawodności
+- Jednego odpowiedzialnego partnera
+- Zmniejszonego ryzyka
+- Długoterminowego wsparcia
+
+---
+
+# Decyzja
+
+Strona będzie przede wszystkim przemawiać do osób decyzyjnych w biznesie.
+
+Szczegóły techniczne będą wspierać decyzję, a nie ją dominować.
