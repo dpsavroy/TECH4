@@ -1,114 +1,114 @@
-# TECH4 Project AI Rules
+# Zasady AI dla Projektu TECH4
 
-## Mission
+## Misja
 
-Build one of the best building engineering company websites in Europe.
+Zbudowanie jednej z najlepszych stron internetowych firmy inżynierii budowlanej w Europie.
 
-The goal is not visual effects.
+Celem nie są efekty wizualne.
 
-The goal is trust, engineering excellence and premium quality.
+Celem jest zaufanie, doskonałość inżynieryjna i jakość premium.
 
-## Design Philosophy
+## Filozofia Designu
 
-Minimal.
+Minimalizm.
 
 Premium.
 
-Engineering-first.
+Inżynieria na pierwszym miejscu.
 
-Every animation must have a purpose.
+Każda animacja musi mieć cel.
 
-Never add animation just because it looks cool.
+Nigdy nie dodawaj animacji tylko dlatego, że wygląda fajnie.
 
-## Technical Rules
+## Zasady Techniczne
 
-- Keep components clean.
-- Prefer reusable components.
-- Keep accessibility in mind.
-- Use TypeScript everywhere.
-- Use Tailwind CSS.
-- Explain major architectural decisions before implementing them.
+- Utrzymuj czystość komponentów.
+- Preferuj komponenty wielokrotnego użytku (reusable).
+- Pamiętaj o dostępności (accessibility).
+- Używaj TypeScript wszędzie.
+- Używaj Tailwind CSS.
+- Wyjaśnij główne decyzje architektoniczne przed ich wdrożeniem.
 
-## Working Rules
+## Zasady Pracy
 
-Never make large design decisions without asking.
+Nigdy nie podejmuj dużych decyzji projektowych bez pytania.
 
-Prefer small iterations.
+Preferuj małe iteracje.
 
-Always explain what files are changed.
+Zawsze wyjaśniaj, jakie pliki są zmieniane.
 
-Never delete documentation.
+Nigdy nie usuwaj dokumentacji.
 
-Preserve the docs folder.
+Zachowaj folder docs.
 
-Never overwrite existing work unless requested.
+Nigdy nie nadpisuj istniejącej pracy bez wyraźnej prośby.
 
-## Visual Style
+## Styl Wizualny
 
-Inspired by Apple, Stripe, Linear and premium engineering companies.
+Zainspirowany przez Apple, Stripe, Linear i firmy inżynieryjne premium.
 
-No gaming aesthetics.
+Brak estetyki gamingowej.
 
-No cyberpunk.
+Brak cyberpunku.
 
-No unnecessary glowing effects.
+Brak niepotrzebnych efektów świecenia.
 
-The building should feel intelligent, calm and reliable.
+Budynek powinien sprawiać wrażenie inteligentnego, spokojnego i niezawodnego.
 
-Status: Approved
+Status: Zatwierdzony
 
-## Documentation
+## Dokumentacja
 
-Before making architectural or design decisions, always review the documentation inside the /docs folder.
+Przed podjęciem decyzji architektonicznych lub projektowych zawsze sprawdzaj dokumentację w folderze /docs.
 
-Project documentation is the single source of truth.
+Dokumentacja projektu jest jedynym źródłem prawdy.
 
-If documentation conflicts with assumptions, documentation wins.
+Jeśli dokumentacja jest sprzeczna z założeniami, wygrywa dokumentacja.
 
-## Decision Making
+## Podejmowanie Decyzji
 
-Never invent new features, pages or functionality.
+Nigdy nie wymyślaj nowych funkcji, stron ani funkcjonalności.
 
-If something is unclear, ask before implementing.
+Jeśli coś jest niejasne, zapytaj przed wdrożeniem.
 
-Do not reinterpret documented decisions.
+Nie interpretuj na nowo udokumentowanych decyzji.
 
-## Engineering Accuracy
+## Dokładność Inżynieryjna
 
-Marketing must never contradict engineering reality.
+Marketing nigdy nie może przeczyć rzeczywistości inżynieryjnej.
 
-Never describe engineering systems in a technically incorrect way.
+Nigdy nie opisuj systemów inżynieryjnych w sposób technicznie niepoprawny.
 
-## Brand
+## Marka
 
-The core idea of the company is:
+Główną ideą firmy jest:
 
-TECH4 integrates building engineering systems into one reliable and manageable solution.
+TECH4 integruje systemy inżynieryjne budynku w jedno niezawodne i łatwe w zarządzaniu rozwiązanie.
 
-The Hero message is:
+Główna wiadomość (Hero message) to:
 
-Where Buildings Become Intelligent.
+Tam, Gdzie Budynki Stają Się Inteligentne.
 
-## Components
+## Komponenty
 
-Prefer reusable components.
+Preferuj komponenty wielokrotnego użytku.
 
-## Performance
+## Wydajność
 
-Optimize for performance.
+Optymalizuj pod kątem wydajności.
 
-Avoid unnecessary JavaScript.
+Unikaj niepotrzebnego JavaScript.
 
-Animations must remain smooth on mid-range hardware.
+Animacje muszą pozostać płynne na sprzęcie średniej klasy.
 
-## Before Coding
+## Przed Kodowaniem
 
-Before implementing major UI sections, first describe the implementation plan.
+Przed wdrożeniem głównych sekcji UI najpierw opisz plan wdrożenia.
 
-Wait for approval.
+Poczekaj na zatwierdzenie.
 
-Only then write code.
+Dopiero wtedy pisz kod.
 
-Avoid duplicate code.
+Unikaj duplikacji kodu.
 
-Keep components small and readable.
+Utrzymuj komponenty małe i czytelne.
