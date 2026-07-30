@@ -1,36 +1,38 @@
-To jest projekt [Next.js](https://nextjs.org) zainicjowany za pomocą [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TECH4
 
-## Jak zacząć
+## Krótki opis projektu
 
-Najpierw uruchom serwer deweloperski:
+TECH4 to strona internetowa B2B dla firmy inżynieryjnej, specjalizującej się w integracji systemów budynkowych takich jak: BMS, BAS, CCTV, SAP, KD oraz HVAC. Głównym celem jest komunikacja zaufania, doskonałości inżynieryjnej i jakości premium.
+
+## Stack technologiczny
+
+- **Framework:** Next.js
+- **Język:** TypeScript
+
+## Jak uruchomić lokalnie
+
+Najpierw zainstaluj zależności:
+
+```bash
+npm install
+```
+
+Następnie uruchom serwer deweloperski:
 
 ```bash
 npm run dev
-# lub
-yarn dev
-# lub
-pnpm dev
-# lub
-bun dev
 ```
 
 Otwórz [http://localhost:3000](http://localhost:3000) w swojej przeglądarce, aby zobaczyć wynik.
 
-Możesz zacząć edytować stronę modyfikując `app/page.tsx`. Strona odświeży się automatycznie podczas edycji pliku.
+## Struktura folderów
 
-Ten projekt używa [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) aby automatycznie optymalizować i ładować [Geist](https://vercel.com/font), nową rodzinę czcionek dla Vercel.
+- `app/` - główna logika routingu i strony
+- `components/` - komponenty wielokrotnego użytku (UI, sekcje)
+- `public/` - zasoby statyczne
+- `docs/` - dokumentacja projektu i wytyczne architektoniczne
 
-## Dowiedz się więcej
+## Przydatne linki
 
-Aby dowiedzieć się więcej o Next.js, sprawdź poniższe zasoby:
-
-- [Dokumentacja Next.js](https://nextjs.org/docs) - poznaj funkcje i API Next.js.
-- [Nauka Next.js](https://nextjs.org/learn) - interaktywny samouczek Next.js.
-
-Możesz odwiedzić [repozytorium GitHub Next.js](https://github.com/vercel/next.js) - twoje opinie i kontrybucje są mile widziane!
-
-## Wdrożenie na Vercel
-
-Najprostszym sposobem na wdrożenie twojej aplikacji Next.js jest użycie [Platformy Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) od twórców Next.js.
-
-Sprawdź naszą [dokumentację wdrożeniową Next.js](https://nextjs.org/docs/app/building-your-application/deploying) po więcej szczegółów.
+- **Link do wdrożenia:** [https://tech-4-gamma.vercel.app](https://tech-4-gamma.vercel.app)
+- **Link do repozytorium:** [https://github.com/dpsavroy/TECH4](https://github.com/dpsavroy/TECH4)
