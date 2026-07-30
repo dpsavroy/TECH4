@@ -322,80 +322,84 @@ function SystemStory({
     <div
       data-system-story-position
       className={[
-        'pointer-events-none absolute z-30 w-52',
+        'pointer-events-none absolute z-30 w-52 h-full top-0',
         // Horizontal: left at xl (right column occupied by SystemCards), right at lg/md
         'right-0 xl:right-auto xl:left-0',
       ].join(' ')}
       style={{
         // Spread the story card over the same top-to-bottom order as SystemCards.
         // clamp keeps its center inside the building bounds at both ends.
-        top: `clamp(7.5rem, ${verticalProgress * 100}%, calc(100% - 7.5rem))`,
-        transform: 'translateY(-50%)',
-        transition: `top ${STORY_TRANSITION_MS}ms cubic-bezier(.16, 1, .3, 1)`,
+        transform: `translateY(clamp(7.5rem, ${verticalProgress * 100}%, calc(100% - 7.5rem)))`,
+        transition: `transform ${STORY_TRANSITION_MS}ms cubic-bezier(.16, 1, .3, 1)`,
       }}
     >
-      <article
-        data-system-story
-        className="story-enter overflow-hidden border sm:backdrop-blur-sm"
-        style={{
-          borderRadius: radius.md,
-          backgroundColor: isDark
-            ? 'rgb(24 35 51 / 0.98)'
-            : 'rgb(255 255 255 / 0.98)',
-          borderColor: isDark
-            ? darkColors.neutral[800]
-            : 'rgb(255 255 255 / 0.80)',
-          // Green-tinted shadow using the brand signal token instead of neutral black/blue
-          boxShadow: isDark
-            ? `0 18px 42px ${themeColors.primary.signal}40`
-            : `0 18px 42px ${themeColors.primary.signal}1F`,
-          opacity: isVisible ? 1 : 0,
-          transform: isVisible ? 'translateY(0)' : 'translateY(8px)',
-          transition: `opacity ${STORY_TRANSITION_MS}ms cubic-bezier(.16, 1, .3, 1), transform ${STORY_TRANSITION_MS}ms cubic-bezier(.16, 1, .3, 1)`,
-        }}
-        aria-label={storyT.title}
+      <div
+        className="absolute top-0 w-full"
+        style={{ transform: 'translateY(-50%)' }}
       >
-        <div className="relative aspect-[7/5] overflow-hidden bg-neutral-900">
-          <Image
-            src={image}
-            alt=""
-            fill
-            sizes="208px"
-            className="story-pan object-cover"
-          />
-          <span
-            className="absolute left-2 top-2 px-1.5 py-1 font-mono text-[8px] font-medium tracking-[0.08em] text-white"
-            style={{ backgroundColor: SYSTEM_COLORS[displayedSystem] }}
-          >
-            {storyT.badge}
-          </span>
-          <span className="story-scan absolute inset-x-0 bottom-0 h-px bg-white/75 shadow-[0_0_12px_4px_rgba(166,210,255,0.8)]" />
-        </div>
-        <div className="p-3">
-          <span
-            className="block font-mono text-[8px] font-medium tracking-[0.06em]"
-            style={{
-              color: isDark ? darkColors.neutral[400] : colors.neutral[500],
-            }}
-          >
-            {storyT.tag}
-          </span>
-          <strong
-            className="mt-1 block text-[11px] leading-snug"
-            style={{ color: themeColors.primary.ink }}
-          >
-            {storyT.title}
-          </strong>
-          <p
-            className="mt-1 text-[10px] leading-snug"
-            style={{
-              color: isDark ? darkColors.neutral[400] : colors.neutral[500],
-            }}
-          >
-            {storyT.description}
-          </p>
-        </div>
-      </article>
+        <article
+          data-system-story
+          className="story-enter overflow-hidden border sm:backdrop-blur-sm"
+          style={{
+            borderRadius: radius.md,
+            backgroundColor: isDark
+              ? 'rgb(24 35 51 / 0.98)'
+              : 'rgb(255 255 255 / 0.98)',
+            borderColor: isDark
+              ? darkColors.neutral[800]
+              : 'rgb(255 255 255 / 0.80)',
+            // Green-tinted shadow using the brand signal token instead of neutral black/blue
+            boxShadow: isDark
+              ? `0 18px 42px ${themeColors.primary.signal}40`
+              : `0 18px 42px ${themeColors.primary.signal}1F`,
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'translateY(0)' : 'translateY(8px)',
+            transition: `opacity ${STORY_TRANSITION_MS}ms cubic-bezier(.16, 1, .3, 1), transform ${STORY_TRANSITION_MS}ms cubic-bezier(.16, 1, .3, 1)`,
+          }}
+          aria-label={storyT.title}
+        >
+          <div className="relative aspect-[7/5] overflow-hidden bg-neutral-900">
+            <Image
+              src={image}
+              alt=""
+              fill
+              sizes="208px"
+              className="story-pan object-cover"
+            />
+            <span
+              className="absolute left-2 top-2 px-1.5 py-1 font-mono text-[8px] font-medium tracking-[0.08em] text-white"
+              style={{ backgroundColor: SYSTEM_COLORS[displayedSystem] }}
+            >
+              {storyT.badge}
+            </span>
+            <span className="story-scan absolute inset-x-0 bottom-0 h-px bg-white/75 shadow-[0_0_12px_4px_rgba(166,210,255,0.8)]" />
+          </div>
+          <div className="p-3">
+            <span
+              className="block font-mono text-[8px] font-medium tracking-[0.06em]"
+              style={{
+                color: isDark ? darkColors.neutral[400] : colors.neutral[500],
+              }}
+            >
+              {storyT.tag}
+            </span>
+            <strong
+              className="mt-1 block text-[11px] leading-snug"
+              style={{ color: themeColors.primary.ink }}
+            >
+              {storyT.title}
+            </strong>
+            <p
+              className="mt-1 text-[10px] leading-snug"
+              style={{
+                color: isDark ? darkColors.neutral[400] : colors.neutral[500],
+              }}
+            >
+              {storyT.description}
+            </p>
+          </div>
+        </article>
+      </div>
     </div>
   );
 }
