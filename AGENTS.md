@@ -112,3 +112,11 @@ Dopiero wtedy pisz kod.
 Unikaj duplikacji kodu.
 
 Utrzymuj komponenty małe i czytelne.
+
+## Dla Agentów AI (Codex, Cline i inni)
+
+- **Środowisko:** Projekt działa na systemie Windows. Wszystkie komendy w terminalu muszą być podawane ściśle w składni PowerShell.
+- **Dyscyplina pracy:** Obowiązuje tryb Plan → Act. Przed wprowadzeniem jakichkolwiek zmian, musisz przedstawić plan i poczekać na jego zatwierdzenie.
+- **Kontekst marki:** Szukaj informacji o marce i wytycznych wizualnych w folderze `docs/branding/`.
+- **Architektura:** Decyzje architektoniczne i strukturalne znajdują się w `docs/architecture/`.
+- **Konflikty:** Kategoryczny zakaz pracy dwóch agentów (lub agenta i człowieka) na tym samym pliku lub na tej samej gałęzi jednocześnie. Sprawdzaj aktywne zadania/gałęzie.
