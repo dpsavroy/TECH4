@@ -1,63 +1,63 @@
-# Homepage Structure
+# Struktura Strony Głównej (Homepage Structure)
 
-Status: Draft
+Status: Szkic (Draft)
 
 ---
 
 # 1. Hero
 
-First impression.
+Pierwsze wrażenie.
 
-Communicate trust, engineering excellence and modern intelligent buildings.
-
----
-
-# 2. What We Do
-
-Explain in one simple sentence what TECH4 does.
+Komunikuje zaufanie, doskonałość inżynieryjną i nowoczesne, inteligentne budynki.
 
 ---
 
-# 3. Engineering Systems
+# 2. Co Robimy (What We Do)
 
-Present all engineering disciplines.
-
----
-
-# 4. Industries
-
-Show who TECH4 works for.
-
-- Office Buildings
-- Commercial Buildings
-- Industrial Facilities
+Wyjaśnia w jednym prostym zdaniu, czym zajmuje się TECH4.
 
 ---
 
-# 5. Process
+# 3. Systemy Inżynieryjne (Engineering Systems)
 
-Explain how projects are delivered from concept to service.
-
----
-
-# 6. Why TECH4
-
-Reasons to choose the company.
+Prezentacja wszystkich dyscyplin inżynieryjnych.
 
 ---
 
-# 7. Projects
+# 4. Branże (Industries)
 
-Selected reference projects.
+Pokazuje, dla kogo pracuje TECH4.
 
----
-
-# 8. Partners & Technologies
-
-Technology vendors and partners.
+- Budynki Biurowe (Office Buildings)
+- Budynki Komercyjne (Commercial Buildings)
+- Obiekty Przemysłowe (Industrial Facilities)
 
 ---
 
-# 9. Contact
+# 5. Proces (Process)
 
-Clear call to action.
+Wyjaśnia, w jaki sposób projekty są realizowane od koncepcji do serwisu.
+
+---
+
+# 6. Dlaczego TECH4 (Why TECH4)
+
+Powody, dla których warto wybrać firmę.
+
+---
+
+# 7. Projekty (Projects)
+
+Wybrane projekty referencyjne.
+
+---
+
+# 8. Partnerzy i Technologie (Partners & Technologies)
+
+Dostawcy technologii i partnerzy.
+
+---
+
+# 9. Kontakt (Contact)
+
+Wyraźne wezwanie do działania (CTA).
