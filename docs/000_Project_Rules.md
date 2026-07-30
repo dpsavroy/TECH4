@@ -1,57 +1,57 @@
-# Project Rules
+# Zasady Projektu
 
-## Purpose
+## Cel
 
-This document defines the working rules for the TECH4 project.
-
----
-
-## Rule 1
-
-Business decisions are made by the project team, not by AI.
+Ten dokument określa zasady pracy dla projektu TECH4.
 
 ---
 
-## Rule 2
+## Zasada 1
 
-AI assists with execution, documentation and implementation.
-
----
-
-## Rule 3
-
-Every important decision must be documented.
+Decyzje biznesowe podejmuje zespół projektowy, nie AI.
 
 ---
 
-## Rule 4
+## Zasada 2
 
-One document = one subject.
-
----
-
-## Rule 5
-
-Marketing must never contradict engineering reality.
+AI asystuje przy wykonaniu, dokumentacji i wdrożeniu.
 
 ---
 
-## Rule 6
+## Zasada 3
 
-If something is technically inaccurate, engineering accuracy always wins.
-
----
-
-## Rule 7
-
-Documentation is the single source of truth for the project.
+Każda ważna decyzja musi być udokumentowana.
 
 ---
 
-## Rule 8
+## Zasada 4
 
-All AI assistants must use the project documentation as context before making decisions.
+Jeden dokument = jeden temat.
 
 ---
 
-Status: Approved
+## Zasada 5
+
+Marketing nigdy nie może przeczyć rzeczywistości inżynieryjnej.
+
+---
+
+## Zasada 6
+
+Jeśli coś jest technicznie nieścisłe, dokładność inżynieryjna zawsze wygrywa.
+
+---
+
+## Zasada 7
+
+Dokumentacja jest jedynym źródłem prawdy dla projektu.
+
+---
+
+## Zasada 8
+
+Wszyscy asystenci AI muszą traktować dokumentację projektu jako kontekst przed podjęciem decyzji.
+
+---
+
+Status: Zatwierdzony
