@@ -1,83 +1,83 @@
-# Engineering Scope
+# Zakres Inżynieryjny (Engineering Scope)
 
-Status: Draft
+Status: Szkic (Draft)
 
-Last Updated: 2026-07-08
-
----
-
-# Overview
-
-TECH4 designs, integrates, commissions and maintains engineering systems for commercial, office and industrial buildings.
-
-The company provides complete engineering solutions throughout the entire project lifecycle.
+Ostatnia aktualizacja: 2026-07-08
 
 ---
 
-# Areas of Expertise
+# Przegląd
+
+TECH4 projektuje, integruje, uruchamia i serwisuje systemy inżynieryjne dla budynków komercyjnych, biurowych i przemysłowych.
+
+Firma dostarcza kompletne rozwiązania inżynieryjne przez cały cykl życia projektu.
+
+---
+
+# Obszary Ekspertyzy
 
 ## Building Automation Systems (BAS)
 
 Systemy automatyki budynkowej.
 
-Integration and automation of building engineering systems.
+Integracja i automatyzacja inżynieryjnych systemów budynkowych.
 
 ---
 
 ## Building Management Systems (BMS)
 
-Central monitoring and management of engineering systems.
+Centralne monitorowanie i zarządzanie systemami inżynieryjnymi.
 
 ---
 
-## HVAC Automation
+## Automatyka HVAC
 
-Heating, ventilation and air conditioning control.
+Sterowanie ogrzewaniem, wentylacją i klimatyzacją.
 
 ---
 
-## Access Control Systems
+## Systemy Kontroli Dostępu (KD)
 
-Access control for offices, commercial and industrial facilities.
+Kontrola dostępu dla biur, obiektów komercyjnych i przemysłowych.
 
 ---
 
 ## CCTV
 
-IP video surveillance systems.
+Systemy nadzoru wideo IP.
 
 ---
 
-## Intrusion Alarm Systems
+## Systemy Sygnalizacji Włamania (SSWiN)
 
-Electronic intrusion detection systems.
-
----
-
-## Fire Alarm Systems
-
-Fire detection and life safety systems.
+Elektroniczne systemy wykrywania intruzów.
 
 ---
 
-## Energy Management
+## Systemy Sygnalizacji Pożaru (SAP)
 
-Monitoring and optimization of energy consumption.
-
----
-
-## Network Infrastructure
-
-LAN, fiber optic and network infrastructure for building systems.
+Wykrywanie pożaru i systemy bezpieczeństwa życia.
 
 ---
 
-# Integration Philosophy
+## Zarządzanie Energią (Energy Management)
 
-Not every project requires a single software platform.
-
-The objective is to create engineering systems that work together reliably, are easy to manage and provide long-term operational stability.
+Monitorowanie i optymalizacja zużycia energii.
 
 ---
 
-Status: Draft
+## Infrastruktura Sieciowa
+
+LAN, światłowody i infrastruktura sieciowa dla systemów budynkowych.
+
+---
+
+# Filozofia Integracji
+
+Nie każdy projekt wymaga jednej platformy oprogramowania.
+
+Celem jest tworzenie systemów inżynieryjnych, które współpracują ze sobą niezawodnie, są łatwe w zarządzaniu i zapewniają długoterminową stabilność operacyjną.
+
+---
+
+Status: Szkic (Draft)
