@@ -336,12 +336,12 @@ function SystemStory({
     >
       <article
         data-system-story
-        className="story-enter overflow-hidden border backdrop-blur-sm"
+        className="story-enter overflow-hidden border sm:backdrop-blur-sm"
         style={{
           borderRadius: radius.md,
           backgroundColor: isDark
-            ? 'rgb(24 35 51 / 0.95)'
-            : 'rgb(255 255 255 / 0.95)',
+            ? 'rgb(24 35 51 / 0.98)'
+            : 'rgb(255 255 255 / 0.98)',
           borderColor: isDark
             ? darkColors.neutral[800]
             : 'rgb(255 255 255 / 0.80)',
