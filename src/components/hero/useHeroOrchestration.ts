@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
 // ─── Shared types & data ────────────────────────────────────────────────────
 
-export type SystemType = "bms" | "bas" | "cctv" | "sap" | "kd" | "hvac";
+export type SystemType = 'bms' | 'bas' | 'cctv' | 'sap' | 'kd' | 'hvac';
 
 /**
  * Ordered list of building systems for the hero sequence.
@@ -12,12 +12,12 @@ export type SystemType = "bms" | "bas" | "cctv" | "sap" | "kd" | "hvac";
  * (useTranslations().systems[id]) — not stored here.
  */
 export const systemsList: { id: SystemType }[] = [
-  { id: "bms" },
-  { id: "bas" },
-  { id: "cctv" },
-  { id: "sap" },
-  { id: "kd" },
-  { id: "hvac" },
+  { id: 'bms' },
+  { id: 'bas' },
+  { id: 'cctv' },
+  { id: 'sap' },
+  { id: 'kd' },
+  { id: 'hvac' },
 ];
 
 // ─── Timing ─────────────────────────────────────────────────────────────────
@@ -59,13 +59,29 @@ export interface UseHeroOrchestrationOptions {
 export function useHeroOrchestration(opts?: UseHeroOrchestrationOptions) {
   const introStarted = opts?.introStarted ?? true;
 
-  const [activeSystem, setActiveSystem] = useState<SystemType | null>("bms");
+  const [activeSystem, setActiveSystem] = useState<SystemType | null>('bms');
   const [visibleSystems, setVisibleSystems] = useState<SystemType[]>([]);
   const [isHovered, setIsHovered] = useState(false);
   const [introComplete, setIntroComplete] = useState(false);
+  const [isInView, setIsInView] = useState(true);
 
+  const containerRef = useRef<HTMLElement>(null);
   const currentIndexRef = useRef(-1);
   const cycleIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // ── Intersection Observer ───────────────────────────────────────────────────
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   // ── Intro sequence ────────────────────────────────────────────────────────
   // Runs once. Not affected by hover state — users should see all cards
@@ -83,19 +99,19 @@ export function useHeroOrchestration(opts?: UseHeroOrchestrationOptions) {
           currentIndexRef.current = index;
           setActiveSystem(system.id);
           setVisibleSystems((prev) =>
-            prev.includes(system.id) ? prev : [...prev, system.id],
+            prev.includes(system.id) ? prev : [...prev, system.id]
           );
 
           // After last card appears, schedule transition to auto-cycle
           if (index === systemsList.length - 1) {
             const settle = setTimeout(
               () => setIntroComplete(true),
-              INTRO_SETTLE_DELAY,
+              INTRO_SETTLE_DELAY
             );
             timeouts.push(settle);
           }
         },
-        INTRO_INITIAL_DELAY + index * INTRO_STEP,
+        INTRO_INITIAL_DELAY + index * INTRO_STEP
       );
 
       timeouts.push(t);
@@ -106,7 +122,7 @@ export function useHeroOrchestration(opts?: UseHeroOrchestrationOptions) {
 
   // ── Auto-cycle ────────────────────────────────────────────────────────────
   useEffect(() => {
-    if (!introComplete || isHovered) {
+    if (!introComplete || isHovered || !isInView) {
       if (cycleIntervalRef.current) {
         clearInterval(cycleIntervalRef.current);
         cycleIntervalRef.current = null;
@@ -125,7 +141,7 @@ export function useHeroOrchestration(opts?: UseHeroOrchestrationOptions) {
         clearInterval(cycleIntervalRef.current);
       }
     };
-  }, [introComplete, isHovered]);
+  }, [introComplete, isHovered, isInView]);
 
   // ── Manual selection ──────────────────────────────────────────────────────
   const handleSelect = (id: SystemType) => {
@@ -138,6 +154,7 @@ export function useHeroOrchestration(opts?: UseHeroOrchestrationOptions) {
   };
 
   return {
+    containerRef,
     activeSystem,
     visibleSystems,
     isHovered,
