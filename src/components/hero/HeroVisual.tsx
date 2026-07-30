@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { memo, useEffect, useState } from "react";
-import { useTheme } from "@/components/theme/ThemeProvider";
-import { useTranslations } from "@/contexts/LocaleContext";
-import { colors, darkColors, radius } from "@/styles/design-tokens";
-import { SYSTEM_COLORS } from "./BuildingSchematic";
-import { systemsList } from "./useHeroOrchestration";
-import type { SystemType } from "./useHeroOrchestration";
+import Image from 'next/image';
+import { memo, useEffect, useState } from 'react';
+import { useTheme } from '@/components/theme/ThemeProvider';
+import { useTranslations } from '@/contexts/LocaleContext';
+import { colors, darkColors, radius } from '@/styles/design-tokens';
+import { SYSTEM_COLORS } from './BuildingSchematic';
+import { systemsList } from './useHeroOrchestration';
+import type { SystemType } from './useHeroOrchestration';
 
 // ─── Static data ─────────────────────────────────────────────────────────────
 
@@ -49,28 +49,30 @@ const systemHotspots: Record<SystemType, { x: number; y: number }[]> = {
  * Text (tag, title, description, badge) comes from translations.
  */
 const systemImages: Partial<Record<SystemType, string>> = {
-  bms: "/bms-control-room.png",
-  bas: "/bas-control-panel.png",
-  cctv: "/cctv-control-room.png",
-  kd: "/access-card.png",
-  sap: "/sap-detector-test.png",
-  hvac: "/hvac-service.png",
+  bms: '/bms-control-room.png',
+  bas: '/bas-control-panel.png',
+  cctv: '/cctv-control-room.png',
+  kd: '/access-card.png',
+  sap: '/sap-detector-test.png',
+  hvac: '/hvac-service.png',
 };
 
 const routePaths: Record<SystemType, string> = {
-  bms: "M55 42V57H62V72",
-  bas: "M43 29H47V50H58V68",
-  cctv: "M18 30H47V49H78V68",
-  sap: "M67 25V47V67",
-  kd: "M33 77H51V66H62V87",
-  hvac: "M42 14H54V52H53V88",
+  bms: 'M55 42V57H62V72',
+  bas: 'M43 29H47V50H58V68',
+  cctv: 'M18 30H47V49H78V68',
+  sap: 'M67 25V47V67',
+  kd: 'M33 77H51V66H62V87',
+  hvac: 'M42 14H54V52H53V88',
 };
 
 const STORY_TRANSITION_MS = 420;
 const STORY_SETTLE_DELAY_MS = 120;
 
 function useSettledSystem(activeSystem: SystemType | null) {
-  const [displayedSystem, setDisplayedSystem] = useState<SystemType | null>(null);
+  const [displayedSystem, setDisplayedSystem] = useState<SystemType | null>(
+    null
+  );
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -107,11 +109,10 @@ const BuildingCutaway = memo(function BuildingCutaway() {
       width={1024}
       height={1024}
       priority
-      quality={100}
-      unoptimized
+      quality={85}
       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 60vw, (max-width: 1280px) 55vw, 560px"
       className="pointer-events-none z-0 h-auto w-full object-contain"
-      style={{ transform: "translateZ(0)" }}
+      style={{ transform: 'translateZ(0)' }}
     />
   );
 });
@@ -130,13 +131,13 @@ function SystemMarker({
   return (
     <g transform={`translate(${x} ${y})`}>
       <circle r="2.1" fill="white" stroke={color} strokeWidth="0.42" />
-      {system === "cctv" ? (
+      {system === 'cctv' ? (
         <path
           d="M-1.15-0.82h1.65l.42.46H1.35v1.36H-1.15zM1.35-.3l.95-.55v1.65l-.95-.55z"
           fill={color}
         />
       ) : null}
-      {system === "kd" ? (
+      {system === 'kd' ? (
         <>
           <path
             d="M-1.05-1.1h1.05v2.2h-1.05zM.42-.86v1.72M.65-.36h.42"
@@ -148,7 +149,7 @@ function SystemMarker({
           <circle cx="-.53" cy=".18" r=".14" fill={color} />
         </>
       ) : null}
-      {system === "bms" ? (
+      {system === 'bms' ? (
         <>
           <rect
             x="-1.18"
@@ -168,7 +169,7 @@ function SystemMarker({
           />
         </>
       ) : null}
-      {system === "bas" ? (
+      {system === 'bas' ? (
         <>
           <rect
             x="-1"
@@ -184,9 +185,15 @@ function SystemMarker({
           <circle cx=".42" cy=".38" r=".2" fill={color} />
         </>
       ) : null}
-      {system === "sap" ? (
+      {system === 'sap' ? (
         <>
-          <circle cy="-.18" r=".88" fill="none" stroke={color} strokeWidth=".42" />
+          <circle
+            cy="-.18"
+            r=".88"
+            fill="none"
+            stroke={color}
+            strokeWidth=".42"
+          />
           <path
             d="M-1.05 1h2.1M-.55 1v-.32h1.1V1"
             stroke={color}
@@ -195,7 +202,7 @@ function SystemMarker({
           />
         </>
       ) : null}
-      {system === "hvac" ? (
+      {system === 'hvac' ? (
         <>
           <circle r=".92" fill="none" stroke={color} strokeWidth=".42" />
           <path
@@ -305,84 +312,94 @@ function SystemStory({
   if (!image || !storyT || !displayedSystem) return null;
 
   const systemIndex = systemsList.findIndex(
-    (system) => system.id === displayedSystem,
+    (system) => system.id === displayedSystem
   );
   const verticalProgress = systemIndex / (systemsList.length - 1);
-  const isDark = theme === "dark";
+  const isDark = theme === 'dark';
   const themeColors = isDark ? darkColors : colors;
 
   return (
     <div
       data-system-story-position
       className={[
-        "pointer-events-none absolute z-30 w-52",
+        'pointer-events-none absolute z-30 w-52 h-full top-0',
         // Horizontal: left at xl (right column occupied by SystemCards), right at lg/md
-        "right-0 xl:right-auto xl:left-0",
-      ].join(" ")}
+        'right-0 xl:right-auto xl:left-0',
+      ].join(' ')}
       style={{
         // Spread the story card over the same top-to-bottom order as SystemCards.
         // clamp keeps its center inside the building bounds at both ends.
-        top: `clamp(7.5rem, ${verticalProgress * 100}%, calc(100% - 7.5rem))`,
-        transform: "translateY(-50%)",
-        transition: `top ${STORY_TRANSITION_MS}ms cubic-bezier(.16, 1, .3, 1)`,
+        transform: `translateY(clamp(7.5rem, ${verticalProgress * 100}%, calc(100% - 7.5rem)))`,
+        transition: `transform ${STORY_TRANSITION_MS}ms cubic-bezier(.16, 1, .3, 1)`,
       }}
     >
-      <article
-        data-system-story
-        className="story-enter overflow-hidden border backdrop-blur-sm"
-        style={{
-          borderRadius: radius.md,
-          backgroundColor: isDark
-            ? "rgb(24 35 51 / 0.95)"
-            : "rgb(255 255 255 / 0.95)",
-          borderColor: isDark ? darkColors.neutral[800] : "rgb(255 255 255 / 0.80)",
-          // Green-tinted shadow using the brand signal token instead of neutral black/blue
-          boxShadow: isDark
-            ? `0 18px 42px ${themeColors.primary.signal}40`
-            : `0 18px 42px ${themeColors.primary.signal}1F`,
-          opacity: isVisible ? 1 : 0,
-          transform: isVisible ? "translateY(0)" : "translateY(8px)",
-          transition: `opacity ${STORY_TRANSITION_MS}ms cubic-bezier(.16, 1, .3, 1), transform ${STORY_TRANSITION_MS}ms cubic-bezier(.16, 1, .3, 1)`,
-        }}
-        aria-label={storyT.title}
+      <div
+        className="absolute top-0 w-full"
+        style={{ transform: 'translateY(-50%)' }}
       >
-        <div className="relative aspect-[7/5] overflow-hidden bg-neutral-900">
-          <Image
-            src={image}
-            alt=""
-            fill
-            sizes="208px"
-            className="story-pan object-cover"
-          />
-          <span
-            className="absolute left-2 top-2 px-1.5 py-1 font-mono text-[8px] font-medium tracking-[0.08em] text-white"
-            style={{ backgroundColor: SYSTEM_COLORS[displayedSystem] }}
-          >
-            {storyT.badge}
-          </span>
-          <span className="story-scan absolute inset-x-0 bottom-0 h-px bg-white/75 shadow-[0_0_12px_4px_rgba(166,210,255,0.8)]" />
-        </div>
-        <div className="p-3">
-          <span
-            className="block font-mono text-[8px] font-medium tracking-[0.06em]"
-            style={{ color: isDark ? darkColors.neutral[400] : colors.neutral[500] }}
-          >
-            {storyT.tag}
-          </span>
-          <strong
-            className="mt-1 block text-[11px] leading-snug"
-            style={{ color: themeColors.primary.ink }}
-          >
-            {storyT.title}
-          </strong>
-          <p
-            className="mt-1 text-[10px] leading-snug"
-            style={{ color: isDark ? darkColors.neutral[400] : colors.neutral[500] }}
-          >
-            {storyT.description}
-          </p>
-        </div>
-      </article>
+        <article
+          data-system-story
+          className="story-enter overflow-hidden border sm:backdrop-blur-sm"
+          style={{
+            borderRadius: radius.md,
+            backgroundColor: isDark
+              ? 'rgb(24 35 51 / 0.98)'
+              : 'rgb(255 255 255 / 0.98)',
+            borderColor: isDark
+              ? darkColors.neutral[800]
+              : 'rgb(255 255 255 / 0.80)',
+            // Green-tinted shadow using the brand signal token instead of neutral black/blue
+            boxShadow: isDark
+              ? `0 18px 42px ${themeColors.primary.signal}40`
+              : `0 18px 42px ${themeColors.primary.signal}1F`,
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'translateY(0)' : 'translateY(8px)',
+            transition: `opacity ${STORY_TRANSITION_MS}ms cubic-bezier(.16, 1, .3, 1), transform ${STORY_TRANSITION_MS}ms cubic-bezier(.16, 1, .3, 1)`,
+          }}
+          aria-label={storyT.title}
+        >
+          <div className="relative aspect-[7/5] overflow-hidden bg-neutral-900">
+            <Image
+              src={image}
+              alt=""
+              fill
+              sizes="208px"
+              className="story-pan object-cover"
+            />
+            <span
+              className="absolute left-2 top-2 px-1.5 py-1 font-mono text-[8px] font-medium tracking-[0.08em] text-white"
+              style={{ backgroundColor: SYSTEM_COLORS[displayedSystem] }}
+            >
+              {storyT.badge}
+            </span>
+            <span className="story-scan absolute inset-x-0 bottom-0 h-px bg-white/75 shadow-[0_0_12px_4px_rgba(166,210,255,0.8)]" />
+          </div>
+          <div className="p-3">
+            <span
+              className="block font-mono text-[8px] font-medium tracking-[0.06em]"
+              style={{
+                color: isDark ? darkColors.neutral[400] : colors.neutral[500],
+              }}
+            >
+              {storyT.tag}
+            </span>
+            <strong
+              className="mt-1 block text-[11px] leading-snug"
+              style={{ color: themeColors.primary.ink }}
+            >
+              {storyT.title}
+            </strong>
+            <p
+              className="mt-1 text-[10px] leading-snug"
+              style={{
+                color: isDark ? darkColors.neutral[400] : colors.neutral[500],
+              }}
+            >
+              {storyT.description}
+            </p>
+          </div>
+        </article>
+      </div>
     </div>
   );
 }
@@ -394,13 +411,11 @@ interface HeroVisualProps {
   onHoverChange: (hovered: boolean) => void;
 }
 
-export function HeroVisual({
-  activeSystem,
-  onHoverChange,
-}: HeroVisualProps) {
+export function HeroVisual({ activeSystem, onHoverChange }: HeroVisualProps) {
   const { theme } = useTheme();
   const { displayedSystem, isVisible } = useSettledSystem(activeSystem);
-  const cornerMarkColor = theme === "dark" ? darkColors.neutral[800] : colors.neutral[300];
+  const cornerMarkColor =
+    theme === 'dark' ? darkColors.neutral[800] : colors.neutral[300];
 
   return (
     <div
@@ -425,10 +440,22 @@ export function HeroVisual({
         <BuildingCutaway />
 
         {/* Engineering corner marks */}
-        <div className="pointer-events-none absolute top-0 left-0 z-20 w-4 h-4 border-t border-l" style={{ borderColor: cornerMarkColor }} />
-        <div className="pointer-events-none absolute top-0 right-0 z-20 w-4 h-4 border-t border-r" style={{ borderColor: cornerMarkColor }} />
-        <div className="pointer-events-none absolute bottom-0 left-0 z-20 w-4 h-4 border-b border-l" style={{ borderColor: cornerMarkColor }} />
-        <div className="pointer-events-none absolute bottom-0 right-0 z-20 w-4 h-4 border-b border-r" style={{ borderColor: cornerMarkColor }} />
+        <div
+          className="pointer-events-none absolute top-0 left-0 z-20 w-4 h-4 border-t border-l"
+          style={{ borderColor: cornerMarkColor }}
+        />
+        <div
+          className="pointer-events-none absolute top-0 right-0 z-20 w-4 h-4 border-t border-r"
+          style={{ borderColor: cornerMarkColor }}
+        />
+        <div
+          className="pointer-events-none absolute bottom-0 left-0 z-20 w-4 h-4 border-b border-l"
+          style={{ borderColor: cornerMarkColor }}
+        />
+        <div
+          className="pointer-events-none absolute bottom-0 right-0 z-20 w-4 h-4 border-b border-r"
+          style={{ borderColor: cornerMarkColor }}
+        />
 
         <SystemRoutes activeSystem={displayedSystem} isVisible={isVisible} />
         <SystemHotspots activeSystem={displayedSystem} isVisible={isVisible} />

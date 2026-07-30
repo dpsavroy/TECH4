@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useTheme } from "@/components/theme/ThemeProvider";
-import { colors, darkColors, layout } from "@/styles/design-tokens";
-import { HeroContent } from "./HeroContent";
-import { HeroVisual } from "./HeroVisual";
-import { SystemCards } from "./SystemCards";
-import { useHeroOrchestration } from "./useHeroOrchestration";
+import { useState } from 'react';
+import { useTheme } from '@/components/theme/ThemeProvider';
+import { colors, darkColors, layout } from '@/styles/design-tokens';
+import { HeroContent } from './HeroContent';
+import { HeroVisual } from './HeroVisual';
+import { SystemCards } from './SystemCards';
+import { useHeroOrchestration } from './useHeroOrchestration';
 
 /**
  * Hero section — full-viewport composition.
@@ -29,6 +29,7 @@ export function HeroSection() {
   const [descriptionReady, setDescriptionReady] = useState<boolean>(false);
 
   const {
+    containerRef,
     activeSystem,
     visibleSystems,
     setIsHovered,
@@ -38,11 +39,14 @@ export function HeroSection() {
   return (
     <section
       id="hero"
+      ref={containerRef}
       className="relative w-full overflow-hidden flex items-center justify-center transition-colors duration-300"
       style={{
-        minHeight: "calc(100vh - 88px)",
+        minHeight: 'calc(100vh - 88px)',
         backgroundColor:
-          theme === "dark" ? darkColors.background.page : colors.background.page,
+          theme === 'dark'
+            ? darkColors.background.page
+            : colors.background.page,
       }}
     >
       {/* Structural background grid — engineering motif */}
@@ -55,7 +59,7 @@ export function HeroSection() {
         className="absolute inset-0 pointer-events-none"
         aria-hidden="true"
         style={{
-          background: `radial-gradient(ellipse 75% 65% at 50% 45%, transparent 30%, ${theme === "dark" ? darkColors.background.page : colors.background.page} 100%)`,
+          background: `radial-gradient(ellipse 75% 65% at 50% 45%, transparent 30%, ${theme === 'dark' ? darkColors.background.page : colors.background.page} 100%)`,
         }}
       />
 
@@ -73,18 +77,18 @@ export function HeroSection() {
       */}
       <div
         className={[
-          "mx-auto w-full px-7 md:px-12 xl:px-10 relative z-10 py-12 lg:py-16 xl:py-10",
+          'mx-auto w-full px-7 md:px-12 xl:px-10 relative z-10 py-12 lg:py-16 xl:py-10',
           // Mobile / tablet: vertical stack
-          "flex flex-col items-center gap-14",
+          'flex flex-col items-center gap-14',
           // lg two-column
-          "lg:flex-row lg:items-center lg:gap-10",
+          'lg:flex-row lg:items-center lg:gap-10',
           // xl three-column grid
-          "xl:grid xl:items-center xl:gap-8",
-        ].join(" ")}
+          'xl:grid xl:items-center xl:gap-8',
+        ].join(' ')}
         style={{
-          maxWidth: layout.container["2xl"],
+          maxWidth: layout.container['2xl'],
           // Grid template only applies at xl (Tailwind xl:grid activates display:grid)
-          gridTemplateColumns: "28% 1fr 25%",
+          gridTemplateColumns: '28% 1fr 25%',
         }}
       >
         {/* ── Left column: copy & CTA ──────────────────────────────────────── */}
