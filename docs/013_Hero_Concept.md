@@ -1,61 +1,61 @@
-# Hero Concept
+# Koncepcja Hero (Hero Concept)
 
-Status: Draft
-
----
-
-# Goal
-
-The visitor must understand within 5 seconds that TECH4 is a premium engineering company capable of designing, integrating and supporting complex building systems.
+Status: Szkic (Draft)
 
 ---
 
-# Visitor Emotion
+# Cel
 
-- Trust
-- Engineering Excellence
-- Innovation
-- Premium Quality
+Odwiedzający musi w ciągu 5 sekund zrozumieć, że TECH4 to firma inżynieryjna klasy premium, zdolna do projektowania, integracji i wsparcia złożonych systemów budynkowych.
 
 ---
 
-# Main Message
+# Emocje Odwiedzającego
 
-Where Buildings Become Intelligent.
-
----
-
-# Supporting Message
-
-TECH4 integrates building engineering systems into one reliable and manageable solution.
+- Zaufanie
+- Doskonałość Inżynieryjna
+- Innowacyjność
+- Jakość Premium
 
 ---
 
-# Visual Direction
+# Główna Wiadomość (Main Message)
 
-Living Digital Building
-
----
-
-# Hero Components
-
-- Large headline
-- Supporting text
-- Primary CTA
-- Secondary CTA
-- Interactive visual
-- Background animation
+Tam, Gdzie Budynki Stają Się Inteligentne.
 
 ---
 
-# Animation Goal
+# Wiadomość Wspierająca (Supporting Message)
 
-The animation must communicate how different engineering systems work together as one coordinated building.
-
-The animation should not imply that all systems operate on the same software platform.
+TECH4 integruje systemy inżynieryjne budynku w jedno niezawodne i łatwe w zarządzaniu rozwiązanie.
 
 ---
 
-# MVP Goal
+# Kierunek Wizualny (Visual Direction)
 
-Build the best engineering company Hero section in Europe.
+Żywy Cyfrowy Budynek (Living Digital Building)
+
+---
+
+# Komponenty Hero
+
+- Duży nagłówek
+- Tekst wspierający
+- Główne CTA (Wezwanie do działania)
+- Dodatkowe CTA
+- Interaktywna wizualizacja
+- Animacja w tle
+
+---
+
+# Cel Animacji
+
+Animacja musi komunikować, w jaki sposób różne systemy inżynieryjne współpracują ze sobą jako jeden skoordynowany budynek.
+
+Animacja nie powinna sugerować, że wszystkie systemy działają na tej samej platformie oprogramowania.
+
+---
+
+# Cel MVP
+
+Zbudowanie najlepszej sekcji Hero firmy inżynieryjnej w Europie.
