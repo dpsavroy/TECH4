@@ -1,43 +1,73 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 
 const NATURAL_W = 1720;
 const NATURAL_H = 624;
-const SCALE = 0.5;
 
 const ICON = { x0: 157, y0: 87, x1: 462, y1: 393 };
 const TECH = { x0: 526, y0: 87, x1: 1395, y1: 393 };
 const FOUR = { x0: 1421, y0: 87, x1: 1618, y1: 393 };
-const TAG  = { x0: 221, y0: 491, x1: 1593, y1: 553 };
-
-function crop(box: { x0: number, y0: number, x1: number, y1: number }) {
-  return {
-    w: Math.round((box.x1 - box.x0) * SCALE),
-    h: Math.round((box.y1 - box.y0) * SCALE),
-    bgX: Math.round(-box.x0 * SCALE),
-    bgY: Math.round(-box.y0 * SCALE),
-  };
-}
-
-const icon = crop(ICON);
-const tech = crop(TECH);
-const four = crop(FOUR);
-const tag = crop(TAG);
-const bgW = Math.round(NATURAL_W * SCALE);
-const bgH = Math.round(NATURAL_H * SCALE);
-const rowH = icon.h;
-const iconTechGap = Math.round((TECH.x0 - ICON.x1) * SCALE);
-const techFourGap = Math.round((FOUR.x0 - TECH.x1) * SCALE);
-const tagMarginTop = Math.round((TAG.y0 - ICON.y1) * SCALE);
+const TAG = { x0: 221, y0: 491, x1: 1593, y1: 553 };
 
 export default function LogoIntro() {
   const [phase, setPhase] = useState<'reveal' | 'flying' | 'done'>('reveal');
+  const [scale, setScale] = useState<number>(0.5);
+  const [readyToAnimate, setReadyToAnimate] = useState(false);
   const rowRef = useRef<HTMLDivElement>(null);
   const revealRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    function updateScale() {
+      if (window.innerWidth < NATURAL_W * 0.5) {
+        setScale(Math.min((window.innerWidth * 0.85) / NATURAL_W, 0.5));
+      } else {
+        setScale(0.5);
+      }
+    }
+    updateScale();
+    setReadyToAnimate(true);
+    window.addEventListener('resize', updateScale);
+    return () => window.removeEventListener('resize', updateScale);
+  }, []);
+
+  const {
+    icon,
+    tech,
+    four,
+    tag,
+    bgW,
+    bgH,
+    rowH,
+    iconTechGap,
+    techFourGap,
+    tagMarginTop,
+  } = useMemo(() => {
+    function crop(box: { x0: number; y0: number; x1: number; y1: number }) {
+      return {
+        w: Math.round((box.x1 - box.x0) * scale),
+        h: Math.round((box.y1 - box.y0) * scale),
+        bgX: Math.round(-box.x0 * scale),
+        bgY: Math.round(-box.y0 * scale),
+      };
+    }
+    return {
+      icon: crop(ICON),
+      tech: crop(TECH),
+      four: crop(FOUR),
+      tag: crop(TAG),
+      bgW: Math.round(NATURAL_W * scale),
+      bgH: Math.round(NATURAL_H * scale),
+      rowH: Math.round((ICON.y1 - ICON.y0) * scale),
+      iconTechGap: Math.round((TECH.x0 - ICON.x1) * scale),
+      techFourGap: Math.round((FOUR.x0 - TECH.x1) * scale),
+      tagMarginTop: Math.round((TAG.y0 - ICON.y1) * scale),
+    };
+  }, [scale]);
+
+  useEffect(() => {
+    if (!readyToAnimate) return;
     document.body.style.overflow = 'hidden';
 
     // Phase: reveal
@@ -65,7 +95,7 @@ export default function LogoIntro() {
         clearTimeout(t2);
       };
     }
-  }, []);
+  }, [readyToAnimate]);
 
   useEffect(() => {
     if (phase !== 'flying') return;
@@ -80,14 +110,18 @@ export default function LogoIntro() {
     const endRect = target.getBoundingClientRect();
 
     const scale = endRect.width / startRect.width;
-    const dx = endRect.left + endRect.width / 2 - (startRect.left + startRect.width / 2);
-    const dy = endRect.top + endRect.height / 2 - (startRect.top + startRect.height / 2);
+    const dx =
+      endRect.left + endRect.width / 2 - (startRect.left + startRect.width / 2);
+    const dy =
+      endRect.top + endRect.height / 2 - (startRect.top + startRect.height / 2);
 
     row.style.transformOrigin = 'center center';
     row.style.transition = 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
     row.style.transform = `translate(${dx}px, ${dy}px) scale(${scale})`;
 
-    const tagline = row.parentElement?.querySelector('.tagline') as HTMLElement | null;
+    const tagline = row.parentElement?.querySelector(
+      '.tagline'
+    ) as HTMLElement | null;
     const taglineTarget = document.getElementById('site-tagline');
 
     if (tagline && taglineTarget) {
@@ -99,7 +133,8 @@ export default function LogoIntro() {
       const tdy = tEnd.top + tEnd.height / 2 - (tStart.top + tStart.height / 2);
 
       tagline.style.transformOrigin = 'center center';
-      tagline.style.transition = 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
+      tagline.style.transition =
+        'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
       tagline.style.transform = `translate(${tdx}px, ${tdy}px) scale(${tScale})`;
     } else if (tagline) {
       // fallback
@@ -138,8 +173,11 @@ export default function LogoIntro() {
         justifyContent: 'center',
       }}
     >
-      <div ref={rowRef} style={{ display: 'flex', alignItems: 'center', height: rowH, gap: 0 }}
-           className={phase === 'flying' ? '' : undefined}>
+      <div
+        ref={rowRef}
+        style={{ display: 'flex', alignItems: 'center', height: rowH, gap: 0 }}
+        className={phase === 'flying' ? '' : undefined}
+      >
         <div
           ref={revealRef}
           style={{
@@ -149,7 +187,8 @@ export default function LogoIntro() {
             opacity: 0,
             width: 0,
             gap: iconTechGap,
-            transition: 'width 1.1s cubic-bezier(0.16,1,0.3,1), opacity 0.6s ease',
+            transition:
+              'width 1.1s cubic-bezier(0.16,1,0.3,1), opacity 0.6s ease',
           }}
           className="reveal-left-el"
         >
@@ -173,12 +212,20 @@ export default function LogoIntro() {
           transition: 'opacity 0.8s ease 0.4s',
         }}
       />
-      <RevealTrigger revealRef={revealRef} />
+      <RevealTrigger revealRef={revealRef} ready={readyToAnimate} />
     </div>
   );
 }
 
-function Piece({ box, bgW, bgH }: { box: { w: number; h: number; bgX: number; bgY: number }; bgW: number; bgH: number }) {
+function Piece({
+  box,
+  bgW,
+  bgH,
+}: {
+  box: { w: number; h: number; bgX: number; bgY: number };
+  bgW: number;
+  bgH: number;
+}) {
   return (
     <div
       className="piece"
@@ -195,16 +242,25 @@ function Piece({ box, bgW, bgH }: { box: { w: number; h: number; bgX: number; bg
   );
 }
 
-function RevealTrigger({ revealRef }: { revealRef: React.RefObject<HTMLDivElement | null> }) {
+function RevealTrigger({
+  revealRef,
+  ready,
+}: {
+  revealRef: React.RefObject<HTMLDivElement | null>;
+  ready: boolean;
+}) {
   useEffect(() => {
+    if (!ready) return;
     const el = revealRef.current;
     if (!el) return;
     const timer = setTimeout(() => {
       el.style.opacity = '1';
-      const tagEl = document.querySelector('.piece.tagline') as HTMLElement | null;
+      const tagEl = document.querySelector(
+        '.piece.tagline'
+      ) as HTMLElement | null;
       if (tagEl) tagEl.style.opacity = '1';
     }, 520);
     return () => clearTimeout(timer);
-  }, [revealRef]);
+  }, [revealRef, ready]);
   return null;
 }
