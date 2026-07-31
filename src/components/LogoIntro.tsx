@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, useMemo } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, useMemo } from 'react';
 
 const NATURAL_W = 1720;
 const NATURAL_H = 624;
@@ -18,7 +18,7 @@ export default function LogoIntro() {
   const revealRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     function updateScale() {
       if (window.innerWidth < NATURAL_W * 0.5) {
         setScale(Math.min((window.innerWidth * 0.85) / NATURAL_W, 0.5));
