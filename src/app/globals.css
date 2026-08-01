@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #ffffff;
@@ -17,6 +17,10 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
+}
+
+html {
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -71,14 +75,16 @@ body {
   stroke: #4ade80;
   stroke-width: 2;
   stroke-linecap: round;
-  filter: drop-shadow(0 0 4px #23870b) drop-shadow(0 0 8px rgba(35, 135, 11, 0.6));
+  filter: drop-shadow(0 0 4px #23870b)
+    drop-shadow(0 0 8px rgba(35, 135, 11, 0.6));
   stroke-dasharray: 40 360;
   animation: trace 3s linear infinite;
 }
 
 .trace-btn[data-variant='solid'] .trace-glow {
   stroke: #ffffff;
-  filter: drop-shadow(0 0 4px #ffffff) drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+  filter: drop-shadow(0 0 4px #ffffff)
+    drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
 }
 
 @keyframes trace {
